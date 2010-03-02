@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title><%= h(yield(:title) || "Untitled") %></title>
+    <%= stylesheet_link_tag 'reset','login' %>
+    <%= stylesheet_link_tag 'formtastic','formtastic_changes' %>
+    <%= yield(:stylesheets) %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id="container">
+      <div id="banner">
+        <div id="user_logo">
+          <span>Monster Inc.</span>
+        </div>
+      </div>
+
+      <div id="content">
+        <div id="main">
+          <%= yield %>
+        </div>
+      </div>
+
+    </div>
+    <%= javascript_include_tag 'jquery', 'jquery-ui', 'application', :cache => 'jquery' %>
+    <%= yield(:javascripts) %>
+  </body>
+</html>

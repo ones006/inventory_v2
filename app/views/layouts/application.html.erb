@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title><%= h(yield(:title) || "Untitled") %></title>
+    <%= stylesheet_link_tag 'reset','application' %>
+    <%= stylesheet_link_tag 'formtastic','formtastic_changes' %>
+    <%= yield(:stylesheets) %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id="container">
+      <div id="banner">
+        <div id="user_nav">
+          Signed in as <strong><%=h current_user.try(:username) %></strong> &bull;
+          <%= link_to "My Account", current_user ? user_path(current_user) : '#' %> &bull;
+          <%= link_to "Sign Out", signout_path %>
+        </div>
+        <div id="user_logo">
+          <span>Monster Inc.</span>
+        </div>
+        <ul id="tabs">
+          <% current = { 'dashboard' => nil, 'transactions' => nil, 'reports' => nil, 'administrations' => nil } %>
+          <% current[(@tab || 'dashboard')] = "current" %>
+          <li><%= link_to "Dashboard", dashboard_path, :class => current['dashboard'] %><div></div></li>
+          <li><%= link_to "Transactions", transactions_path, :class => current['transactions'] %><div></div></li>
+          <li><%= link_to "Reports", reports_path, :class => current['reports'] %><div></div></li>
+          <li><%= link_to "Administrations", administrations_path, :class => current['administrations'] %><div></div></li>
+        </ul>
+      </div>
+
+      <div id="content">
+        <div id="sidebar">
+          <ul id="sidemenu">
+            <li><a href="#">Quick link #1</a></li>
+            <li>
+              <a href="#">+ Quick link #2</a>
+              <ul>
+                <li><a href="#">SubMenu #1</a></li>
+                <li><a href="#">SubMenu #2</a></li>
+                <li><a href="#">SubMenu #3</a></li>
+                <li><a href="#">SubMenu #4</a></li>
+                <li><a href="#">SubMenu #5</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Quick link #3</a></li>
+            <li><a href="#">Quick link #4</a></li>
+            <li><a href="#">Quick link #5</a></li>
+            <li><a href="#">Quick link #6</a></li>
+          </ul>
+        </div>
+
+        <div id="main">
+          <%- flash.each do |name, msg| -%>
+            <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <%- end -%>
+          
+          <%- if show_title? -%>
+            <h1><%=h yield(:title) %></h1>
+          <%- end -%>
+        
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <%= javascript_include_tag 'jquery', 'jquery-ui', 'application', :cache => 'jquery' %>
+    <%= yield(:javascripts) %>
+  </body>
+</html>

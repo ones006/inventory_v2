@@ -1,0 +1,22 @@
+<% title "Sign In" %>
+
+<div id="login">
+  <%- flash.each do |name, msg| -%>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <%- end -%>
+          
+  <%- if show_title? -%>
+    <h1><%=h yield(:title) %></h1>
+  <%- end -%>
+        
+  <% semantic_form_for @user_session do |f| %>
+    <% f.inputs do %>
+      <%= f.input :username, :required => false, :input_html => { :class => 'default' } %>
+      <%= f.input :password, :required => false %>
+    <% end -%>
+    <fieldset class="buttons">
+      <button type="submit">Sign In</button>
+      or <%= link_to "Sign Up", new_user_path %>
+    </fieldset>
+  <% end %>
+</div>

@@ -1,0 +1,117 @@
+body {
+  background:rgb(207, 255, 209);
+  font-family: "Trebuchet MS", Tahoma, Verdana, Helvetica, Arial;
+  font-size: 12px;
+}
+a img { border: none; }
+a { text-decoration:none; color: #0000FF; }
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+#flash_notice, #flash_error {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+#flash_error {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+#container {
+}
+#banner {
+  background:rgb(35, 95, 38);
+  padding:0 20px;
+  overflow:hidden;
+}
+#user_nav {
+  background:rgb(207, 255, 209);
+  color:rgb(35, 95, 38);
+  float:right;
+  margin-right:-20px;
+  padding:7px 20px 10px;
+  -moz-border-radius:0 0 0 15px;
+  -webkit-border-radius:0 0 0 15px;
+}
+#user_logo span {
+  color:rgb(207, 255, 209);
+  display:inline-block;
+  font-size:36px;
+  font-weight:bold;
+  padding:20px 0 20px 0;
+}
+#tabs {
+  margin:10px 10px 10px 0;
+}
+#tabs li {
+  margin:-10px 3px 0 0;
+  float:left;
+}
+#tabs li a {
+  background:rgb(116, 207, 120);
+  color:rgb(35, 95, 38);
+  display:block;
+  font-size:1.2em;
+  font-weight:bold;
+  padding:8px 14px;
+  text-decoration:none;
+  text-shadow:0 1px 1px rgba(255,255,255,.9);
+  -moz-border-radius:10px 10px 0 0;
+  -webkit-border-radius:10px 10px 0 0;
+}
+#tabs li a.current, #tabs li a:hover {
+  background:rgb(207, 255, 209);
+  color:rgb(35, 95, 38);
+}
+#tabs li div {
+  background:rgb(116, 207, 120);
+  height:1px;
+  -moz-box-shadow:0 -1px 6px rgba(0, 0, 0, .9);
+  -webkit-box-shadow:0 -1px 6px rgba(0, 0, 0, .9);
+}
+#tabs li a.current + div, #tabs li a:hover + div {
+  background:rgb(207, 255, 209);
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+}
+#content {
+  padding:20px;
+}
+#sidebar {
+  background:rgba(0, 239, 0, .25);
+  float:left;
+  margin:0 20px 20px 0;
+  padding:10px;
+  width:180px;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+}
+#sidemenu li a {
+  color:rgb(0, 0, 0);
+  display:block;
+  margin:2px 0;
+  padding:6px;
+  text-decoration:none;
+  text-shadow:0 1px 1px rgba(255,255,255,.9);
+}
+#sidemenu li a:hover {
+  background:rgb(207, 255, 209);
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+}
+#sidemenu ul {
+  display:none;
+  padding:0 0 0 20px;
+}
+#main {
+  background:rgba(255,255,255,.8);
+  margin-left:220px;
+  padding:20px;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+}
