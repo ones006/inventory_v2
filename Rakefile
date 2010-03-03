@@ -34,6 +34,6 @@ MetricFu::Configuration.run do |config|
                       "--no-color",
                       "--profile",
                       "--rails",
-                      "--exclude /gems/,/Library/,spec"]}
+                      "--exclude /gems/,/Library/,test"]}
   config.graph_engine = :bluff
 end

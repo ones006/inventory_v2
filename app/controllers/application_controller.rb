@@ -8,14 +8,14 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
-  helper_method :current_user_session, :current_user, :current_bussiness, :next_bussiness, :prev_bussiness, :current_subscription
+  helper_method :current_user_session, :current_user, :current_company
   # rescue_from CanCan::AccessDenied do |exception|
   #   flash[:error] = "Maaf, anda tidak bisa mengakses halaman tersebut."
   #   redirect_to root_path
   # end
 
-  def current_subscription
-    Subscription.find_by_subdomain(current_subdomain)
+  def current_company
+    current_user.company
   end
 
   def current_user_id

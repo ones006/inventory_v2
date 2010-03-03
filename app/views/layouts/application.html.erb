@@ -17,7 +17,7 @@
           <%= link_to "Sign Out", signout_path %>
         </div>
         <div id="user_logo">
-          <span>Monster Inc.</span>
+          <span><%=h current_company.name %></span>
         </div>
         <ul id="tabs">
           <% current = { 'dashboard' => nil, 'transactions' => nil, 'reports' => nil, 'administrations' => nil } %>
