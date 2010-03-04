@@ -6,20 +6,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
   # Scrub sensitive parameters from your log
-  # Scrub sensitive parameters from your log
   filter_parameter_logging :password
-  helper_method :current_user_session, :current_user, :current_company
+  helper_method :current_user_session, :current_user, :current_company, :authenticate
   # rescue_from CanCan::AccessDenied do |exception|
   #   flash[:error] = "Maaf, anda tidak bisa mengakses halaman tersebut."
   #   redirect_to root_path
   # end
 
+  private
   def current_company
-    current_user.company
-  end
-
-  def current_user_id
-    current_user.id unless current_user.blank?
+    return @current_company if defined?(@current_company)
+    @current_company = Company.find_by_subdomain(current_subdomain)
   end
 
   def authenticate
@@ -29,7 +26,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find

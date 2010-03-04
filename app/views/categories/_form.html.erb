@@ -1,28 +1,14 @@
-<% form_for category do |f| %>
-  <%= f.error_messages %>
-  <p>
-    <%= f.label :company_id %><br />
-    <%= f.text_field :company_id %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-  <p>
-    <%= f.label :parent_id %><br />
-    <%= f.text_field :parent_id %>
-  </p>
-  <p>
-    <%= f.label :lft %><br />
-    <%= f.text_field :lft %>
-  </p>
-  <p>
-    <%= f.label :rgt %><br />
-    <%= f.text_field :rgt %>
-  </p>
-  <p><%= f.submit "Submit" %></p>
+<% semantic_form_for @category do |f| %>
+  <ul class="form_info">
+    <li>Fields marked <span class="required">*</span> are required</li>
+  </ul>
+  <% f.inputs do %>
+    <%= f.input :name, :input_html => { :class => 'default' } %>
+    <%= f.input :description, :input_html => { :rows => 5 } %>
+  <% end -%>
+  <fieldset class="buttons">
+    <button type="submit">
+      <%= image_tag 'icons/silk/disk.png' %> Save Category
+    </button>
+  </fieldset>
 <% end %>

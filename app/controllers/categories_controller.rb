@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+  before_filter :set_tab
+  before_filter :authenticate
+
   def index
     @categories = Category.all
   end
@@ -13,6 +16,7 @@ class CategoriesController < ApplicationController
   
   def create
     @category = Category.new(params[:category])
+    @category.company = current_company
     if @category.save
       flash[:notice] = "Successfully created category."
       redirect_to @category
@@ -40,5 +44,10 @@ class CategoriesController < ApplicationController
     @category.destroy
     flash[:notice] = "Successfully destroyed category."
     redirect_to categories_url
+  end
+
+  private
+  def set_tab
+    @tab = 'administrations'
   end
 end

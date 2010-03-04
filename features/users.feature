@@ -4,6 +4,15 @@ Feature: user login
     As a registered user
     I want to login and use the application
 
+    Scenario: visiting signin page
+        Given I have tho following company records
+            | name | subdomain |
+            | Monster Inc | monsterinc |
+        When I visit subdomain "monsterinc"
+        And I go to the root page
+        Then I should see "Monster Inc"
+
+
     Scenario: registered user login
         Given I have the following user records
             | username | password | email |

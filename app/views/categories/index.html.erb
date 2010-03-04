@@ -1,27 +1,29 @@
 <% title "Categories" %>
 
+<% content_for :breadcrumb do %>
+  <%= breadcrumb [ link_to("Administrations", administrations_path),
+                   link_to("Categories",categories_path) ] %>
+<% end -%>
+
+<% content_for :main_act do %>
+  <%= link_to "#{image_tag('icons/silk/add.png')} Create new category", new_category_path, :class => "main_link", :id => 'new_category' %>
+<% end -%>
+
 <table>
   <tr>
-    <th>Company</th>
     <th>Name</th>
     <th>Description</th>
-    <th>Parent</th>
-    <th>Lft</th>
-    <th>Rgt</th>
+    <th>Actions</th>
   </tr>
   <% for category in @categories %>
     <tr>
-      <td><%=h category.company_id %></td>
       <td><%=h category.name %></td>
       <td><%=h category.description %></td>
-      <td><%=h category.parent_id %></td>
-      <td><%=h category.lft %></td>
-      <td><%=h category.rgt %></td>
-      <td><%= link_to "Show", category %></td>
-      <td><%= link_to "Edit", edit_category_path(category) %></td>
-      <td><%= link_to "Destroy", category, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td>
+        <%= link_to "Show", category %> &bull;
+        <%= link_to "Edit", edit_category_path(category) %> &bull;
+        <%= link_to "Destroy", category, :confirm => 'Are you sure?', :method => :delete %>
+      </td>
     </tr>
   <% end %>
 </table>
-
-<p><%= link_to "New Category", new_category_path %></p>

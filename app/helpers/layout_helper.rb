@@ -19,4 +19,12 @@ module LayoutHelper
   def javascript(*args)
     content_for(:javascripts) { javascript_include_tag(*args) }
   end
+
+  def breadcrumb(crumbs, separator = "/")
+    crumbs.each do |crumb|
+      @html = '' unless defined?(@html)
+      @html << (@html.empty? ? crumb : " #{separator} #{crumb}")
+    end
+    @html
+  end
 end

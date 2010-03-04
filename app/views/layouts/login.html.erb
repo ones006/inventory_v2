@@ -2,26 +2,32 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title><%= h(yield(:title) || "Untitled") %></title>
-    <%= stylesheet_link_tag 'reset','login' %>
-    <%= stylesheet_link_tag 'formtastic','formtastic_changes' %>
+    <title><%= h(yield(:title) || "Inventory System") %></title>
+    <%= stylesheet_link_tag 'reset', 'login', :cache => 'login' %>
+    <%= stylesheet_link_tag 'formtastic','formtastic_changes', :cache => 'formtastic' %>
     <%= yield(:stylesheets) %>
     <%= yield(:head) %>
   </head>
+
   <body>
     <div id="container">
       <div id="banner">
         <div id="user_logo">
-          <span>Monster Inc.</span>
+          <span><%=h current_company.name %> :: Inventory System</span>
         </div>
       </div>
-
       <div id="content">
+        <noscript>
+          <div id="flash_error">
+            Sorry, but it seems that your browser currently has it's javascript support disabled.
+            In order to use this application javascript support has to be enabled.
+            <%= link_to "How to enable javascript?", '#' %>
+          </div>
+        </noscript>
         <div id="main">
           <%= yield %>
         </div>
       </div>
-
     </div>
     <%= javascript_include_tag 'jquery', 'jquery-ui', 'application', :cache => 'jquery' %>
     <%= yield(:javascripts) %>

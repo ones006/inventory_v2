@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title><%= h(yield(:title) || "Untitled") %></title>
+    <%= stylesheet_link_tag 'reset','uniform.default','style' %>
+    <%= yield(:head) %>
+  </head>
+
+  <body>
+    <noscript>
+      <h1>
+        Your browser have javascript support disabled, this application must have javascript support enabled
+        to function properly. Please enable javascript support or contact your system administrator.
+      </h1>
+    </noscript>
+    <div id="container">
+      <div id="banner">
+        <%= image_tag 'box1.png' %>
+        <span id="app_name">
+          <%=h current_subscription.company.name %> ::
+          Inventory System
+        </span>
+        <p id="user_action">
+          Loged in as <strong><%=h current_user.username %></strong> &bull;
+          <%= link_to "Change password", edit_user_path(current_user) %> &bull;
+          <%= link_to "Log out", logout_path %><br/>
+        </p>
+        <%= render 'shared/tab' %>
+      </div>
+      <div id="content">
+        <div id="context_menu">
+        </div>
+        <div id="main">
+          <div id="breadcrumb">
+            <%= yield :breadcrumb %>
+          </div>
+          
+          <%- flash.each do |name, msg| -%>
+            <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <%- end -%>
+          
+          <%= yield %>
+        </div>
+        <div id="footer" class="wide">
+          <p>
+            <a href="#">About Us</a> &bull;
+            <a href="#">Site Map</a> &bull;
+            <a href="#">Contact Us</a>
+          </p>
+          Copyright &copy; <%= Time.now.year %> Rahmat Budiharso
+        </div>
+      </div>
+    </div>
+    <%= javascript_include_tag 'jquery-1.4.2.min' %>
+    <%= yield :javascript %>
+    <%= javascript_include_tag 'application' %>
+  </body>
+</html>

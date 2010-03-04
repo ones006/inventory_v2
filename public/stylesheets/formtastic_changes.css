@@ -18,7 +18,38 @@ form.formtastic fieldset ol li.numeric input { width:30%; }
 form.formtastic fieldset ol li.text textarea { width:60%; }
 form.formtastic fieldset.buttons button { font-family: "Trebuchet MS", Tahoma, Verdana, Helvetica, Arial; }
 
-label span.required {
+label span.required, span.required {
   color:rgb(200,0,0);
   font-weight:bold;
+}
+form.formtastic fieldset.buttons button {
+  background:#235F26 url(/images/gradient.png) repeat-x scroll 0 -125px;
+  border:none;
+  color:rgb(207,255,209);
+  font-weight:bold;
+  font-size:1.2em;
+  padding:10px;
+  text-shadow:0 -1px rgba(0, 0, 0, .8);
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  -moz-box-shadow:2px 2px 4px rgba(0, 0, 0, .6);
+  -webkit-box-shadow:2px 2px 4px rgba(0, 0, 0, .6);
+}
+form.formtastic fieldset.buttons button:hover {
+  background:rgba(35, 95, 38, .85);
+  cursor:pointer;
+}
+form.formtastic fieldset.buttons button:active {
+  background:rgba(35, 95, 38, .85);
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
+}
+input:focus { border:solid 1px rgb(255, 131, 63) !important; }
+
+ul.form_info {
+  background:rgb(242, 255, 127);
+  list-style-position:inside !important;
+  list-style-type:disc !important;
+  margin-bottom:20px !important;
+  padding:5px !important;
 }

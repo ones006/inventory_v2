@@ -1,0 +1,11 @@
+<% tab = { 'home' => nil, 'transaction' => nil, 'report' => nil, 'admin' => nil } %>
+<% tab[ @tab || 'home' ] = 'current' %>
+<ul id="tab_menu">
+  <li><%= link_to "Beranda", home_path, :class => tab['home'] %><div class="tab_shadow"></div></li>
+  <li><%= link_to "Transaksi", transaction_path, :class => tab['transaction'] %><div class="tab_shadow"></div></li>
+  <li><%= link_to "Laporan", report_path, :class => tab['report'] %><div class="tab_shadow"></div></li>
+  <% if ['admin','manager'].include? current_user.role.name %>
+    <li><%= link_to "Administrasi", admin_path, :class => tab['admin'] %><div class="tab_shadow"></div></li>
+  <% end -%>
+</ul>
+

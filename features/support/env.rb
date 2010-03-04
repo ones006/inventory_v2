@@ -13,6 +13,7 @@ require 'cucumber/rails/world'
 require 'cucumber/rails/active_record'
 require 'cucumber/web/tableish'
 require 'factory_girl'
+require 'authlogic/test_case'
 
 require 'webrat'
 require 'webrat/core/matchers'
@@ -54,3 +55,5 @@ Cucumber::Rails::World.use_transactional_fixtures = true
 require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 SubdomainFu.tld_size = 1
+include Authlogic::TestCase
+activate_authlogic
