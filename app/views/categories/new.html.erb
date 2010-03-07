@@ -6,7 +6,11 @@
                    'Create New Category' ] %>
 <% end -%>
 
-<% content_for :main_act do %>
+<% content_for :sidemenu do %>
+  <ul id="sidemenu">
+    <li><%= link_to "Categories", categories_path %></li>
+  </ul>
 <% end -%>
+
 
 <%= render :partial => 'form' %>

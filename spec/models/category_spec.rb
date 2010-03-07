@@ -18,8 +18,8 @@ describe Category do
   end
 
   it 'should have unique name within a company' do
-    category = Factory.create(:category, :name => "test cat", :company_id => 1)
-    category2 = Factory.build(:category, :name => "test cat", :company_id => 1)
+    category = Factory.create(:category, :name => "test cat", :company_id => 1, :parent_name => nil)
+    category2 = Factory.build(:category, :name => "test cat", :company_id => 1, :parent_name => nil)
     category2.should_not be_valid
   end
 
@@ -37,5 +37,18 @@ describe Category do
     child_cat.move_to_child_of(cat1)
     cat1.children.length.should == 1
     child_cat.parent.should == cat1
+  end
+
+  it 'should become root if parent category name is empty' do
+    cat1 = Factory(:category)
+    cat1.root?.should be_true
+  end
+
+  it 'should become root if parent category name is emptied when editing' do
+    cat1 = Factory(:category)
+    cat2 = Factory(:category)
+    cat2.move_to_child_of cat1
+    cat2.update_attributes(:parent_name => nil)
+    cat2.root?.should be_true
   end
 end

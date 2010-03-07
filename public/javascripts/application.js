@@ -1,6 +1,8 @@
-$(document).ready(function() {
+$(function() {
   $('input.default').focus();
-  $('#sidemenu li a').click(function() {
-    $(this).next('ul').toggle();
-  });
+});
+
+$('#sidemenu li a.revealer').click(function() {
+  $(this).next('ul').toggle();
+  return false;
 });

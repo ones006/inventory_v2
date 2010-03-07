@@ -1,8 +1,8 @@
 <% title "Category" %>
 
 <p>
-  <strong>Company:</strong>
-  <%=h @category.company_id %>
+  <strong>Category:</strong>
+  <%=h @category.parent.try(:name) %>
 </p>
 <p>
   <strong>Name:</strong>
@@ -11,22 +11,4 @@
 <p>
   <strong>Description:</strong>
   <%=h @category.description %>
-</p>
-<p>
-  <strong>Parent:</strong>
-  <%=h @category.parent_id %>
-</p>
-<p>
-  <strong>Lft:</strong>
-  <%=h @category.lft %>
-</p>
-<p>
-  <strong>Rgt:</strong>
-  <%=h @category.rgt %>
-</p>
-
-<p>
-  <%= link_to "Edit", edit_category_path(@category) %> |
-  <%= link_to "Destroy", @category, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", categories_path %>
 </p>

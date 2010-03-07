@@ -1,17 +1,21 @@
 class CategoriesController < ApplicationController
   before_filter :set_tab
   before_filter :authenticate
+  before_filter :categories_list, :except => [:show, :destroy]
 
   def index
-    @categories = Category.all
+    @categories = current_company.sorted_categories
+    @category = Category.new
   end
   
   def show
     @category = Category.find(params[:id])
+    render :layout => false if request.xhr?
   end
   
   def new
     @category = Category.new
+    render :layout => false if request.xhr?
   end
   
   def create
@@ -19,23 +23,44 @@ class CategoriesController < ApplicationController
     @category.company = current_company
     if @category.save
       flash[:notice] = "Successfully created category."
-      redirect_to @category
+      if request.xhr?
+        render :json => { 'location' => categories_path}.to_json, :layout => false
+      else
+        redirect_to @category
+      end
     else
-      render :action => 'new'
+      if request.xhr?
+        form = render_to_string :action => 'new', :layout => false
+        status = 'validation error'
+        render :json => {'status' => status, 'form' => form }.to_json
+      else
+        render :action => 'new'
+      end
     end
   end
   
   def edit
     @category = Category.find(params[:id])
+    render :layout => false if request.xhr?
   end
   
   def update
     @category = Category.find(params[:id])
     if @category.update_attributes(params[:category])
       flash[:notice] = "Successfully updated category."
-      redirect_to @category
+      if request.xhr?
+        render :json => { 'location' => categories_path}.to_json, :layout => false
+      else
+        redirect_to @category
+      end
     else
-      render :action => 'edit'
+      if request.xhr?
+        form = render_to_string :action => 'edit', :layout => false
+        status = 'validation error'
+        render :json => {'status' => status, 'form' => form }.to_json
+      else
+        render :action => 'edit'
+      end
     end
   end
   
@@ -49,5 +74,9 @@ class CategoriesController < ApplicationController
   private
   def set_tab
     @tab = 'administrations'
+  end
+
+  def categories_list
+    @categories_list = current_company.categories.collect { |cat| cat.name }
   end
 end

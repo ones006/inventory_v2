@@ -1,14 +1,24 @@
-<% semantic_form_for @category do |f| %>
-  <ul class="form_info">
-    <li>Fields marked <span class="required">*</span> are required</li>
-  </ul>
-  <% f.inputs do %>
-    <%= f.input :name, :input_html => { :class => 'default' } %>
-    <%= f.input :description, :input_html => { :rows => 5 } %>
-  <% end -%>
-  <fieldset class="buttons">
-    <button type="submit">
-      <%= image_tag 'icons/silk/disk.png' %> Save Category
-    </button>
-  </fieldset>
-<% end %>
+
+<div id="dialog_form">
+
+  <%= javascript_tag "var categories = ['#{@categories_list.join("', '")}'];" %>
+  
+  <% semantic_form_for @category, {}, :html => { :id => 'category_form' } do |f| %>
+    <ul class="form_info">
+      <li>Fields marked <span class="required">*</span> are required</li>
+    </ul>
+    <% f.inputs do %>
+      <%= f.input :parent_name,
+        :label => 'Category',
+        :hint => 'parent category name, will be created if not exists'
+      %>
+      <%= f.input :name %>
+      <%= f.input :description, :input_html => { :rows => 5 } %>
+    <% end -%>
+    <fieldset class="buttons">
+      <button type="submit">
+        <%= image_tag 'icons/silk/disk.png' %> <span>Save Category</span>
+      </button>
+    </fieldset>
+  <% end %>
+</div>

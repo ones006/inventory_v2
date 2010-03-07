@@ -53,3 +53,6 @@ ul.form_info {
   margin-bottom:20px !important;
   padding:5px !important;
 }
+form.formtastic fieldset ol li p.inline-hints {
+  font-style:italic;
+}

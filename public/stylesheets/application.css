@@ -10,6 +10,16 @@ a { text-decoration:none; color: #235f26; }
   height: 0;
   overflow: hidden;
 }
+h1, h2, h3, h4, h5, h6 {
+  font-weight:bold;
+  margin-bottom:20px;
+}
+h1 { font-size:2em; }
+h2 { font-size:1.8em; }
+h3 { font-size:1.5em; }
+h4 { font-size:1.3em; }
+h5 { font-size:1.2em; }
+h6 { font-size:1.1em; }
 #flash_notice, #flash_error {
   padding: 5px 8px;
   margin: 10px 0;
@@ -67,9 +77,9 @@ a { text-decoration:none; color: #235f26; }
 }
 #tabs li a.current, #tabs li a:hover {
   background:#CFFFD1 none repeat scroll 0 0;
-  border-top:4px solid orange;
+  border-top:2px solid orange;
   color:#173F19;
-  margin-top:-4px;
+  margin-top:-2px;
 }
 #tabs li div {
   background:rgb(116, 207, 120);
@@ -102,8 +112,6 @@ a { text-decoration:none; color: #235f26; }
 }
 #sidemenu li a:hover {
   background:rgba(0, 239, 0, .25);
-  -moz-border-radius:4px;
-  -webkit-border-radius:4px;
 }
 #sidemenu ul {
   display:none;
@@ -161,3 +169,58 @@ a.main_link:hover {
   background:#7f7f7f url(/images/gradient.png) repeat-x scroll 0 -4px;
   color:rgb(23, 63, 25);
 }
+table {
+  border-collapse:collapse;
+  border-bottom:solid 1px #5fbf63;
+  margin-bottom:20px;
+  width:100%;
+}
+table tr th {
+  background:#5FBF63;
+  color:#fff;
+  text-align:center;
+  padding:6px;
+}
+table tr td {
+  background:rgba(95,191,99,.1);
+  padding:4px;
+}
+table tr.odd td {
+  background:rgba(95,191,99,.2);
+}
+table tr.odd:hover td, table tr.even:hover td {
+  background:rgba(95,191,99,.4);
+}
+table tr td.lvl_1 { padding-left:20px; } 
+table tr td.lvl_2 { padding-left:40px; } 
+table tr td.lvl_3 { padding-left:60px; } 
+table tr td.lvl_4 { padding-left:80px; } 
+table tr td.lvl_5 { padding-left:100px; } 
+table tr td.lvl_6 { padding-left:120px; } 
+td.subcategories_count {
+  width:44px;
+}
+td.root_category span {
+  background:#ff0000 url(/images/gradient.png) repeat-x scroll 0 -110px !important;
+}
+td.subcategories_count span {
+  background:#000000 url(/images/gradient.png) repeat-x scroll 0 -110px;
+  color:#fff;
+  display:inline-block;
+  font-weight:bold;
+  padding:2px;
+  text-align:center;
+  text-shadow:0 -1px rgba(0, 0, 0, .9);
+  width:40px;
+}
+.actions { text-align:center; }
+.boxy-wrapper {
+  border-bottom: none;
+  width:700px;
+  -moz-box-shadow:0 0 10px rgba(0, 0, 0, .8);
+  -webkit-box-shadow:0 0 20px rgba(0, 0, 0, .8);
+}
+#dialog_form { margin:15px; }
+.buttons p { margin:10px 0 !important; }
+.buttons p img { vertical-align:middle; }
+.buttons p img + span { color:#235f26; font-style:italic; }

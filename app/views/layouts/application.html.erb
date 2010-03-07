@@ -3,8 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title><%= h(yield(:title) || "Untitled") %></title>
-    <%= stylesheet_link_tag 'reset', 'application' %>
-    <%= stylesheet_link_tag 'formtastic','formtastic_changes' %>
+    <%= stylesheet_link_tag 'reset',
+      'application',
+      'formtastic',
+      'formtastic_changes',
+      'jquery.autocomplete',
+      'jquery.boxy',
+      :cache => 'style'
+    %>
     <%= yield(:head) %>
   </head>
 
@@ -38,9 +44,7 @@
       <div id="content">
         <div id="sidebar">
           <%= yield :main_act %>
-          <ul id="sidemenu">
-            <%= yield :sidemenu %>
-          </ul>
+          <%= yield :sidemenu %>
         </div>
         <div id="main">
           <div id="breadcrumb">
@@ -63,8 +67,12 @@
         </div>
       </div>
     </div>
-    <%= javascript_include_tag 'jquery', 'jquery-ui', 'application', :cache => 'jquery' %>
-    <%= javascript_include_tag 'application' %>
-    <%= yield :javascript %>
+    <%= javascript_include_tag 'jquery',
+      'jquery.autocomplete.min',
+      'jquery.boxy',
+      'application',
+      :cache => 'jquery'
+    %>
+    <%= yield :javascripts %>
   </body>
 </html>
