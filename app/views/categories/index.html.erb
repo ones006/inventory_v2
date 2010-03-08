@@ -4,7 +4,7 @@
   <% javascript 'categories' %>
   <% content_for :breadcrumb do %>
     <%= breadcrumb [ link_to("Administrations", administrations_path),
-                     link_to("Categories",categories_path) ] %>
+                     "Categories" ] %>
   <% end -%>
 
   <% content_for :main_act do %>

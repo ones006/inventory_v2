@@ -7,7 +7,8 @@ Then /^I should have ([0-9]+) (.+)/ do |count, model|
 end
 
 Given /^I am not signed in$/ do
-    visit signout_url
+    #visit signout_url
+  UserSession.destroy
 end
 
 Given /^I have the following (.+) records$/ do |model,table|

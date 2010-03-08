@@ -15,3 +15,8 @@ Factory.define :category do |cat|
   cat.sequence(:name) { |n| "Category Foo ##{n}" }
   cat.description "Placeat qui odit et unde dolores velit dolores sit non rerum non quia aut cumque qui possimus maxime quas eveniet doloribus eius."
 end
+
+Factory.define :item do |item|
+  item.sequence(:code) { |n| "item#{n}" }
+  item.sequence(:name) { |n| "Item Foo #{n}" }
+end

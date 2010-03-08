@@ -1,0 +1,32 @@
+<% cache do %>
+  <% title "Items" %>
+
+  <% content_for :breadcrumb do %>
+    <%= breadcrumb [ link_to("Administrations", administrations_path),
+                     "Items" ] %>
+  <% end -%>
+
+  <% content_for :main_act do %>
+    <%= link_to "#{image_tag('icons/silk/add.png')} Create new item", new_item_path, :class => "main_link new_item" %>
+  <% end -%>
+
+  <table>
+    <tr>
+      <th>Category</th>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+    <% for item in @items %>
+      <tr>
+        <td><%=h item.category_id %></td>
+        <td><%=h item.code %></td>
+        <td><%=h item.name %></td>
+        <td><%=h item.description %></td>
+        <td><%= link_to "Show", item %></td>
+        <td><%= link_to "Edit", edit_item_path(item) %></td>
+        <td><%= link_to "Destroy", item, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end -%>

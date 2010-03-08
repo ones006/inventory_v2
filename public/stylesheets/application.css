@@ -103,15 +103,19 @@ h6 { font-size:1.1em; }
   -webkit-border-radius:8px;
 }
 #sidemenu li a {
-  color:rgb(0, 0, 0);
+  color:rgb(35, 95, 38);
+  color:rgba(35, 95, 38, 1);
   display:block;
-  margin:2px 0;
+  font-size:1.16em;
+  font-weight:bold;
+  margin:0 0 2px;
   padding:6px;
   text-decoration:none;
   text-shadow:0 1px 1px rgba(255,255,255,.9);
 }
 #sidemenu li a:hover {
   background:rgba(0, 239, 0, .25);
+  color:rgb(0, 0, 0);
 }
 #sidemenu ul {
   display:none;

@@ -14,11 +14,19 @@ module NavigationHelpers
     when /the root page/
       root_url
     
+    when /the items page/
+      items_url
+    
+    when /the administrations page/
+      administrations_url
+    
     when /signin page/
       signin_url
 
     when /the list of categories/
       categories_path
+    when /admin page/
+      administrations_path
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
