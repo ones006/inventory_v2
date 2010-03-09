@@ -4,9 +4,4 @@
   <%= breadcrumb [ "Administrations" ] %>
 <% end -%>
 
-<% content_for :sidemenu do %>
-  <ul id="sidemenu">
-    <li><%= link_to "Categories", categories_path %></li>
-    <li><%= link_to "Items", items_path %></li>
-  </ul>
-<% end -%>
+<%= sidemenu %>

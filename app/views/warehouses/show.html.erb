@@ -1,0 +1,20 @@
+<% title "Warehouse" %>
+
+<p>
+  <strong>Code:</strong>
+  <%=h @warehouse.code %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%=h @warehouse.name %>
+</p>
+<p>
+  <strong>Address:</strong>
+  <%=h @warehouse.address %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_warehouse_path(@warehouse) %> |
+  <%= link_to "Destroy", @warehouse, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", warehouses_path %>
+</p>

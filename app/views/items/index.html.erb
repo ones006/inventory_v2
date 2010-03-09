@@ -11,12 +11,7 @@
     <%= link_to "#{image_tag('icons/silk/add.png')} Create new item", new_item_path, :class => "main_link new_item", :title => "Create New Item" %>
   <% end -%>
 
-  <% content_for :sidemenu do %>
-    <ul id="sidemenu">
-      <li><%= link_to "Categories", categories_path %></li>
-      <li><%= link_to "Items", items_path %></li>
-    </ul>
-  <% end -%>
+  <%= sidemenu %>
 
   <table class="list">
     <tr>
@@ -26,17 +21,8 @@
       <th>Description</th>
       <th class="actions">Actions</th>
     </tr>
-    <% for item in @items %>
-      <tr>
-        <td><%= link_to item.category.name, category_items_path(item.category) %></td>
-        <td><%= link_to item.code, item, :class => "item_detail" %></td>
-        <td><%=h item.name %></td>
-        <td><span class="item_description"><%=h truncate(item.description, :length => 50) %></span></td>
-        <td class="actions">
-          <%= link_to image_tag('icons/silk/application_form_edit.png'), edit_item_path(item), :class => "edit_item", :title => "Edit #{item.name}" %>
-          <%= link_to image_tag('icons/silk/delete.png'), item, :confirm => 'Are you sure?', :method => :delete %>
-        </td>
-      </tr>
-    <% end %>
+
+    <%= render @items %>
+
   </table>
 <% end -%>

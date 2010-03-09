@@ -20,6 +20,9 @@ module NavigationHelpers
     when /the administrations page/
       administrations_url
     
+    when /the warehouse page/
+      warehouses_url
+    
     when /signin page/
       signin_url
 

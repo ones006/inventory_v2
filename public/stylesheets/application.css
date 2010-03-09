@@ -203,7 +203,7 @@ table.list tr td {
   background:rgba(95,191,99,.1);
   padding:4px;
 }
-table.list tr.odd td {
+table.list tr:nth-child(2n+1) td {
   background:rgba(95,191,99,.2);
 }
 table.list tr:hover td, table.list tr.odd:hover td, table.list tr.even:hover td {

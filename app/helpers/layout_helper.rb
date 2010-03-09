@@ -27,4 +27,10 @@ module LayoutHelper
     end
     @html
   end
+
+  def sidemenu
+    content_for :sidemenu do
+      render "shared/sidemenu"
+    end
+  end
 end

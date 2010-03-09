@@ -37,7 +37,7 @@ describe Item do
 
   it 'should assign category by name' do
     category = Factory(:category)
-    item = Factory.create(:item, :category_name => category.name, :category => nil)
+    item = Factory.create(:item, :category_id => nil, :category_name => category.name)
     item.category.should == category
   end
 

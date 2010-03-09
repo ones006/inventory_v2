@@ -21,3 +21,8 @@ Factory.define :item do |item|
   item.sequence(:name) { |n| "Item Foo #{n}" }
   item.association(:category)
 end
+
+Factory.define :warehouse do |warehouse|
+  warehouse.sequence(:code) { |n| "WH##{n}" }
+  warehouse.sequence(:name) { |n| "Warehouse ##{n}" }
+end

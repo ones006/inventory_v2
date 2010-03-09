@@ -29,11 +29,11 @@ Given /^I have no categories$/ do
 end
 
 Given /^company "([^\"]*)" exists$/ do |sub|
-  Factory.create(:company, :subdomain => sub)
+  Factory.create(:company, :subdomain => sub) if Company.find_by_subdomain(sub).nil?
 end
 
 Given /^user "([^\"]*)" exists$/ do |username|
-  Factory.create(:user, :username => username, :password => 'secret')
+  Factory.create(:user, :username => username, :password => 'secret') if User.find_by_username(username).nil?
 end
 
 Given /^user "([^\"]*)" is signed in on "([^\"]*)"$/ do |username, subdomain|

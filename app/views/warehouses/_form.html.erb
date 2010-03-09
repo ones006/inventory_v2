@@ -1,0 +1,16 @@
+
+<div id="dialog_form">
+  <% semantic_form_for @warehouse, {}, :html => { :id => 'warehouse_form' } do |f| %>
+    <ul class="form_info">
+      <li>Fields marked <span class="required">*</span> are required</li>
+    </ul>
+    <% f.inputs do %>
+      <%= f.input :code %>
+      <%= f.input :name %>
+      <%= f.input :address, :input_html => { :rows => 3 } %>
+    <% end -%>
+    <fieldset class="buttons">
+      <button type="submit"><%= image_tag('icons/silk/disk.png') %> Save warehouse</button>
+    </fieldset>
+  <% end %>
+</div>
