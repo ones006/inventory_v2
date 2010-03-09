@@ -1,0 +1,22 @@
+<% cache do %>
+  <div id="dialog_form">
+    <% title "Supplier" %>
+
+    <p>
+      <strong>Company:</strong>
+      <%=h @supplier.company_id %>
+    </p>
+    <p>
+      <strong>Code:</strong>
+      <%=h @supplier.code %>
+    </p>
+    <p>
+      <strong>Name:</strong>
+      <%=h @supplier.name %>
+    </p>
+    <p>
+      <strong>Description:</strong>
+      <%=h @supplier.description %>
+    </p>
+  </div>
+<% end -%>

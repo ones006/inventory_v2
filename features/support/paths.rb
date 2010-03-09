@@ -26,6 +26,9 @@ module NavigationHelpers
     when /signin page/
       signin_url
 
+    when /the list of suppliers/
+      suppliers_path
+
     when /the list of categories/
       categories_path
     when /admin page/

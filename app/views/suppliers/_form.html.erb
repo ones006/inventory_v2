@@ -1,0 +1,14 @@
+<% javascript "suppliers" %>
+
+<div id="dialog_form">
+  <% semantic_form_for @supplier, {}, :html => { :id => "supplier_form" } do |f| %>
+    <% f.inputs do %>
+      <%= f.input :code %>
+      <%= f.input :name %>
+      <%= f.input :description, :input_html => { :rows => 3 } %>
+    <% end -%>
+    <fieldset class="buttons">
+      <button type="submit"><%= image_tag 'icons/silk/disk.png' %> Save supplier</button>
+    </fieldset>
+  <% end %>
+</div>

@@ -24,10 +24,6 @@ Given /^user "([^\"]*)" belongs to company "([^\"]*)"$/ do |user, company|
   Company.find_by_name(company).users << User.find_by_username(user)
 end
 
-Given /^I have no categories$/ do
-    Category.delete_all
-end
-
 Given /^company "([^\"]*)" exists$/ do |sub|
   Factory.create(:company, :subdomain => sub) if Company.find_by_subdomain(sub).nil?
 end

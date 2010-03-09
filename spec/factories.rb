@@ -26,3 +26,9 @@ Factory.define :warehouse do |warehouse|
   warehouse.sequence(:code) { |n| "WH##{n}" }
   warehouse.sequence(:name) { |n| "Warehouse ##{n}" }
 end
+
+Factory.define :supplier do |supplier|
+  supplier.association(:company)
+  supplier.sequence(:code) { |n| "Supp##{n}" }
+  supplier.sequence(:name) { |n| "Supplier ##{n}" }
+end

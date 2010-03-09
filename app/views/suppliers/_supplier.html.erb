@@ -1,0 +1,9 @@
+<tr class="<%= cycle 'odd', 'even' %>">
+  <td><%=h supplier.code %></td>
+  <td><%= link_to supplier.name, supplier, :class => "detail" %></td>
+  <td><%=h supplier.description %></td>
+  <td class="actions">
+    <%= link_to image_tag('icons/silk/application_form_edit.png'), edit_supplier_path(supplier), :class => "alter_record", :title => "Edit #{supplier.name}" %>
+    <%= link_to image_tag('icons/silk/delete.png'), supplier, :confirm => 'Are you sure?', :method => :delete, :title => "Delete #{supplier.name}" %>
+  </td>
+</tr>

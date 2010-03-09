@@ -1,7 +1,3 @@
-Given /^I have no warehouses$/ do
-  Warehouse.delete_all
-end
-
 Given /^warehouse "([^\"]*)" exists$/ do |code|
   Factory(:warehouse, :code => code) if Warehouse.find_by_code(code).nil?
 end
