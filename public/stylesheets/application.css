@@ -102,11 +102,21 @@ h6 { font-size:1.1em; }
   -moz-border-radius:8px;
   -webkit-border-radius:8px;
 }
+#sidemenu li span {
+  color:rgb(111, 111, 111);
+  display:block;
+  font-size:1.06em;
+  font-weight:bold;
+  margin:0 0 2px;
+  padding:6px;
+  text-decoration:none;
+  text-shadow:0 1px 1px rgba(255,255,255,.9);
+}
 #sidemenu li a {
   color:rgb(35, 95, 38);
   color:rgba(35, 95, 38, 1);
   display:block;
-  font-size:1.16em;
+  font-size:1.06em;
   font-weight:bold;
   margin:0 0 2px;
   padding:6px;
@@ -162,7 +172,7 @@ a.main_link {
   display:inline-block;
   font-size:1.08em;
   font-weight:bold;
-  padding:4px 10px 4px 4px;
+  padding:4px 10px 4px 8px;
   text-shadow:0 1px #FFFFFF;
   -moz-border-radius:12px;
   -webkit-border-radius:12px;
@@ -173,34 +183,38 @@ a.main_link:hover {
   background:#7f7f7f url(/images/gradient.png) repeat-x scroll 0 -4px;
   color:rgb(23, 63, 25);
 }
+a.main_link + ul#sidemenu {
+  margin-top:20px;
+}
 table {
   border-collapse:collapse;
   border-bottom:solid 1px #5fbf63;
+  line-height:1.5em;
   margin-bottom:20px;
   width:100%;
 }
-table tr th {
+table.list tr th {
   background:#5FBF63;
   color:#fff;
   text-align:center;
   padding:6px;
 }
-table tr td {
+table.list tr td {
   background:rgba(95,191,99,.1);
   padding:4px;
 }
-table tr.odd td {
+table.list tr.odd td {
   background:rgba(95,191,99,.2);
 }
-table tr.odd:hover td, table tr.even:hover td {
+table.list tr:hover td, table.list tr.odd:hover td, table.list tr.even:hover td {
   background:rgba(95,191,99,.4);
 }
-table tr td.lvl_1 { padding-left:20px; } 
-table tr td.lvl_2 { padding-left:40px; } 
-table tr td.lvl_3 { padding-left:60px; } 
-table tr td.lvl_4 { padding-left:80px; } 
-table tr td.lvl_5 { padding-left:100px; } 
-table tr td.lvl_6 { padding-left:120px; } 
+table.list tr td.lvl_1 { padding-left:20px; } 
+table.list tr td.lvl_2 { padding-left:40px; } 
+table.list tr td.lvl_3 { padding-left:60px; } 
+table.list tr td.lvl_4 { padding-left:80px; } 
+table.list tr td.lvl_5 { padding-left:100px; } 
+table.list tr td.lvl_6 { padding-left:120px; } 
 td.subcategories_count {
   width:44px;
 }
@@ -217,7 +231,7 @@ td.subcategories_count span {
   text-shadow:0 -1px rgba(0, 0, 0, .9);
   width:40px;
 }
-.actions { text-align:center; }
+.actions { text-align:right !important; }
 .boxy-wrapper {
   border-bottom: none;
   width:700px;

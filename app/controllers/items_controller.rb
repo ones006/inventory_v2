@@ -1,15 +1,23 @@
 class ItemsController < ApplicationController
+  before_filter :set_tab
   before_filter :authenticate
+  before_filter :categories_list, :except => [:index, :show]
   def index
-    @items = Item.all
+    if params[:category_id]
+      @items = current_company.categories.find(params[:category_id]).items
+    else
+      @items = current_company.items
+    end
   end
   
   def show
     @item = Item.find(params[:id])
+    render :layout => false if request.xhr?
   end
   
   def new
     @item = Item.new
+    render :layout => false if request.xhr?
   end
   
   def create
@@ -17,23 +25,44 @@ class ItemsController < ApplicationController
     @item.company = current_company
     if @item.save
       flash[:notice] = "Successfully created item."
-      redirect_to @item
+      if request.xhr?
+        render :json => { 'location' => items_path}.to_json, :layout => false
+      else
+        redirect_to @item
+      end
     else
-      render :action => 'new'
+      if request.xhr?
+        form = render_to_string :action => 'new', :layout => false
+        status = 'validation error'
+        render :json => {'status' => status, 'form' => form }.to_json
+      else
+        render :action => 'new'
+      end
     end
   end
   
   def edit
     @item = Item.find(params[:id])
+    render :layout => false if request.xhr?
   end
   
   def update
     @item = Item.find(params[:id])
     if @item.update_attributes(params[:item])
       flash[:notice] = "Successfully updated item."
-      redirect_to @item
+      if request.xhr?
+        render :json => { 'location' => items_path}.to_json, :layout => false
+      else
+        redirect_to @item
+      end
     else
-      render :action => 'edit'
+      if request.xhr?
+        form = render_to_string :action => 'edit', :layout => false
+        status = 'validation error'
+        render :json => {'status' => status, 'form' => form }.to_json
+      else
+        render :action => 'edit'
+      end
     end
   end
   
@@ -42,5 +71,14 @@ class ItemsController < ApplicationController
     @item.destroy
     flash[:notice] = "Successfully destroyed item."
     redirect_to items_url
+  end
+
+  private
+  def set_tab
+    @tab = 'administrations'
+  end
+
+  def categories_list
+    @categories_list = category_names
   end
 end

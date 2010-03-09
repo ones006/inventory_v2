@@ -1,8 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :items
-
-  map.resources :categories
-
 
   map.signin "signin", :controller => :user_sessions, :action => :new
   map.signout "signout", :controller => :user_sessions, :action => :destroy
@@ -16,6 +12,10 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => :pages
 
   map.resources :user_sessions
+  map.resources :items
+  map.resources :categories do |category|
+    category.resources :items
+  end
   map.resources :companies
   map.resources :users
 

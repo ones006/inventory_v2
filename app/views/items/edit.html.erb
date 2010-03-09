@@ -1,8 +1,22 @@
-<% title "Edit Item" %>
+<% cache do %>
+  <% title "Edit Item" %>
 
-<%= render :partial => 'form' %>
+  <% content_for :breadcrumb do %>
+    <%= breadcrumb [ link_to("Administrations", administrations_path),
+                     link_to("Items",items_path),
+                     'Edit Item' ] %>
+  <% end -%>
 
-<p>
-  <%= link_to "Show", @item %> |
-  <%= link_to "View All", items_path %>
-</p>
+  <% content_for :main_act do %>
+    <%= link_to "#{image_tag('icons/silk/zoom_in.png')} Show item detail", @item, :class => "main_link item_detail" %>
+  <% end -%>
+
+  <% content_for :sidemenu do %>
+    <ul id="sidemenu">
+      <li><%= link_to "Categories", categories_path %></li>
+      <li><%= link_to "Items", items_path %></li>
+    </ul>
+  <% end -%>
+
+  <%= render :partial => 'form' %>
+<% end -%>

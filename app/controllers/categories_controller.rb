@@ -77,6 +77,6 @@ class CategoriesController < ApplicationController
   end
 
   def categories_list
-    @categories_list = current_company.categories.collect { |cat| cat.name }
+    @categories_list = category_names
   end
 end

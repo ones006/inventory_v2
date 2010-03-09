@@ -1,5 +1,16 @@
 <% title "New Item" %>
 
-<%= render :partial => 'form' %>
+<% content_for :breadcrumb do %>
+  <%= breadcrumb [ link_to("Administrations", administrations_path),
+                   link_to("Items",items_path),
+                   'Create New Item' ] %>
+<% end -%>
 
-<p><%= link_to "Back to List", items_path %></p>
+<% content_for :sidemenu do %>
+  <ul id="sidemenu">
+    <li><%= link_to "Categories", categories_path %></li>
+    <li><%= link_to "Items", items_path %></li>
+  </ul>
+<% end -%>
+
+<%= render :partial => 'form' %>

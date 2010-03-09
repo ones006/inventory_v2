@@ -28,7 +28,21 @@ describe Item do
   end
 
   it 'should belongs to a company' do
-    company = Factory(:company)
-    Factory(:item, :company_id => company.id).should be_valid
+    Factory(:item, :company => Factory(:company)).respond_to?(:company).should be_true
+  end
+
+  it 'should belongs to a category' do
+    Factory(:item, :category => Factory(:category)).respond_to?(:category).should be_true
+  end
+
+  it 'should assign category by name' do
+    category = Factory(:category)
+    item = Factory.create(:item, :category_name => category.name, :category => nil)
+    item.category.should == category
+  end
+
+  it 'should invalid when category name is empty when edit' do
+    item = Factory(:item)
+    item.update_attributes(:category_name => nil).should be_false
   end
 end

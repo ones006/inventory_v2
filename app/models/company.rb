@@ -3,6 +3,7 @@ class Company < ActiveRecord::Base
   validates_uniqueness_of :name
   has_many :users
   has_many :categories
+  has_many :items
 
   def sorted_categories
     cat = []; categories.roots.each do |root|

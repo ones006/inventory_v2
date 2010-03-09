@@ -11,12 +11,12 @@
     <%= link_to "#{image_tag('icons/silk/add.png')} Create new category", new_category_path, :class => "main_link new_category" %>
   <% end -%>
 
-  <table id="categories_list">
+  <table id="categories_list" class="list">
     <tr>
       <th></th>
       <th>Name</th>
       <th>Description</th>
-      <th>Actions</th>
+      <th class="actions">Actions</th>
     </tr>
     <%= render @categories %>
   </table>

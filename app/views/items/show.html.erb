@@ -2,7 +2,7 @@
 
 <p>
   <strong>Category:</strong>
-  <%=h @item.category_id %>
+  <%=h @item.category.name %>
 </p>
 <p>
   <strong>Code:</strong>
@@ -15,10 +15,4 @@
 <p>
   <strong>Description:</strong>
   <%=h @item.description %>
-</p>
-
-<p>
-  <%= link_to "Edit", edit_item_path(@item) %> |
-  <%= link_to "Destroy", @item, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", items_path %>
 </p>

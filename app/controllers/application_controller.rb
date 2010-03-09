@@ -12,6 +12,9 @@ class ApplicationController < ActionController::Base
   #   flash[:error] = "Maaf, anda tidak bisa mengakses halaman tersebut."
   #   redirect_to root_path
   # end
+  def category_names
+    current_company.categories.collect { |cat| cat.name }
+  end
 
   private
   def current_company
