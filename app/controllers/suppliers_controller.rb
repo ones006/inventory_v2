@@ -56,7 +56,7 @@ class SuppliersController < ApplicationController
     if request.xhr?
       render :json => { 'location' => suppliers_path}.to_json, :layout => false
     else
-      redirect_to @warehouse
+      redirect_to @supplier
     end
   end
 
