@@ -1,0 +1,21 @@
+<% cache do %>
+  <div id="dialog_form">
+    <%= javascript 'plu.js' %>
+    <%= javascript_tag "
+      var items = #{@items.to_json(:only => [:id, :name])};
+      var suppliers = #{@suppliers.to_json(:only => [:id, :name])};"
+    %>
+    <% semantic_form_for @plu, {}, :html => { :id => 'plu_form' } do |f| %>
+      <% f.inputs do %>
+        <%= f.input :item_name %>
+        <%= f.input :item_id, :as => :hidden %>
+        <%= f.input :supplier_name %>
+        <%= f.input :supplier_id, :as => :hidden %>
+        <%= f.input :payment_term %>
+      <% end -%>
+      <fieldset class="buttons">
+        <button type="submit"><%= image_tag 'icons/silk/disk.png' %> Save PLU</button>
+      </fieldset>
+    <% end %>
+  </div>
+<% end -%>

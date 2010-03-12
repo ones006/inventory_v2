@@ -1,4 +1,3 @@
-@items
 Feature: Items management
     In order to manage items
     As an admin
@@ -35,10 +34,11 @@ Feature: Items management
         Then I should see "code has already been taken"
         And I should have 1 item
 
+@items
     Scenario: admin create new item
         When I follow "Create New Item"
         And I fill in "code" with "Item#1"
-        And I fill in "name" with "Item 1"
+        And I fill in "item_name" with "Item 1"
         And I fill in "category name" with "Cat 1"
         And I press "Save Item"
         Then I should be redirected

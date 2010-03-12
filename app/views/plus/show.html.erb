@@ -1,0 +1,20 @@
+<% title "Plu" %>
+
+<p>
+  <strong>Item:</strong>
+  <%=h @plu.item_id %>
+</p>
+<p>
+  <strong>Supplier:</strong>
+  <%=h @plu.supplier_id %>
+</p>
+<p>
+  <strong>Payment Term:</strong>
+  <%=h @plu.payment_term %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_plu_path(@plu) %> |
+  <%= link_to "Destroy", @plu, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", plus_path %>
+</p>

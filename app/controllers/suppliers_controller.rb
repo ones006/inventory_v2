@@ -2,7 +2,7 @@ class SuppliersController < ApplicationController
   before_filter :authenticate
   before_filter :set_tab
   def index
-    @suppliers = Supplier.all
+    @suppliers = current_company.suppliers
   end
   
   def show
@@ -11,12 +11,12 @@ class SuppliersController < ApplicationController
   end
   
   def new
-    @supplier = Supplier.new
+    @supplier = current_company.suppliers.new
     render :layout => false if request.xhr?
   end
   
   def create
-    @supplier = Supplier.new(params[:supplier])
+    @supplier = current_company.suppliers.new(params[:supplier])
     if @supplier.save
       flash[:notice] = "Successfully created supplier."
       xhr_success_response

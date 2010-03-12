@@ -1,9 +1,0 @@
-one:
-  code: MyString
-  name: MyString
-  address: MyText
-
-two:
-  code: MyString
-  name: MyString
-  address: MyText

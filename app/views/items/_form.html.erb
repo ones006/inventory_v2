@@ -12,6 +12,22 @@
       <%= f.input :category_name %>
       <%= f.input :description, :input_html => { :rows => 3 } %>
     <% end -%>
+    <fieldset id="units">
+      <legend><span>Units</span></legend>
+      <ol>
+        <% f.fields_for :units do |unit| %>
+          <li>
+            <%= unit.label :name %>
+            <%= unit.text_field :name, :size => 20 %>
+            <%= unit.label :conversion_rate %>
+            <%= unit.text_field :conversion_rate, :size => 5 %>
+            <%= unit.hidden_field :_destroy %>
+            <a href="#" title="remove unit" class="unit_remover"><%= image_tag 'icons/silk/cross.png' %></a>
+          </li>
+        <% end -%>
+      </ol>
+      <a href="#" id="add_unit"><%= image_tag 'icons/silk/add.png' %> add more unit</a>
+    </fieldset>
     <fieldset class="buttons">
       <button type="submit"><%= image_tag 'icons/silk/disk.png' %> Save Item</button>
     </fieldset>

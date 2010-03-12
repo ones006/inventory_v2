@@ -32,3 +32,17 @@ Factory.define :supplier do |supplier|
   supplier.sequence(:code) { |n| "Supp##{n}" }
   supplier.sequence(:name) { |n| "Supplier ##{n}" }
 end
+
+Factory.define :unit do |unit|
+  unit.association(:item)
+  unit.sequence(:name) { |n| "Unit#{n}" }
+  unit.conversion_rate 1
+end
+
+Factory.define :plu do |plu|
+  plu.sequence(:code) { |n| "PLU#{n}" }
+  plu.association(:company)
+  plu.association(:item)
+  plu.association(:supplier)
+  plu.payment_term "Credit"
+end

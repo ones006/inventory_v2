@@ -1,0 +1,14 @@
+<% cache do %>
+  <% title "New PLU" %>
+
+  <% content_for :breadcrumb do %>
+    <%= breadcrumb [ link_to("Administrations", administrations_path),
+                     link_to("PLU",plus_path),
+                     'Create New PLU' ] %>
+  <% end -%>
+
+  <%= sidemenu %>
+
+  <%= render :partial => 'form' %>
+
+<% end -%>
