@@ -81,6 +81,6 @@ class ItemsController < ApplicationController
   end
 
   def categories_list
-    @categories_list = category_names
+    @categories_list = leaf_category_names
   end
 end

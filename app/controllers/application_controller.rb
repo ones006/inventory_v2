@@ -16,8 +16,12 @@ class ApplicationController < ActionController::Base
     current_company.categories.collect { |cat| cat.name }
   end
 
-  def leaf_category_names
+  def leaf_category
     current_company.categories.reject { |cat| !cat.leaf? }
+  end
+
+  def leaf_category_names
+    leaf_category.collect { |cat| cat.name }
   end
 
   private
