@@ -1,14 +1,19 @@
-<% title "Category" %>
+<% cache do -%>
+  <div id="dialog_form">
+    <% title "Category" %>
 
-<p>
-  <strong>Category:</strong>
-  <%=h @category.parent.try(:name) %>
-</p>
-<p>
-  <strong>Name:</strong>
-  <%=h @category.name %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%=h @category.description %>
-</p>
+    <p>
+      <strong>Category:</strong>
+      <%=h @category.parent.try(:name) %>
+    </p>
+    <p>
+      <strong>Name:</strong>
+      <%=h @category.name %>
+    </p>
+    <p>
+      <strong>Description:</strong>
+      <%=h @category.description %>
+    </p>
+  </div>
+<% end -%>
+

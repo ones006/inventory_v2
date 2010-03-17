@@ -46,3 +46,9 @@ Factory.define :plu do |plu|
   plu.association(:supplier)
   plu.payment_term "Credit"
 end
+
+Factory.define :location do |loc|
+  loc.association :company
+  loc.association :warehouse
+  loc.sequence(:code) {|n| "LOC#{n}" }
+end

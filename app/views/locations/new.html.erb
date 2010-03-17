@@ -1,0 +1,12 @@
+<% cache do %>
+  <% title 'Create new location' %>
+  <% content_for :breadcrumb do %>
+    <%= breadcrumb [ link_to("Administrations", administrations_path),
+                     link_to("Locations",warehouse_locations_path(@location.warehouse)),
+                     "Create new location for #{link_to @location.warehouse.name, warehouse_path(@location.warehouse)}" ] %>
+  <% end -%>
+
+  <%= sidemenu %>
+
+  <%= render :partial => "form" %>
+<% end -%>

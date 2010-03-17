@@ -1,0 +1,25 @@
+<% title "Placements" %>
+
+<table>
+  <tr>
+    <th>Company</th>
+    <th>Warehouse</th>
+    <th>Plu</th>
+    <th>Quantity</th>
+    <th>Reference</th>
+  </tr>
+  <% for placement in @placements %>
+    <tr>
+      <td><%=h placement.company_id %></td>
+      <td><%=h placement.warehouse_id %></td>
+      <td><%=h placement.plu_id %></td>
+      <td><%=h placement.quantity %></td>
+      <td><%=h placement.reference %></td>
+      <td><%= link_to "Show", placement %></td>
+      <td><%= link_to "Edit", edit_placement_path(placement) %></td>
+      <td><%= link_to "Destroy", placement, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Placement", new_placement_path %></p>

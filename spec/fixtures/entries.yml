@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  company_id: 1
+  transaction_id: 1
+  plu_id: 1
+  quantity: 1
+
+two:
+  company_id: 1
+  transaction_id: 1
+  plu_id: 1
+  quantity: 1

@@ -13,7 +13,7 @@
 
   <%= sidemenu %>
 
-  <table class="list">
+  <table class="list" id="items">
     <tr>
       <th>Category</th>
       <th>Code</th>
@@ -25,4 +25,7 @@
     <%= render @items %>
 
   </table>
+  <div id="item_detail">
+    <p>Click on one of the item code to see it's detail</p>
+  </div>
 <% end -%>

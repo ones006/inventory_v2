@@ -39,6 +39,17 @@ $(".item_detail").live('click', function() {
   });
   return false;
 });
+
+$('#items tr').live('click', function() {
+  $.ajax({
+    url: $(this).find('td a.item_detail').attr('href'),
+    success: function(respond, status) {
+      $('#item_detail').html(respond);
+    },
+    error: function(xhr, status, e) { alert(status); }
+  });
+  return false;
+});
 /*
 $(".new_item, .edit_item").live('click', function() {
   Boxy.load(this.href, {

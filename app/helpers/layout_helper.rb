@@ -28,9 +28,9 @@ module LayoutHelper
     @html
   end
 
-  def sidemenu
+  def sidemenu(section='administrations')
     content_for :sidemenu do
-      render "shared/sidemenu"
+      render "shared/#{section}"
     end
   end
 end

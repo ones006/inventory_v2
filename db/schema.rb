@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100312041855) do
+ActiveRecord::Schema.define(:version => 20100316185506) do
 
   create_table "categories", :force => true do |t|
     t.integer  "company_id"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(:version => 20100312041855) do
     t.string   "subdomain"
   end
 
+  create_table "entries", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "transaction_id"
+    t.integer  "plu_id"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "items", :force => true do |t|
     t.integer  "category_id"
     t.string   "code"
@@ -39,6 +48,26 @@ ActiveRecord::Schema.define(:version => 20100312041855) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+  end
+
+  create_table "locations", :force => true do |t|
+    t.integer  "warehouse_id"
+    t.string   "code"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+    t.integer  "position"
+  end
+
+  create_table "placements", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "warehouse_id"
+    t.integer  "plu_id"
+    t.integer  "quantity"
+    t.string   "reference"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "plus", :force => true do |t|
@@ -58,6 +87,17 @@ ActiveRecord::Schema.define(:version => 20100312041855) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.string   "number"
+    t.integer  "origin_id"
+    t.integer  "destination_id"
+    t.integer  "quantity"
+    t.string   "tr_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "units", :force => true do |t|

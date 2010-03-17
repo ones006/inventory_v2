@@ -1,0 +1,28 @@
+<% title "Placement" %>
+
+<p>
+  <strong>Company:</strong>
+  <%=h @placement.company_id %>
+</p>
+<p>
+  <strong>Warehouse:</strong>
+  <%=h @placement.warehouse_id %>
+</p>
+<p>
+  <strong>Plu:</strong>
+  <%=h @placement.plu_id %>
+</p>
+<p>
+  <strong>Quantity:</strong>
+  <%=h @placement.quantity %>
+</p>
+<p>
+  <strong>Reference:</strong>
+  <%=h @placement.reference %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_placement_path(@placement) %> |
+  <%= link_to "Destroy", @placement, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", placements_path %>
+</p>

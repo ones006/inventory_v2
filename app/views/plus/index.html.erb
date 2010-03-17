@@ -14,6 +14,7 @@
 
   <table class="list">
     <tr>
+      <th>Code</th>
       <th>Item</th>
       <th>Supplier</th>
       <th>Payment Term</th>
@@ -21,6 +22,7 @@
     </tr>
     <% for plu in @plus %>
       <tr>
+        <td><%= link_to plu.code, plu %></td>
         <td><strong><%=h plu.item.code %></strong> <em><%=h plu.item.name %></em></td>
         <td><%=h plu.supplier.name %></td>
         <td><%=h plu.payment_term %></td>

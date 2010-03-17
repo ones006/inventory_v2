@@ -1,0 +1,9 @@
+<% semantic_form_for [@location.warehouse, @location], {}, :html => { :id => 'new_location' } do |f| -%>
+  <% f.inputs do %>
+    <%= f.input :code %>
+    <%= f.input :description, :input_html => { :rows => 3 } %>
+  <% end -%>
+  <fieldset class="buttons">
+    <button type="submit"><%= image_tag "icons/silk/disk.png" %> Save location</button>
+  </fieldset>
+<% end -%>

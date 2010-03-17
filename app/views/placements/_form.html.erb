@@ -1,0 +1,24 @@
+<% form_for @placement do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :company_id %><br />
+    <%= f.text_field :company_id %>
+  </p>
+  <p>
+    <%= f.label :warehouse_id %><br />
+    <%= f.text_field :warehouse_id %>
+  </p>
+  <p>
+    <%= f.label :plu_id %><br />
+    <%= f.text_field :plu_id %>
+  </p>
+  <p>
+    <%= f.label :quantity %><br />
+    <%= f.text_field :quantity %>
+  </p>
+  <p>
+    <%= f.label :reference %><br />
+    <%= f.text_field :reference %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

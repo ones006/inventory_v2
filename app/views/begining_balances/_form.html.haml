@@ -1,0 +1,11 @@
+- semantic_form_for @begining_balance, :url => begining_balances_path do |f|
+  - f.inputs do
+    = f.input :number
+    %li.string
+      = label_tag 'item_category'
+      = text_field_tag 'item_category', nil, :id => 'item_category'
+
+  %fieldset.buttons
+    %button{ :type => :submit }
+      = image_tag 'icons/silk/disk.png'
+      Save Begining Balance

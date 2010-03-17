@@ -3,7 +3,7 @@ body {
   font-family: "Trebuchet MS", Tahoma, Verdana, Helvetica, Arial;
   font-size: 12px;
 }
-a img, button img { border: none; vertical-align:middle; }
+a img, button img { border: none; vertical-align:text-top; }
 a { text-decoration:none; color: #235f26; }
 .clear {
   clear: both;
@@ -20,7 +20,8 @@ h3 { font-size:1.5em; }
 h4 { font-size:1.3em; }
 h5 { font-size:1.2em; }
 h6 { font-size:1.1em; }
-#flash_notice, #flash_error {
+p { margin-bottom:20px; }
+#flash_notice, #flash_error, #flash_success {
   padding: 5px 8px;
   margin: 10px 0;
 }
@@ -32,7 +33,9 @@ h6 { font-size:1.1em; }
   background-color: #FCC;
   border: solid 1px #C66;
 }
-#container {
+#flash_success {
+  background-color: #92FF7F;
+  border: solid 1px #427F37;
 }
 #banner {
   background:rgb(35, 95, 38);
@@ -53,10 +56,10 @@ h6 { font-size:1.1em; }
 #user_logo span {
   color:rgb(207, 255, 209);
   display:inline-block;
-  font-size:24px;
+  font-size:20px;
   font-weight:bold;
   margin:10px 10px 20px;
-  padding:20px 0 20px 0;
+  padding:10px 0;
 }
 #tabs {
   margin:10px 10px 10px 0;
@@ -69,7 +72,7 @@ h6 { font-size:1.1em; }
   background:rgb(116, 207, 120);
   color:rgb(35, 95, 38);
   display:block;
-  font-size:1.2em;
+  font-size:1.06em;
   font-weight:bold;
   padding:8px 14px;
   text-decoration:none;
@@ -105,7 +108,7 @@ h6 { font-size:1.1em; }
 #sidemenu li span {
   color:rgb(111, 111, 111);
   display:block;
-  font-size:1.06em;
+  font-size:1.05em;
   font-weight:bold;
   margin:0 0 2px;
   padding:6px;
@@ -158,6 +161,7 @@ h6 { font-size:1.1em; }
   line-height:2em;
   margin:20px 0 0 200px;
 }
+#footer p { margin-bottom:0; }
 #footer.wide {
   margin:30px 0 0;
 }
@@ -190,7 +194,7 @@ a.main_link:active {
 a.main_link + ul#sidemenu {
   margin-top:20px;
 }
-table {
+table.list {
   border-collapse:collapse;
   border-bottom:solid 1px #5fbf63;
   line-height:1.5em;
@@ -247,8 +251,8 @@ td.subcategories_count span {
 .buttons p { margin:10px 0 !important; }
 .buttons p img { vertical-align:middle; }
 .buttons p img + span { color:#235f26; font-style:italic; }
-#units li label { float:none; display:inline; }
-form.formtastic fieldset#units {
+#nested_attributes li label { float:none; display:inline; }
+form.formtastic fieldset#nested_attributes {
   border:1px solid lightgrey;
   margin-bottom:20px;
   margin-left:25%;
@@ -257,4 +261,7 @@ form.formtastic fieldset#units {
 form.formtastic fieldset#units legend {
   font-size:1.1em;
   font-weight:bold;
+}
+#item_detail #dialog_form {
+  margin:0;
 }

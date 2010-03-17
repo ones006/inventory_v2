@@ -1,9 +1,15 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :begining_balances
+
+  map.resources :placements
+
   map.resources :plus
 
   map.resources :suppliers
 
-  map.resources :warehouses
+  map.resources :warehouses do |warehouse|
+    warehouse.resources :locations
+  end
 
 
   map.signin "signin", :controller => :user_sessions, :action => :new

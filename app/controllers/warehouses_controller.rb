@@ -2,7 +2,7 @@ class WarehousesController < ApplicationController
   before_filter :authenticate
   before_filter :set_tab
   def index
-    @warehouses = Warehouse.all
+    @warehouses = current_company.warehouses
   end
   
   def show
@@ -10,12 +10,13 @@ class WarehousesController < ApplicationController
   end
   
   def new
-    @warehouse = Warehouse.new
+    @warehouse = current_company.warehouses.new
+    @warehouse.locations.build
     render :layout => false if request.xhr?
   end
   
   def create
-    @warehouse = Warehouse.new(params[:warehouse])
+    @warehouse = current_company.warehouses.new(params[:warehouse])
     @warehouse.company = current_company
     if @warehouse.save
       flash[:notice] = "Successfully created warehouse."

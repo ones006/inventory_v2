@@ -6,6 +6,8 @@ class Company < ActiveRecord::Base
   has_many :items
   has_many :suppliers
   has_many :plus
+  has_many :warehouses
+  has_many :transactions
 
   def sorted_categories
     cat = []; categories.roots.each do |root|

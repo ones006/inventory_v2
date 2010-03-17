@@ -56,3 +56,4 @@ ul.form_info {
 form.formtastic fieldset ol li p.inline-hints {
   font-style:italic;
 }
+form.formtastic fieldset ol li.hidden { display:none !important; }

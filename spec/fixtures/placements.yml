@@ -1,0 +1,13 @@
+one:
+  company_id: 1
+  warehouse_id: 1
+  plu_id: 1
+  quantity: 1
+  reference: MyString
+
+two:
+  company_id: 1
+  warehouse_id: 1
+  plu_id: 1
+  quantity: 1
+  reference: MyString
