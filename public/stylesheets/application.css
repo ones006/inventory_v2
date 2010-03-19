@@ -265,3 +265,29 @@ form.formtastic fieldset#units legend {
 #item_detail #dialog_form {
   margin:0;
 }
+.light { color:#7f7f7f; }
+table.report {
+  border-collapse:collapse;
+  width:100%;
+}
+table.report th, table.report td {
+  padding:4px;
+}
+table.report tr th {
+  background:#666;
+  color:#fff;
+}
+table.report tr.even td {
+  background:rgba(239,239,239,.8);
+}
+.report span.description {
+  font-style:italic;
+}
+.report td.index {
+  background:rgba(139,139,139,1) !important;
+  color:#fff;
+  font-weight:bold;
+  text-align:right;
+  width:5%;
+}
+.tdc { text-align:right; }

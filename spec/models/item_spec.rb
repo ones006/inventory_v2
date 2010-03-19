@@ -45,4 +45,12 @@ describe Item do
     item = Factory(:item)
     item.update_attributes(:category_name => nil).should be_false
   end
+
+  it 'should have stock quantity' do
+    company = Factory(:company)
+    item = Factory(:item, :company_id => company.id)
+    entry = Factory(:entry, :item_id => item.id, :quantity => 12)
+    bb = Factory(:begining_balance, :entries => [entry], :company_id => company.id)
+    item.stock.should == 12
+  end
 end

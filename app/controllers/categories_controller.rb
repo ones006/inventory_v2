@@ -71,6 +71,13 @@ class CategoriesController < ApplicationController
     redirect_to categories_url
   end
 
+  def items_for_begining_balance
+    @items = Category.find(params[:id]).items
+    if request.xhr?
+      render :layout => false
+    end
+  end
+
   private
   def set_tab
     @tab = 'administrations'

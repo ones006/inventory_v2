@@ -20,4 +20,12 @@ class Item < ActiveRecord::Base
       self.category = Category.find_by_name(name)
     end
   end
+
+  def stock
+    entries = []
+    company.begining_balances.each do |bb|
+      entries << bb.entries.reject { |entry| entry.item_id != id }
+    end
+    entries.flatten.collect { |entry| entry.quantity }.sum
+  end
 end

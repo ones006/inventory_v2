@@ -25,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :user_sessions
   map.resources :items
-  map.resources :categories do |category|
+  map.resources :categories, :member => {:items_for_begining_balance => :get} do |category|
     category.resources :items
   end
   map.resources :companies

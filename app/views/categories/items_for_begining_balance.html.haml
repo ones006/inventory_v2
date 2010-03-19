@@ -1,0 +1,20 @@
+%table.list
+  %tr
+    %th Code
+    %th Name
+    %th.actions Quantity
+
+  - @items.each_with_index do |item, n|
+    %tr
+      %td= item.code
+      %td= item.name
+      %td.actions
+        %input{ :type => "text",
+                :size => 10,
+                :name => "begining_balance[entries_attributes][#{n}][quantity]",
+                :id => "begining_balance_entries_attributes_#{n}_quantity" }
+        %input{ :type => 'hidden',
+                :value => item.id,
+                :name => "begining_balance[entries_attributes][#{n}][item_id]",
+                :id => "begining_balance_entries_attributes_#{n}_item_id" }
+

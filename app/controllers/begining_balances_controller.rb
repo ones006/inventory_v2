@@ -2,7 +2,7 @@ class BeginingBalancesController < ApplicationController
   before_filter :authenticate
   before_filter :assign_tab
   def index
-    @begining_balances = current_company.transactions.all(:conditions => {:tr_type => 'BB'});
+    @begining_balances = current_company.begining_balances.all
   end
 
   def show
@@ -10,16 +10,18 @@ class BeginingBalancesController < ApplicationController
   end
   
   def new
-    @begining_balance = current_company.transactions.new
+    @categories = current_company.leaf_categories
+    @begining_balance = current_company.begining_balances.new
+    #@begining_balance.entries.build(:item_id => 1)
   end
   
   def create
-    @begining_balance = current_company.transactions.new(params[:transaction])
-    @begining_balance.type = 'BB'
+    @begining_balance = current_company.begining_balances.new(params[:begining_balance])
     if @begining_balance.save
       flash[:notice] = "Successfully created begining balance."
       redirect_to begining_balances_url
     else
+      @categories = current_company.leaf_categories
       render :action => 'new'
     end
   end

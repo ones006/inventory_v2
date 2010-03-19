@@ -7,12 +7,16 @@ class Company < ActiveRecord::Base
   has_many :suppliers
   has_many :plus
   has_many :warehouses
-  has_many :transactions
+  has_many :begining_balances
 
   def sorted_categories
     cat = []; categories.roots.each do |root|
       cat << root << root.descendants
     end
     cat.flatten
+  end
+
+  def leaf_categories
+    categories.reject { |cat| !cat.leaf? }
   end
 end

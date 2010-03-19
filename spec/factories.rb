@@ -52,3 +52,14 @@ Factory.define :location do |loc|
   loc.association :warehouse
   loc.sequence(:code) {|n| "LOC#{n}" }
 end
+
+Factory.define :entry do |entry|
+  entry.association(:item)
+  entry.quantity 10
+end
+
+Factory.define :begining_balance do |trans|
+  trans.sequence(:number) {|n| "BB#{n}" }
+  trans.association(:company)
+  trans.entries { |entries| [entries.association(:entry)] }
+end

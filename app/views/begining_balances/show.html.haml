@@ -1,4 +1,35 @@
 - cache do
   - title "Begining Balance #{@begining_balance.number}"
 
-  %p= @begining_balance.number
+  - content_for :breadcrumb do
+    = breadcrumb [ link_to('Transactions', transactions_path), |
+      link_to('Begining Balances', begining_balances_path), |
+      @begining_balance.number ] |
+
+  = sidemenu
+
+  %p 
+    %span.light Transaction Number : 
+    %strong= @begining_balance.number
+  %p
+    %span.light Created :
+    %strong= @begining_balance.created_at.to_s(:long)
+  %p
+    %span.light Last Update :
+    %strong= @begining_balance.updated_at.to_s(:long)
+  %p
+    %strong Entries :
+  %table.report
+    %tr
+      %th #
+      %th Item Code
+      %th Item Name
+      %th.actions Quantity
+    - @begining_balance.entries.each_with_index do |entry, n|
+      %tr{ :class => cycle('odd','even') }
+        %td.index= n+1
+        %td= entry.item.code
+        %td
+          %strong= entry.item.name
+          %span.description= "(#{truncate entry.item.description})"
+        %td.actions= entry.quantity

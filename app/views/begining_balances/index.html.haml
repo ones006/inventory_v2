@@ -8,10 +8,15 @@
   - content_for :main_act do
     = link_to "#{image_tag('icons/silk/add.png')} Create new BB ", new_begining_balance_path, :class => "main_link new_bb", :title => "Create New Begining Balance"
 
-  %table
+  %table.list
     %tr
       %th Number
+      %th Created
+      %th Last Update
+      %th.actions Actions
     - for begining_balance in @begining_balances
       %tr
-        %td= begining_balance.number
-        %td= link_to "Edit", edit_begining_balance_path(begining_balance)
+        %td= link_to begining_balance.number, begining_balance
+        %td= begining_balance.created_at
+        %td= begining_balance.updated_at
+        %td.actions= link_to image_tag('icons/silk/application_form_edit.png'), edit_begining_balance_path(begining_balance)
