@@ -5,7 +5,7 @@ describe Location do
     Factory(:location).should be_valid
   end
 
-  it 'should be invalis without code' do
+  it 'should be invalid without code' do
     Factory.build(:location, :code => nil).should_not be_valid
   end
 
@@ -20,5 +20,16 @@ describe Location do
 
   it 'should belongs to a company' do
     Factory(:location).company.should be_an_instance_of(Company)
+  end
+
+  it 'should be root location if parent_id is blank' do
+    Factory(:location, :parent_id => nil).root?.should == true
+  end
+
+  it 'should become children if parent code is valid' do
+    loc1 = Factory(:location)
+    loc2 = Factory(:location, :parent_code => loc1.code, :company_id => loc1.company.id)
+    loc2.parent.should == loc1
+
   end
 end

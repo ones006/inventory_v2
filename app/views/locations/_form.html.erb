@@ -1,9 +1,21 @@
-<% semantic_form_for [@location.warehouse, @location], {}, :html => { :id => 'new_location' } do |f| -%>
-  <% f.inputs do %>
-    <%= f.input :code %>
-    <%= f.input :description, :input_html => { :rows => 3 } %>
-  <% end -%>
-  <fieldset class="buttons">
-    <button type="submit"><%= image_tag "icons/silk/disk.png" %> Save location</button>
-  </fieldset>
+<% cache do %>
+  <% javascript 'location' %>
+  <div id="dialog_form">
+    <%= javascript_tag "var locations = #{@warehouse.locations.to_json(:only => [:id,:code])};" %>
+    <% semantic_form_for [@location.warehouse, @location], {}, :html => { :id => 'new_location' } do |f| -%>
+      <% f.inputs do %>
+        <li id="location_parent_code_input" class="string optional">
+          <label for="location_parent_code">Parent code</label>
+          <input type="text" size="50" name="location[parent_code]" id="location_parent_code" class="default" value="<%= @location.parent_code %>"/>
+          <a href="#" title="select parent location" id="parent_code_popup"><%= image_tag 'icons/silk/application_view_detail.png' %></a>
+          <p class="inline-hints">enter parent location code, leave blank for root location</p>
+        </li>
+        <%= f.input :code %>
+        <%= f.input :description, :input_html => { :rows => 3 } %>
+      <% end -%>
+      <fieldset class="buttons">
+        <button type="submit"><%= image_tag "icons/silk/disk.png" %> Save location</button>
+      </fieldset>
+    <% end -%>
+  </div>
 <% end -%>

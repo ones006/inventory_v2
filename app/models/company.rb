@@ -7,6 +7,7 @@ class Company < ActiveRecord::Base
   has_many :suppliers
   has_many :plus
   has_many :warehouses
+  has_many :locations
   has_many :begining_balances
 
   def sorted_categories

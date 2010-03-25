@@ -28,7 +28,7 @@ form.formtastic fieldset.buttons button {
   color:rgb(207,255,209);
   font-weight:bold;
   font-size:1.2em;
-  padding:10px;
+  padding:5px 10px;
   text-shadow:0 -1px rgba(0, 0, 0, .8);
   -moz-border-radius:6px;
   -webkit-border-radius:6px;

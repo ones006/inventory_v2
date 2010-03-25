@@ -18,7 +18,7 @@ development:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: inventory2_development
+  database: inventory2_alt_development
   pool: 5
   username: root
   password: dbadmin
@@ -31,7 +31,7 @@ test: &TEST
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: inventory2_test
+  database: inventory2_alt_test
   pool: 5
   username: root
   password: dbadmin
@@ -41,7 +41,7 @@ production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: inventory2_production
+  database: inventory2_alt_production
   pool: 5
   username: root
   password: dbadmin
