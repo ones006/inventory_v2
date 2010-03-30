@@ -25,6 +25,7 @@
       %th Item Code
       %th Item Name
       %th.actions Quantity
+      %th.actions Value
     - @begining_balance.entries.each_with_index do |entry, n|
       %tr{ :class => cycle('odd','even') }
         %td.index= n+1
@@ -33,3 +34,6 @@
           %strong= entry.item.name
           %span.description= "(#{truncate entry.item.description})"
         %td.actions= entry.quantity
+        %td.actions
+          = number_to_currency(entry.total_value, :unit => '', :delimiter => '.', :separator => ',')
+          = "(@ #{number_to_currency(entry.value, :unit => '', :delimiter => '.', :separator => ',')})"

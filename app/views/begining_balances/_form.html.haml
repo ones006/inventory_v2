@@ -1,25 +1,27 @@
-= javascript_tag "var categories = #{@categories.to_json(:only => [:id, :name])};"
+= javascript_tag "var categories = #{@categories.to_json(:only => :id, :methods => [:formatted_code])};"
 
 - semantic_form_for @begining_balance, :url => begining_balances_path do |f|
   - f.inputs do
-    = f.input :number
+    = f.input :number, :input_html => { :class => 'default' }
     = f.input :category_name
 
     %li.string
       #items
+        %table.list
+          %tr
+            %th.td_20 Code
+            %th.td_40 Name
+            %th.actions.td_10 Quantity
+            %th.actions.td_30 @ Value
         - unless @begining_balance.entries.blank?
-          %table.list
+          - f.semantic_fields_for :entries do |entry|
             %tr
-              %th Code
-              %th Name
-              %th.actions Actions
-            - f.semantic_fields_for :entries do |entry|
-              %tr
-                %td= entry.object.item.code
-                %td= entry.object.item.name
-                %td.actions
-                  = entry.text_field :quantity, :size => 10
-                  = entry.hidden_field :item_id
+              %td= entry.object.item.code
+              %td= entry.object.item.name
+              %td.actions.td_10
+                = entry.text_field :quantity, :size => 10, :input_html => { :class => 'numbers' }
+                = entry.hidden_field :item_id
+              %td.actions.td_30= entry.text_field :value, :size => 30, :input_html => { :class => 'numbers' }
 
   %fieldset.buttons
     %button{ :type => :submit }

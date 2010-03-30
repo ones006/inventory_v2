@@ -1,12 +1,13 @@
 var item_category = $('input#begining_balance_category_name');
 
 $(function() {
+  $('#begining_balance_number').select();
   set_autocomplete();
 });
 
 function set_autocomplete() {
   item_category.autocomplete(categories, {
-    formatItem: function(row, i) { return row.category.name; },
+    formatItem: function(row, i) { return row.category.formatted_code; },
     mustMatch: true
   })
   .result(function(event, data) {

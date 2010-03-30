@@ -1,20 +1,28 @@
 %table.list
   %tr
-    %th Code
-    %th Name
-    %th.actions Quantity
+    %th.td_20 Code
+    %th.td_40 Name
+    %th.actions.td_10 Quantity
+    %th.actions.td_30 @ Value
 
   - @items.each_with_index do |item, n|
     %tr
       %td= item.code
       %td= item.name
-      %td.actions
+      %td.actions.td_10
         %input{ :type => "text",
                 :size => 10,
                 :name => "begining_balance[entries_attributes][#{n}][quantity]",
+                :class => 'numbers',
                 :id => "begining_balance_entries_attributes_#{n}_quantity" }
         %input{ :type => 'hidden',
                 :value => item.id,
                 :name => "begining_balance[entries_attributes][#{n}][item_id]",
                 :id => "begining_balance_entries_attributes_#{n}_item_id" }
+      %td.actions.td_30
+        %input{ :type => "text",
+                :size => 30,
+                :name => "begining_balance[entries_attributes][#{n}][value]",
+                :class => 'numbers',
+                :id => "begining_balance_entries_attributes_#{n}_value" }
 

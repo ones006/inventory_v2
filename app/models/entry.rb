@@ -3,4 +3,8 @@ class Entry < ActiveRecord::Base
   belongs_to :company
   belongs_to :begining_balance, :foreign_key => :transaction_id
   validates_presence_of :quantity
+
+  def total_value
+    value * quantity
+  end
 end

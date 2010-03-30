@@ -290,4 +290,13 @@ table.report tr.even td {
   text-align:right;
   width:5%;
 }
+input.numbers { text-align:right; }
 .tdc { text-align:right; }
+.td_10 { width:10%; }
+.td_10 input { width:90% !important; }
+.td_20 { width:20%; }
+.td_20 input { width:90% !important; }
+.td_30 { width:20%; }
+.td_30 input { width:90% !important; }
+.td_40 { width:40%; }
+.td_40 input { width:90% !important; }

@@ -14,7 +14,7 @@ class Category < ActiveRecord::Base
   end
 
   def parent_code
-    @parent_code || parent.try(:code)
+    @parent_code || parent.try(:fullcode)
   end
 
   def formatted_code
