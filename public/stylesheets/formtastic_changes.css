@@ -57,3 +57,13 @@ form.formtastic fieldset ol li p.inline-hints {
   font-style:italic;
 }
 form.formtastic fieldset ol li.hidden { display:none !important; }
+form.formtastic fieldset#units { position:relative; }
+form.formtastic fieldset#units ol li span.label { display:inline-block; font-weight:bold; margin-right:-4px; width:25%; }
+form.formtastic fieldset#units ol li label {
+  display:inline-block;
+  float:none;
+  margin-right:4px;
+  width:auto;
+}
+form.formtastic fieldset#units ol li.additional_units { margin-left:25%; }
+form.formtastic fieldset#units ol li input { margin-right:5px; }

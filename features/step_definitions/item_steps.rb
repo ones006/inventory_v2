@@ -8,5 +8,5 @@ Given /^item "([^\"]*)" exists & belongs to company "([^\"]*)"$/ do |code, compa
 end
 
 Given /^category "([^\"]*)" exists$/ do |name|
-  Factory(:category, :name => name)
+  Factory(:category, :name => name, :code => name)
 end

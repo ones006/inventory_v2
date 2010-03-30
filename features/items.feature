@@ -1,3 +1,4 @@
+@items
 Feature: Items management
     In order to manage items
     As an admin
@@ -13,7 +14,7 @@ Feature: Items management
         When I follow "Create New Item"
         And I fill in "code" with "<code>"
         And I fill in "name" with "<name>"
-        And I fill in "category name" with "<category>"
+        And I fill in "category code" with "<category>"
         And I press "Save Item"
         Then I should see "<action>"
         And I should have 0 item
@@ -29,20 +30,18 @@ Feature: Items management
         When I follow "Create New Item"
         And I fill in "code" with "Item#1"
         And I fill in "name" with "Item 1"
-        And I fill in "category name" with "Cat 1"
+        And I fill in "category code" with "Cat 1"
         And I press "Save Item"
         Then I should see "code has already been taken"
         And I should have 1 item
 
-@items
     Scenario: admin create new item
         When I follow "Create New Item"
         And I fill in "code" with "Item#1"
         And I fill in "item_name" with "Item 1"
-        And I fill in "category name" with "Cat 1"
+        And I fill in "category code" with "Cat 1"
         And I press "Save Item"
-        Then I should be redirected
-        And I should see "Item#1"
+        Then I should see "Item#1"
         And I should see "Item 1"
         And I should see "Cat 1"
         And "Item#1" should belongs to company "monsterinc"

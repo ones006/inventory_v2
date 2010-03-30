@@ -21,6 +21,10 @@ class Category < ActiveRecord::Base
     "#{code} (#{parent.try(:code)})"
   end
 
+  def code_for_item
+    "#{ancestors.map(&:code).join('.')}.#{code}"
+  end
+
   private
   def assign_parent
     unless @parent_code.blank?

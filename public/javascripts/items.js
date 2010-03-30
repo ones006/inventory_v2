@@ -1,9 +1,28 @@
 var unit_length = 0;
+var categories;
 
 $(function() {
   unit_length = $('#units ol li').length;
-  $("#item_category_name").autocomplete(window.categories);
+  set_autocomplete();
 });
+
+function set_autocomplete() {
+  var item_category_code = $('#item_category_code');
+  var item_category_id = $('#item_category_id');
+  var item_code = $('#item_code');
+  item_category_code.select();
+  item_category_code.autocomplete(categories, {
+    formatItem: function(row, i) { return row.category.formatted_code; },
+    mustMatch: true
+  })
+  .result(function(event, data) {
+    if(data) {
+      item_category_id.val(data.category.id);
+      item_code.val(data.category.code_for_item).focus();
+    }
+    else item_category_id.val('');
+  });
+}
 
 $("a#add_unit").live('click', function() {
   $("#units ol").append(new_unit_form(unit_length));
@@ -11,7 +30,7 @@ $("a#add_unit").live('click', function() {
 });
       
 function new_unit_form(n) {
-  var html = "<li><label for=\"item_units_attributes_"+n+"_name\">Name</label> " +
+  var html = "<li class=\"additional_units\"><label for=\"item_units_attributes_"+n+"_name\">Name</label> " +
     "<input type=\"text\" name=\"item[units_attributes]["+n+"][name]\" id=\"item_units_attributes_"+n+"_name\" size=\"20\" /> " +
     "<label for=\"item_units_attributes_"+n+"_name\">Conversion rate</label> " +
     "<input type=\"text\" size=\"5\" name=\"item[units_attributes]["+n+"][conversion_rate]\" id=\"item_units_attributes_"+n+"_name\" /> " +

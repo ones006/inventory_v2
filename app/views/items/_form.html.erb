@@ -1,22 +1,23 @@
 <% javascript "items" %>
 
 <div id="dialog_form">
-  <%= javascript_tag "var categories = ['#{@categories_list.join("', '")}'];" %>
+  <%= javascript_tag "var categories = #{@categories_list.to_json(:only => :id, :methods => [:formatted_code, :code_for_item])};" %>
   <% semantic_form_for @item, {}, :html => { :id => "item_form" } do |f| %>
     <ul class="form_info">
       <li>Fields marked <span class="required">*</span> are required</li>
     </ul>
     <% f.inputs do %>
-      <%= f.input :code, :input_html => { :class => 'default' } %>
+      <%= f.input :category_code, :input_html => { :class => 'default' } %>
+      <%= f.input :category_id, :as => :hidden %>
+      <%= f.input :code %>
       <%= f.input :name %>
-      <%= f.input :category_name %>
       <%= f.input :description, :input_html => { :rows => 3 } %>
     <% end -%>
     <fieldset id="units">
-      <legend><span>Units</span></legend>
       <ol>
         <% f.fields_for :units do |unit| %>
           <li>
+            <span class="label">Units</span>
             <%= unit.label :name %>
             <%= unit.text_field :name, :size => 20 %>
             <%= unit.label :conversion_rate %>
