@@ -12,6 +12,8 @@ Factory.define :company do |c|
 end
 
 Factory.define :category do |cat|
+  cat.association(:company)
+  cat.sequence(:code) { |n| "Cat#{n}" }
   cat.sequence(:name) { |n| "Category Foo ##{n}" }
   cat.description "Placeat qui odit et unde dolores velit dolores sit non rerum non quia aut cumque qui possimus maxime quas eveniet doloribus eius."
 end

@@ -1,16 +1,18 @@
 <div id="dialog_form">
 
-  <%= javascript_tag "var categories = ['#{@categories_list.join("', '")}'];" %>
+  <%= javascript_tag "categories = #{@categories_list.to_json(:only => :id, :methods => :fullcode)};" %>
   
   <% semantic_form_for @category, {}, :html => { :id => 'category_form' } do |f| %>
     <ul class="form_info">
       <li>Fields marked <span class="required">*</span> are required</li>
     </ul>
     <% f.inputs do %>
-      <%= f.input :parent_name,
-        :label => 'Category',
-        :hint => 'parent category name, will be created if not exists'
+      <%= f.input :parent_code,
+        :label => 'Parent Category',
+        :hint => 'parent category code, will be created if not exists'
       %>
+      <%= f.input :parent_id, :as => :hidden %>
+      <%= f.input :code %>
       <%= f.input :name %>
       <%= f.input :description, :input_html => { :rows => 5 } %>
     <% end -%>

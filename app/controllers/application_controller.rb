@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   def leaf_category_names
-    leaf_category.collect { |cat| cat.name }
+    leaf_category.collect { |cat| cat.formatted_name }
   end
 
   private

@@ -11,6 +11,10 @@ describe Category do
     category.should_not be_valid
   end
 
+  it 'should invalid without code' do
+    Factory.build(:category, :code => nil).should_not be_valid
+  end
+
   it 'should belongs to a company' do
     company = Factory.create(:company)
     category = Factory.create(:category, :company => company)
@@ -18,9 +22,16 @@ describe Category do
   end
 
   it 'should have unique name within a company' do
-    category = Factory.create(:category, :name => "test cat", :company_id => 1, :parent_name => nil)
-    category2 = Factory.build(:category, :name => "test cat", :company_id => 1, :parent_name => nil)
+    category = Factory.create(:category, :name => "test cat", :company_id => 1, :parent_code => nil)
+    category2 = Factory.build(:category, :name => "test cat", :company_id => 1, :parent_code => nil)
     category2.should_not be_valid
+  end
+
+  it 'should have unique name within the same parent category' do
+    parent = Factory(:category)
+    cat1 = Factory(:category)
+    cat1.move_to_child_of parent
+    Factory.build(:category, :name => cat1.name, :parent_id => cat1.parent.id, :company_id => cat1.company.id).should_not be_valid
   end
 
   it 'can have same name in different company' do
@@ -39,16 +50,16 @@ describe Category do
     child_cat.parent.should == cat1
   end
 
-  it 'should become root if parent category name is empty' do
+  it 'should become root if parent category code is empty' do
     cat1 = Factory(:category)
     cat1.root?.should be_true
   end
 
-  it 'should become root if parent category name is emptied when editing' do
+  it 'should become root if parent category code is emptied when editing' do
     cat1 = Factory(:category)
-    cat2 = Factory(:category)
+    cat2 = Factory(:category, :company_id => cat1.company.id)
     cat2.move_to_child_of cat1
-    cat2.update_attributes(:parent_name => nil)
+    cat2.update_attributes(:parent_code => nil)
     cat2.root?.should be_true
   end
 end

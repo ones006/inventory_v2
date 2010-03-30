@@ -13,6 +13,10 @@ describe Item do
     Factory.build(:item, :name => nil).should_not be_valid
   end
 
+  it 'should invalid without category code' do
+    Factory.build(:item, :category => nil, :category_code => nil).should_not be_valid
+  end
+
   it 'can have the same code between companies' do
     company1 = Factory(:company)
     company2 = Factory(:company)
@@ -35,15 +39,10 @@ describe Item do
     Factory(:item, :category => Factory(:category)).respond_to?(:category).should be_true
   end
 
-  it 'should assign category by name' do
+  it 'should assign category by code' do
     category = Factory(:category)
-    item = Factory.create(:item, :category_id => nil, :category_name => category.name)
+    item = Factory.create(:item, :category_id => nil, :category_code => category.code)
     item.category.should == category
-  end
-
-  it 'should invalid when category name is empty when edit' do
-    item = Factory(:item)
-    item.update_attributes(:category_name => nil).should be_false
   end
 
   it 'should have stock quantity' do

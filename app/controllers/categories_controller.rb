@@ -84,6 +84,6 @@ class CategoriesController < ApplicationController
   end
 
   def categories_list
-    @categories_list = category_names
+    @categories_list = current_company.categories
   end
 end

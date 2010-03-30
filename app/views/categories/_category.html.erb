@@ -3,6 +3,9 @@
     <%= "<span>#{category.children.length}</span>" unless category.leaf? %>
   </td>
   <td class='<%= "lvl_#{category.level}" %>'>
+    <%=h category.code %>
+  </td>
+  <td class='<%= "lvl_#{category.level}" %>'>
     <%= link_to category.name, category, :class => "category_detail" %>
   </td>
   <td><%=h category.description %></td>
