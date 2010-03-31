@@ -30,7 +30,7 @@ $("a#add_unit").live('click', function() {
 });
       
 function new_unit_form(n) {
-  var html = "<li class=\"additional_units\"><label for=\"item_units_attributes_"+n+"_name\">Name</label> " +
+  var html = "<li><label for=\"item_units_attributes_"+n+"_name\">Name</label> " +
     "<input type=\"text\" name=\"item[units_attributes]["+n+"][name]\" id=\"item_units_attributes_"+n+"_name\" size=\"20\" /> " +
     "<label for=\"item_units_attributes_"+n+"_name\">Conversion rate</label> " +
     "<input type=\"text\" size=\"5\" name=\"item[units_attributes]["+n+"][conversion_rate]\" id=\"item_units_attributes_"+n+"_name\" /> " +

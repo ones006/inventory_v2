@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :transaction_types
+
   map.resources :begining_balances
 
   map.resources :placements

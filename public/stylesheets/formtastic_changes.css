@@ -67,3 +67,8 @@ form.formtastic fieldset#units ol li label {
 }
 form.formtastic fieldset#units ol li.additional_units { margin-left:25%; }
 form.formtastic fieldset#units ol li input { margin-right:5px; }
+form.formtastic fieldset ol li.radio.inline fieldset ol { margin:0; }
+form.formtastic fieldset ol li.radio.inline fieldset ol li { float:left; width:10%; margin-right:.2em; }
+form.formtastic fieldset ol li.boolean label { width:25%; padding:7px 0 0; }
+form.formtastic fieldset ol li { padding:3px; }
+form.formtastic fieldset ol li:hover { background:#ffffef; }

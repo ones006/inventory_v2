@@ -65,3 +65,9 @@ Factory.define :begining_balance do |trans|
   trans.association(:company)
   trans.entries { |entries| [entries.association(:entry)] }
 end
+
+Factory.define :transaction_type do |tt|
+  tt.association(:company)
+  tt.sequence(:code) { |n| "TT#{n}" }
+  tt.sequence(:description) { |n| "TransactionType#{n}" }
+end

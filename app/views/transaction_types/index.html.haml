@@ -1,0 +1,24 @@
+- cache do
+  - title "Transaction Types"
+  
+  - content_for :breadcrumb do
+    = breadcrumb [ link_to('Transactions', transactions_path), |
+      "Transaction Types" ] |
+
+  = sidemenu @tab
+
+  - content_for :main_act do
+    = link_to "#{image_tag('icons/silk/add.png')} Add Transaction Type", new_transaction_type_path, :class => 'main_link', :title => 'add new transaction type'
+
+  %table.list
+    %tr
+      %th Code
+      %th Description
+      %th.actions Actions
+    - for transaction_type in @transaction_types
+      %tr
+        %td= transaction_type.code
+        %td= link_to transaction_type.description, transaction_type
+        %td.actions
+          = link_to image_tag('icons/silk/application_form_edit.png'), edit_transaction_type_path(transaction_type), :title => "edit #{transaction_type.code}"
+          = link_to image_tag('icons/silk/delete.png'), transaction_type, :confirm => 'Are you sure?', :method => :delete, :title => "delete #{transaction_type.code}"

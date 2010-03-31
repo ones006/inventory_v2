@@ -300,3 +300,21 @@ input.numbers { text-align:right; }
 .td_30 input { width:90% !important; }
 .td_40 { width:40%; }
 .td_40 input { width:90% !important; }
+.firerift-style {   
+  background:transparent url(/images/yesno-circle.png) no-repeat scroll 0 0;
+  cursor:pointer;
+  display:inline-block;
+  float:right;
+  height:28px;
+  margin:-7px -64px 0 0;
+  width:68px;
+}
+.on {
+  background-position: 0% 100%;
+}
+.off {
+  background-position: 100% 0%;
+}
+.hidden {
+  display: none;
+}
