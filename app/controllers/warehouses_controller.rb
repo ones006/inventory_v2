@@ -8,6 +8,21 @@ class WarehousesController < ApplicationController
   def show
     @warehouse = Warehouse.find(params[:id])
   end
+
+  def setdefault
+    @warehouse = Warehouse.find(params[:id])
+  end
+
+  def setasdefault
+    @warehouse = Warehouse.find(params[:id])
+    if @warehouse.setasdefault
+      flash[:success] = "Operation successful, from now on #{@warehouse.code} is the default warehouse"
+      redirect_to warehouses_path
+    else
+      flash[:error] = "An error occured, please try again"
+      redirect_to setdefault_warehouse_path(@warehouse)
+    end
+  end
   
   def new
     @warehouse = current_company.warehouses.new

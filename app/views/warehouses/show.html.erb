@@ -13,7 +13,7 @@
       <%= link_to "#{image_tag('icons/silk/add.png')} Add location", new_warehouse_location_path(@warehouse), :class => "main_link new_location", :title => "Create new location under #{@warehouse.name}" %>
     <% end -%>
 
-    <%= sidemenu %>
+    <%= sidemenu @tab %>
 
     <p>
       <strong>Code:</strong>
@@ -48,5 +48,24 @@
         <% end -%>
       </table>
     </div>
+
+    <div>
+      <p><strong>Managed Items</strong></p>
+      <table class="list">
+        <tr>
+          <th>Item Code</th>
+          <th>Item Name</th>
+          <th>Quantity</th>
+        </tr>
+        <% @warehouse.managed_items.each do |item| %>
+          <tr>
+            <td><%=h item.code %></td>
+            <td><%=h item.name %></td>
+            <td><%=h item.quantity_in_warehouse(@warehouse) %></td>
+          </tr>
+        <% end -%>
+      </table>
+    </div>
+
   </div>
 <% end -%>

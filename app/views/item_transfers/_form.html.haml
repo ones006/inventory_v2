@@ -5,5 +5,24 @@
       = f.input :number, :input_html => { :class => :default }
       = f.input :originator_warehouse
       = f.input :destination_warehouse
+
+      %li.string
+        #items
+          %table.list
+            %tr
+              %th.td_20 Code
+              %th.td_40 Name
+              %th.actions.td_10 Quantity
+              %th.actions.td_30 @ Value
+            - unless @item_transfer.entries.blank?
+              - f.semantic_fields_for :entries do |entry|
+                %tr
+                  %td= entry.object.item.try(:code)
+                  %td= entry.object.item.try(:name)
+                  %td.actions.td_10
+                    = entry.text_field :quantity, :size => 10, :class => 'numbers'
+                    = entry.hidden_field :item_id
+                  %td.actions.td_30= entry.text_field :value, :size => 30, :class => 'numbers'
+
     %fieldset.buttons
       %button{ :type => :submit } #{image_tag 'icons/silk/disk.png'} Save Item Transfer

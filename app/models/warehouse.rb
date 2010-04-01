@@ -16,4 +16,35 @@ class Warehouse < ActiveRecord::Base
     end
     sorted_locations.flatten
   end
+
+  def setasdefault
+    current_default = Warehouse.first(:conditions => { :company_id => company.id, :default => true })
+    self.transaction do
+      begin
+        current_default.update_attributes(:default => false)
+        self.update_attributes(:default => true)
+      rescue
+        return false
+      end
+    end
+  end
+
+  def managed_items
+    transactions = Transaction.all(:conditions => {:company_id => company.id, :destination_id => id}).map(&:id)
+    entries = Entry.all(:conditions => {:transaction_id => transactions}, :group => :item_id).map(&:item_id)
+    Item.all(:conditions => {:id => entries})
+  end
+
+  def managed_items_quantity
+    transactions_in = Transaction.all(:conditions => { :company_id => company.id,
+                                   :destination_id => id }).map(&:id)
+    transactions_out = Transaction.all(:conditions => { :company_id => company.id,
+                                       :origin_id => id}).map(&:id)
+    items_in = Entry.calculate(:sum, :quantity, :conditions => { :transaction_id => transactions_in }, :group => :item_id)
+    items_out = Entry.calculate(:sum, :quantity, :conditions => { :transaction_id => transactions_out }, :group => :item_id)
+    items_in.each do |k,v|
+      items_in['k'] = v - items_out['k'] unless items_out['k'].nil?
+    end
+    items_in
+  end
 end

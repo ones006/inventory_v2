@@ -1,8 +1,5 @@
-<% title "Edit Item Transfer" %>
+- cache do
+  #dialog_form
+    - title "Edit Item Transfer #{@item_transfer.number}"
 
-<%= render :partial => 'form' %>
-
-<p>
-  <%= link_to "Show", @item_transfer %> |
-  <%= link_to "View All", item_transfers_path %>
-</p>
+    = render :partial => 'form'

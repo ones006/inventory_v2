@@ -12,6 +12,7 @@ class ItemTransfersController < ApplicationController
   def new
     @item_transfer = current_company.item_transfers.new
     @item_transfer.number = ItemTransfer.suggested_number(current_company)
+    @item_transfer.entries.build
   end
   
   def create

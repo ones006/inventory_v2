@@ -18,4 +18,12 @@ describe Warehouse do
     w1 = Factory(:warehouse, :company_id => company.id, :code => "WH#1")
     Factory.build(:warehouse, :company_id => company.id, :code => "WH#1").should_not be_valid
   end
+
+  it 'should only have one default warehouse' do
+    company = Factory(:company)
+    w1 = Factory(:warehouse, :company_id => company.id,  :default => true)
+    w2 = Factory(:warehouse, :company_id => company.id)
+    w2.setasdefault.should be_true
+  end
+
 end

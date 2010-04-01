@@ -6,6 +6,9 @@
   <td><%= link_to warehouse.name, warehouse %></td>
   <td><%=h warehouse.address %></td>
   <td class="actions">
+    <% unless warehouse.default? %>
+      <%= link_to image_tag('icons/silk/flag_green.png'), setdefault_warehouse_path(warehouse), :title => 'Set as default warehouse' %>
+    <% end -%>
     <%= link_to image_tag('icons/silk/application_form_edit.png'), edit_warehouse_path(warehouse), :class => 'new_edit_warehouse', :title => "Edit #{warehouse.name}" %>
     <%= link_to image_tag('icons/silk/delete.png'), warehouse, :confirm => 'Are you sure?', :method => :delete, :title => "Delete #{warehouse.name}" %>
   </td>

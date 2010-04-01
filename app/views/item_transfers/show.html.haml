@@ -1,20 +1,22 @@
-<% title "Item Transfer" %>
+- cache do
+  #dialog_form
+    - title "Item Transfer"
 
-<p>
-  <strong>Number:</strong>
-  <%=h @item_transfer.number %>
-</p>
-<p>
-  <strong>Originator Warehouse:</strong>
-  <%=h @item_transfer.originator_warehouse_id %>
-</p>
-<p>
-  <strong>Destination Warehouse:</strong>
-  <%=h @item_transfer.destination_warehouse_id %>
-</p>
+    - content_for :breadcrumb do
+      = breadcrumb [ link_to('Transaction', transactions_path), |
+        link_to('Item Transfers',item_transfers_path), |
+        "Transaction #{@item_transfer.number}" ] |
 
-<p>
-  <%= link_to "Edit", edit_item_transfer_path(@item_transfer) %> |
-  <%= link_to "Destroy", @item_transfer, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", item_transfers_path %>
-</p>
+    = sidemenu @tab
+
+    %p
+      Transaction number:
+      %strong= @item_transfer.number
+
+    %p
+      Originator Warehouse:
+      %strong= link_to @item_transfer.originator_warehouse.code, @item_transfer.originator_warehouse
+
+    %p
+      Destination Warehouse:
+      %strong= link_to @item_transfer.destination_warehouse.code, @item_transfer.destination_warehouse

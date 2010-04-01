@@ -11,6 +11,10 @@ class Company < ActiveRecord::Base
   has_many :begining_balances
   has_many :item_transfers
 
+  def default_warehouse
+    warehouses.first(:conditions => { :default => true })
+  end
+
   def sorted_categories
     cat = []; categories.roots.each do |root|
       cat << root << root.descendants
