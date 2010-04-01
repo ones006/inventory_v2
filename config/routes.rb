@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :item_transfers
+
   map.resources :transaction_types
 
   map.resources :begining_balances

@@ -9,4 +9,8 @@ class BeginingBalance < Transaction
     @category_name || entries.first.try(:item).try(:category).try(:name)
   end
 
+  def self.suggested_number(company)
+    super(company, self.to_s)
+  end
+
 end

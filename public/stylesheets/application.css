@@ -318,3 +318,31 @@ input.numbers { text-align:right; }
 .hidden {
   display: none;
 }
+#errorExplanation {
+  width: auto;
+  border: 2px solid #CC0000;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+#errorExplanation h2 {
+  background-color:#CC0000;
+  color:#FFFFFF;
+  font-size:1.4em;
+  font-weight:bold;
+  margin:-7px;
+  padding:5px 5px 5px 15px;
+  text-align:left;
+}
+#errorExplanation p {
+  color:#333333;
+  margin:10px 0;
+  padding:8px;
+}
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style-type: square;
+  list-style-position:inside;
+  padding:0 20px;
+}

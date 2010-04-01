@@ -1,0 +1,20 @@
+<% title "Item Transfer" %>
+
+<p>
+  <strong>Number:</strong>
+  <%=h @item_transfer.number %>
+</p>
+<p>
+  <strong>Originator Warehouse:</strong>
+  <%=h @item_transfer.originator_warehouse_id %>
+</p>
+<p>
+  <strong>Destination Warehouse:</strong>
+  <%=h @item_transfer.destination_warehouse_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_item_transfer_path(@item_transfer) %> |
+  <%= link_to "Destroy", @item_transfer, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", item_transfers_path %>
+</p>

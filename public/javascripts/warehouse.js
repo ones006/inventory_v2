@@ -13,6 +13,16 @@ $(".new_edit_warehouse").live('click', function() {
     title: this.title,
     closeText: "<img src='/images/icons/cross.png' alt='close'/>",
     afterShow: function() {
+      $('.firerift-style-checkbox').each(function() {
+        thisID    = $(this).attr('id');
+        thisClass = $(this).attr('class');
+        setClass = "firerift-style";
+        $(this).addClass('hidden');
+        if($(this)[0].checked == true)
+          $(this).after('<div class="'+ setClass +' on" rel="'+ thisID +'">&nbsp;</div>');
+        else
+          $(this).after('<div class="'+ setClass +' off" rel="'+ thisID +'">&nbsp;</div>');
+      });
       $('input#warehouse_code').select();
       $('form#warehouse_form').live('submit', function() {
         var form = $("div#dialog_form");

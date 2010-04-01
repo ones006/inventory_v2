@@ -1,0 +1,11 @@
+- cache do
+  - title "New Item Transfer"
+
+  - content_for :breadcrumb do
+    = breadcrumb [ link_to('Transaction', transactions_path), |
+      link_to('Item Transfers', item_transfers_path), |
+      'Create new Item Transfer' ] |
+
+  = sidemenu @tab
+
+  = render :partial => 'form'

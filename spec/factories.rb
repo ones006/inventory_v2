@@ -71,3 +71,10 @@ Factory.define :transaction_type do |tt|
   tt.sequence(:code) { |n| "TT#{n}" }
   tt.sequence(:description) { |n| "TransactionType#{n}" }
 end
+
+Factory.define(:item_transfer) do |it|
+  it.association(:company)
+  it.sequence(:number) { |n| "ItemTransfer#{n}" }
+  it.originator_warehouse { |warehouse| warehouse.association(:warehouse) }
+  it.destination_warehouse { |warehouse| warehouse.association(:warehouse) }
+end

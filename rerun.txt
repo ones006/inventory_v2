@@ -1,1 +1,1 @@
-features/items.feature:38
+features/categories.feature:7 features/items.feature:38

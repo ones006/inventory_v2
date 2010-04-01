@@ -1,0 +1,9 @@
+- cache do
+  - semantic_form_for @item_transfer do |f|
+    = f.error_messages
+    - f.inputs do
+      = f.input :number, :input_html => { :class => :default }
+      = f.input :originator_warehouse
+      = f.input :destination_warehouse
+    %fieldset.buttons
+      %button{ :type => :submit } #{image_tag 'icons/silk/disk.png'} Save Item Transfer

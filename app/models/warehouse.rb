@@ -1,5 +1,5 @@
 class Warehouse < ActiveRecord::Base
-  attr_accessible :code, :name, :address, :company_id
+  attr_accessible :code, :name, :address, :company_id, :default
   belongs_to :company
   has_many :locations
   accepts_nested_attributes_for :locations

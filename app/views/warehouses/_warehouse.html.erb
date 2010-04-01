@@ -1,5 +1,8 @@
 <tr>
-  <td><%=h warehouse.code %></td>
+  <td>
+    <%=h warehouse.code %>
+    <%= "<strong>(Default)</strong>" if warehouse.default? %>
+  </td>
   <td><%= link_to warehouse.name, warehouse %></td>
   <td><%=h warehouse.address %></td>
   <td class="actions">

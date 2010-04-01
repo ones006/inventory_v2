@@ -1,4 +1,5 @@
 <div id="dialog_form">
+  <% javascript 'custom_checkbox' %>
   <% semantic_form_for @warehouse, {}, :html => { :id => 'warehouse_form' } do |f| %>
     <ul class="form_info">
       <li>Fields marked <span class="required">*</span> are required</li>
@@ -7,6 +8,7 @@
       <%= f.input :code %>
       <%= f.input :name %>
       <%= f.input :address, :input_html => { :rows => 3 } %>
+      <%= f.input :default, :input_html => { :class => 'firerift-style-checkbox' } %>
     <% end -%>
     <fieldset class="buttons">
       <button type="submit"><%= image_tag('icons/silk/disk.png') %> Save warehouse</button>
