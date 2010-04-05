@@ -2,7 +2,7 @@ class ItemTransfersController < ApplicationController
   before_filter :authenticate
   before_filter :assign_tab
   def index
-    @item_transfers = current_company.item_transfers.all
+    @item_transfers = current_company.item_transfers
   end
   
   def show
@@ -13,6 +13,7 @@ class ItemTransfersController < ApplicationController
     @item_transfer = current_company.item_transfers.new
     @item_transfer.number = ItemTransfer.suggested_number(current_company)
     @item_transfer.entries.build
+    @plus = current_company.plus.all(:include => :item)
   end
   
   def create
@@ -21,6 +22,7 @@ class ItemTransfersController < ApplicationController
       flash[:notice] = "Successfully created item transfer."
       redirect_to @item_transfer
     else
+      @plus = current_company.plus.all(:include => :item)
       render :action => 'new'
     end
   end

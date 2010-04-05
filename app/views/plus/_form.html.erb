@@ -2,7 +2,7 @@
   <div id="dialog_form">
     <%= javascript 'plu.js' %>
     <%= javascript_tag "
-      var items = #{@items.to_json(:only => [:id, :name])};
+      var items = #{@items.to_json(:only => [:id, :name], :methods => :name_with_code)};
       var suppliers = #{@suppliers.to_json(:only => [:id, :name])};"
     %>
     <% semantic_form_for @plu, {}, :html => { :id => 'plu_form' } do |f| %>

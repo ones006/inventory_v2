@@ -10,13 +10,29 @@
     = sidemenu @tab
 
     %p
-      Transaction number:
+      %span.light Transaction number:
       %strong= @item_transfer.number
 
     %p
-      Originator Warehouse:
+      %span.light Originator Warehouse:
       %strong= link_to @item_transfer.originator_warehouse.code, @item_transfer.originator_warehouse
 
     %p
-      Destination Warehouse:
+      %span.light Destination Warehouse:
       %strong= link_to @item_transfer.destination_warehouse.code, @item_transfer.destination_warehouse
+
+    %p
+      %strong Transaction Entries
+    %table.report
+      %tr
+        %th #
+        %th PLU
+        %th Item
+        %th Quantity
+      - @item_transfer.entries.each_with_index do |entry, n|
+        %tr
+          %td.index= n+1
+          %td= entry.plu.code
+          %td= entry.plu.item.name_with_code
+          %td.tdr= entry.quantity
+

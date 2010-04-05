@@ -214,6 +214,12 @@ table.list tr td {
 table.list tr:nth-child(2n+1) td {
   background:rgba(95,191,99,.2);
 }
+table.report tr td {
+  background:rgba(250,250,250,1);
+}
+table.report tr:nth-child(2n+1) td {
+  background:rgba(242,242,242,1);
+}
 table.list tr:hover td, table.list tr.odd:hover td, table.list tr.even:hover td {
   background:rgba(95,191,99,.4);
 }
@@ -291,15 +297,14 @@ table.report tr.even td {
   width:5%;
 }
 input.numbers { text-align:right; }
-.tdc { text-align:right; }
+.tdc { text-align:center; }
+.tdr { text-align:right; }
 .td_10 { width:10%; }
-.td_10 input { width:90% !important; }
 .td_20 { width:20%; }
-.td_20 input { width:90% !important; }
 .td_30 { width:20%; }
-.td_30 input { width:90% !important; }
 .td_40 { width:40%; }
-.td_40 input { width:90% !important; }
+.td_70 { width:70%; }
+.td_10 input, .td_20 input, .td_30 input, .td_40 input, .td_70 input { width:90% !important; }
 .firerift-style {   
   background:transparent url(/images/yesno-circle.png) no-repeat scroll 0 0;
   cursor:pointer;
@@ -342,6 +347,7 @@ input.numbers { text-align:right; }
 }
 #errorExplanation ul li {
   font-size: 12px;
+  line-height:1.4em;
   list-style-type: square;
   list-style-position:inside;
   padding:0 20px;

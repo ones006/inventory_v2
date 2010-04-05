@@ -19,4 +19,8 @@ class Plu < ActiveRecord::Base
   def supplier_name
     @supplier_name || supplier.try(:name)
   end
+
+  def item_name_with_code
+    item.name_with_code
+  end
 end

@@ -23,7 +23,7 @@
     <% for plu in @plus %>
       <tr>
         <td><%= link_to plu.code, plu %></td>
-        <td><strong><%=h plu.item.code %></strong> <em><%=h plu.item.name %></em></td>
+        <td><strong><%=h plu.item.name %></strong> <em>(<%=h plu.item.code %>)</em></td>
         <td><%=h plu.supplier.name %></td>
         <td><%=h plu.payment_term %></td>
          <td class="actions">

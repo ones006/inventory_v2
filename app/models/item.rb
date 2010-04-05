@@ -13,6 +13,10 @@ class Item < ActiveRecord::Base
     @category_code || category.try(:formatted_code)
   end
 
+  def name_with_code
+    "#{name} (#{code})"
+  end
+
   def category_code=(catcode)
     self.category = Category.find_by_code(catcode.split.first) unless catcode.blank?
   end

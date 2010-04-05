@@ -16,7 +16,7 @@ $('form#plu_form').live('submit', function() {
 
 function set_autocomplete() {
   item_name.autocomplete(items, {
-    formatItem: function(row, i) { return row.item.name; },
+    formatItem: function(row, i) { return row.item.name_with_code; },
     mustMatch: true
   })
   .result(function(event, data) {
