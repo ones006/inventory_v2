@@ -1,0 +1,21 @@
+- cache do
+  - title "Item Ins"
+  - content_for :breadcrumb do
+    = breadcrumb [ link_to('Transaction', transactions_path), |
+      'Item In' ] |
+
+  = sidemenu @tab
+
+  - content_for :main_act do
+    = link_to "#{image_tag('icons/silk/add.png')} New Item In", new_item_in_path, :title => 'Create new Item In', :class => 'main_link'
+
+  %table.list
+    %tr
+      %th Number
+      %th Destination Warehouse
+      %th.actions Actions
+    - for item_in in @item_ins
+      %tr
+        %td= link_to item_in.number, item_in
+        %td= item_in.destination_warehouse.name
+        %td.actions= link_to "#{image_tag('icons/silk/delete.png')}", item_in, :method => :delete, :confirm => "Are you sure?", :title => "delete transaction #{item_in.number}"

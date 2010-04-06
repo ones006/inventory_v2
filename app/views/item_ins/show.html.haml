@@ -1,0 +1,35 @@
+- cache do
+  - title "Item In"
+
+  #dialog_form
+    - title "Item Transfer"
+
+    - content_for :breadcrumb do
+      = breadcrumb [ link_to('Transaction', transactions_path), |
+        link_to('Item In',item_ins_path), |
+        "Transaction #{@item_in.number}" ] |
+
+    = sidemenu @tab
+
+    %p
+      %span.light Transaction Number:
+      %strong= @item_in.number
+
+    %p
+      %span.light Destination Warehouse:
+      %strong= link_to @item_in.destination_warehouse.name, @item_in.destination_warehouse
+
+    %p
+      %strong Transaction Entries
+    %table.report
+      %tr
+        %th #
+        %th PLU
+        %th Item
+        %th Quantity
+      - @item_in.entries.each_with_index do |entry, n|
+        %tr
+          %td.index= n+1
+          %td= entry.plu.code
+          %td= entry.plu.item.name_with_code
+          %td.tdr= entry.quantity

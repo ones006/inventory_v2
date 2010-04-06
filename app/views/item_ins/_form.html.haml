@@ -1,0 +1,33 @@
+- cache do
+  - javascript 'item_transfer'
+  = javascript_tag "var plu = #{@plus.to_json(:only => [:id, :code], :methods => :item_name_with_code)};"
+  - semantic_form_for @item_in do |f|
+    = f.error_messages
+    - f.inputs do
+      = f.input :number, :input_html => { :class => 'default' }
+      = f.input :destination_warehouse, :include_blank => false
+
+      %li.string
+        #items
+          %table#transaction_entries.list
+            %tr
+              %th.td_20 PLU Code
+              %th.td_70 Item
+              %th.actions.td_10 Quantity
+            - unless @item_in.entries.blank?
+              - f.semantic_fields_for :entries do |entry|
+                %tr
+                  %td.td_20
+                    = entry.text_field :plu_code, :class => 'plu_code'
+                    = entry.hidden_field :plu_id
+                  %td= entry.object.plu.try(:item).try(:name_with_code)
+                  %td.actions.td_10
+                    = entry.text_field :quantity, :size => 10, :class => 'numbers entries_quantity'
+                    = entry.hidden_field :item_id
+
+          %p
+            %a{:href => '#', :id => 'add_entries'}
+              = "#{image_tag('icons/silk/add.png')} add transaction entries"
+
+    %fieldset.buttons
+      %button{ :type => :submit } #{image_tag 'icons/silk/disk.png'} Save Item In
