@@ -10,6 +10,7 @@ class Company < ActiveRecord::Base
   has_many :locations
   has_many :begining_balances
   has_many :item_transfers
+  has_many :item_ins
 
   def default_warehouse
     warehouses.first(:conditions => { :default => true })

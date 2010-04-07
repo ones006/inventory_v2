@@ -13,9 +13,15 @@
     %tr
       %th Number
       %th Destination Warehouse
+      %th Alter Stock
       %th.actions Actions
     - for item_in in @item_ins
       %tr
         %td= link_to item_in.number, item_in
         %td= item_in.destination_warehouse.name
+        %td.tdc
+          - if item_in.alter_stock?
+            = image_tag 'icons/silk/tick.png'
+          - else
+            = image_tag 'icons/silk/cross.png'
         %td.actions= link_to "#{image_tag('icons/silk/delete.png')}", item_in, :method => :delete, :confirm => "Are you sure?", :title => "delete transaction #{item_in.number}"

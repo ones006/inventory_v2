@@ -3,11 +3,11 @@ class ItemInsController < ApplicationController
   before_filter :assign_tab
 
   def index
-    @item_ins = ItemIn.all
+    @item_ins = current_company.item_ins.all
   end
   
   def new
-    @item_in = ItemIn.new
+    @item_in = current_company.item_ins.new
     @item_in.number = ItemIn.suggested_number(current_company)
     @item_in.destination_id = current_company.default_warehouse.id
     @item_in.entries.build
@@ -15,7 +15,7 @@ class ItemInsController < ApplicationController
   end
   
   def create
-    @item_in = ItemIn.new(params[:item_in])
+    @item_in = current_company.item_ins.new(params[:item_in])
     if @item_in.save
       flash[:notice] = "Successfully created item in."
       redirect_to @item_in
@@ -25,7 +25,7 @@ class ItemInsController < ApplicationController
   end
   
   def show
-    @item_in = ItemIn.find(params[:id])
+    @item_in = current_company.item_ins.find(params[:id])
   end
 
   private

@@ -1,6 +1,9 @@
 - cache do
-  - javascript 'item_transfer', 'custom_checkbox'
+
   = javascript_tag "var plu = #{@plus.to_json(:only => [:id, :code], :methods => :item_name_with_code)};"
+  = javascript_tag "var model = 'item_in';"
+  - javascript 'item_transfer', 'custom_checkbox'
+
   - semantic_form_for @item_in do |f|
     = f.error_messages
     - f.inputs do

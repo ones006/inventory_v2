@@ -36,11 +36,11 @@ $('input.entries_quantity').live('keypress', function(e) {
 function entry_row(count) {
   var idx = count;
   var html = "<tr><td class=\"td_30\">" +
-    "<input type=\"text\" size=\"30\" name=\"item_transfer[entries_attributes]["+idx+"][plu_code]\" id=\"item_transfer_entries_attributes_"+idx+"_plu_code\" class=\"plu_code ac_input\" autocomplete=\"off\">" +
-    "<input type=\"hidden\" name=\"item_transfer[entries_attributes]["+idx+"][plu_id]\" id=\"item_transfer_entries_attributes_"+idx+"_plu_id\" value=\"\">" +
+    "<input type=\"text\" size=\"30\" name=\""+model+"[entries_attributes]["+idx+"][plu_code]\" id=\""+model+"_entries_attributes_"+idx+"_plu_code\" class=\"plu_code ac_input\" autocomplete=\"off\">" +
+    "<input type=\"hidden\" name=\""+model+"[entries_attributes]["+idx+"][plu_id]\" id=\""+model+"_entries_attributes_"+idx+"_plu_id\" value=\"\">" +
     "</td> <td></td> <td class=\"actions td_10\">" +
-    "<input type=\"text\" size=\"10\" name=\"item_transfer[entries_attributes]["+idx+"][quantity]\" id=\"item_transfer_entries_attributes_"+idx+"_quantity\" class=\"numbers entries_quantity\">" +
-    "<input type=\"hidden\" name=\"item_transfer[entries_attributes]["+idx+"][item_id]\" id=\"item_transfer_entries_attributes_"+idx+"_item_id\">" +
+    "<input type=\"text\" size=\"10\" name=\""+model+"[entries_attributes]["+idx+"][quantity]\" id=\""+model+"_entries_attributes_"+idx+"_quantity\" class=\"numbers entries_quantity\">" +
+    "<input type=\"hidden\" name=\""+model+"[entries_attributes]["+idx+"][item_id]\" id=\""+model+"_entries_attributes_"+idx+"_item_id\">" +
     "</td></tr>";
   return html;
 }
