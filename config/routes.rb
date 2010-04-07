@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :item_outs
+
   map.resources :item_ins
 
   map.resources :item_transfers

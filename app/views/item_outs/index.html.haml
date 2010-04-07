@@ -1,0 +1,29 @@
+- cache do
+  - title "Item Out"
+  - content_for :breadcrumb do
+    = breadcrumb [ link_to('Transaction', transactions_path), |
+      'Item Out' ] |
+
+  = sidemenu @tab
+
+  - content_for :main_act do
+    = link_to "#{image_tag('icons/silk/add.png')} New Item Out", new_item_out_path, :title => 'Create new Item Out transaction', :class => 'main_link'
+
+  %table.list
+    %tr
+      %th.td_15 Number
+      %th.td_20 Originator Warehouse
+      %th Remark
+      %th.td_15 Alter Stock
+      %th.actions.td_5 Actions
+    - for item_out in @item_outs
+      %tr
+        %td= link_to item_out.number, item_out
+        %td= item_out.originator_warehouse.name
+        %td= truncate item_out.remark, :length => 50
+        %td.tdc
+          - if item_out.alter_stock?
+            = image_tag 'icons/silk/tick.png'
+          - else
+            = image_tag 'icons/silk/cross.png'
+        %td.actions= link_to "#{image_tag('icons/silk/delete.png')}", item_out, :method => :delete, :confirm => "Are you sure?", :title => "delete transaction #{item_out.number}"

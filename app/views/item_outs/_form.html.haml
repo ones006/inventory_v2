@@ -1,14 +1,14 @@
 - cache do
 
   = javascript_tag "var plu = #{@plus.to_json(:only => [:id, :code], :methods => :item_name_with_code)};"
-  = javascript_tag "var model = 'item_in';"
+  = javascript_tag "var model = 'item_out';"
   - javascript 'item_transfer', 'custom_checkbox'
 
-  - semantic_form_for @item_in do |f|
+  - semantic_form_for @item_out do |f|
     = f.error_messages
     - f.inputs do
       = f.input :number, :input_html => { :class => 'default' }
-      = f.input :destination_warehouse, :include_blank => false
+      = f.input :originator_warehouse, :include_blank => false
       = f.input :alter_stock, :input_html => { :class => 'firerift-style-checkbox' }
       = f.input :remark, :input_html => { :rows => 3 }
 
@@ -19,7 +19,7 @@
               %th.td_20 PLU Code
               %th.td_70 Item
               %th.actions.td_10 Quantity
-            - unless @item_in.entries.blank?
+            - unless @item_out.entries.blank?
               - f.semantic_fields_for :entries do |entry|
                 %tr
                   %td.td_20
@@ -35,4 +35,4 @@
               = "#{image_tag('icons/silk/add.png')} add transaction entries"
 
     %fieldset.buttons
-      %button{ :type => :submit } #{image_tag 'icons/silk/disk.png'} Save Item In
+      %button{ :type => :submit } #{image_tag 'icons/silk/disk.png'} Save Transaction

@@ -12,15 +12,17 @@
 
   %table.list
     %tr
-      %th Number
-      %th Originator Warehouse
-      %th Destination Warehouse
-      %th.actions Actions
+      %th.td_10 Number
+      %th.td_20 Origin
+      %th.td_20 Destination
+      %th Remark
+      %th.actions.td_5 Actions
     - for item_transfer in @item_transfers
       %tr
         %td= link_to item_transfer.number, item_transfer, :title => 'transaction detail'
         %td= item_transfer.originator_warehouse.name
         %td= item_transfer.destination_warehouse.name
+        %td= truncate item_transfer.remark, :length => 50
         %td.actions
           = link_to image_tag('icons/silk/application_form_edit.png'), edit_item_transfer_path(item_transfer), :title => "edit transaction #{item_transfer.number}"
           = link_to image_tag('icons/silk/delete.png'), item_transfer, :confirm => 'Are you sure?', :method => :delete, :title => "delete transaction #{item_transfer.number}"

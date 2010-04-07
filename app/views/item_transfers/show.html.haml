@@ -10,16 +10,20 @@
     = sidemenu @tab
 
     %p
-      %span.light Transaction number:
+      %span.light.transaction_label Transaction number
       %strong= @item_transfer.number
 
     %p
-      %span.light Originator Warehouse:
+      %span.light.transaction_label Originator Warehouse
       %strong= link_to @item_transfer.originator_warehouse.code, @item_transfer.originator_warehouse
 
     %p
-      %span.light Destination Warehouse:
+      %span.light.transaction_label Destination Warehouse
       %strong= link_to @item_transfer.destination_warehouse.code, @item_transfer.destination_warehouse
+
+    %div
+      %span.light.transaction_label Remark
+      %p= @item_transfer.remark
 
     %p
       %strong Transaction Entries

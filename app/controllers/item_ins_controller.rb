@@ -20,6 +20,7 @@ class ItemInsController < ApplicationController
       flash[:notice] = "Successfully created item in."
       redirect_to @item_in
     else
+      @plus = current_company.plus.all(:include => :item)
       render :action => 'new'
     end
   end

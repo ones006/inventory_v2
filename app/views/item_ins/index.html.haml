@@ -11,14 +11,16 @@
 
   %table.list
     %tr
-      %th Number
-      %th Destination Warehouse
-      %th Alter Stock
-      %th.actions Actions
+      %th.td_15 Number
+      %th.td_20 Destination Warehouse
+      %th Remark
+      %th.td_15 Alter Stock
+      %th.actions.td_5 Actions
     - for item_in in @item_ins
       %tr
         %td= link_to item_in.number, item_in
         %td= item_in.destination_warehouse.name
+        %td= item_in.remark
         %td.tdc
           - if item_in.alter_stock?
             = image_tag 'icons/silk/tick.png'

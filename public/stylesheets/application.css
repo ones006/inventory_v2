@@ -211,18 +211,19 @@ table.list tr td {
   background:rgba(95,191,99,.1);
   padding:4px;
 }
-table.list tr:nth-child(2n+1) td {
+table.list tr:nth-child(2n+1) {
   background:rgba(95,191,99,.2);
 }
 table.report tr td {
   background:rgba(250,250,250,1);
 }
-table.report tr:nth-child(2n+1) td {
+table.report tr:nth-child(2n+1) {
   background:rgba(242,242,242,1);
 }
 table.list tr:hover td, table.list tr.odd:hover td, table.list tr.even:hover td {
   background:rgba(95,191,99,.4);
 }
+table.list tr td:nth-child(2n+1) { background:rgba(71,143,74,.2); }
 table.list tr td.lvl_1 { padding-left:20px; } 
 table.list tr td.lvl_2 { padding-left:40px; } 
 table.list tr td.lvl_3 { padding-left:60px; } 
@@ -299,10 +300,13 @@ table.report tr.even td {
 input.numbers { text-align:right; }
 .tdc { text-align:center; }
 .tdr { text-align:right; }
+.td_5 { width:5%; }
 .td_10 { width:10%; }
+.td_15 { width:15%; }
 .td_20 { width:20%; }
 .td_30 { width:20%; }
 .td_40 { width:40%; }
+.td_50 { width:50%; }
 .td_70 { width:70%; }
 .td_10 input, .td_20 input, .td_30 input, .td_40 input, .td_70 input { width:90% !important; }
 .firerift-style {   
@@ -352,3 +356,17 @@ input.numbers { text-align:right; }
   list-style-position:inside;
   padding:0 20px;
 }
+#dialog_form div {
+  margin-bottom:20px;
+  overflow:hidden;
+}
+.transaction_label {
+  display:block;
+  float:left;
+  width:160px;
+}
+.transaction_label + p {
+  margin-left:160px;
+  overflow:hidden;
+}
+td img { vertical-align:middle; }
