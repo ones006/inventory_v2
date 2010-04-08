@@ -27,4 +27,12 @@ class Company < ActiveRecord::Base
   def leaf_categories
     categories.reject { |cat| !cat.leaf? }
   end
+
+  def first_transaction_date
+    Transaction.first(:conditions => { :company_id => self.id }, :order => 'created_at ASC').created_at
+  end
+
+  def stock
+    @stock || Stock.new(self)
+  end
 end

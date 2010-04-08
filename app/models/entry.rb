@@ -7,6 +7,10 @@ class Entry < ActiveRecord::Base
   attr_writer :plu_code
   before_save :assign_item_id
 
+  named_scope :for_transactions, lambda { |ids|
+    { :conditions => { :transaction_id => ids } }
+  }
+
   def total_value
     value * quantity
   end

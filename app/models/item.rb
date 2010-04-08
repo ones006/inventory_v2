@@ -34,7 +34,8 @@ class Item < ActiveRecord::Base
   end
 
   def quantity_in_warehouse(warehouse)
-    transactions = Transaction.all(:conditions => {:destination_id => warehouse.id}).map(&:id)
-    Entry.calculate(:sum, :quantity, :conditions => {:transaction_id => transactions, :item_id => id})
+    company.stock.item_on_hand_per_warehouse(warehouse, self)
+    #transactions = Transaction.all(:conditions => {:destination_id => warehouse.id}).map(&:id)
+    #Entry.calculate(:sum, :quantity, :conditions => {:transaction_id => transactions, :item_id => id})
   end
 end

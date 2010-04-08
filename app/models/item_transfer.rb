@@ -10,6 +10,10 @@ class ItemTransfer < Transaction
   has_many :entries, :foreign_key => :transaction_id, :dependent => :destroy
   accepts_nested_attributes_for :entries, :allow_destroy => true, :reject_if => proc { |a| a['quantity'].blank? }
 
+  def validate
+    errors.add(:destination_warehouse, 'Both Originator and destination warehouse cannot be the same') if origin_id == destination_id
+  end
+
   def self.suggested_number(company)
     last_number = super(company, self.to_s)
     next_available = last_number.nil? ? '00001' : sprintf('%05d', last_number.split('.').last.to_i + 1)
