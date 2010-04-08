@@ -24,7 +24,7 @@ $('#add_entries').live('click', function() {
   return false;
 });
 
-$('input.entries_quantity').live('keypress', function(e) {
+$('input.entries_quantity, input.entries_value').live('keypress', function(e) {
   if(e.keyCode == 13) {
     $('#add_entries').click();
     $('#transaction_entries tbody tr:last td:first').children()[0].focus();
@@ -40,7 +40,10 @@ function entry_row(count) {
     "<input type=\"hidden\" name=\""+model+"[entries_attributes]["+idx+"][plu_id]\" id=\""+model+"_entries_attributes_"+idx+"_plu_id\" value=\"\">" +
     "</td> <td></td> <td class=\"actions td_10\">" +
     "<input type=\"text\" size=\"10\" name=\""+model+"[entries_attributes]["+idx+"][quantity]\" id=\""+model+"_entries_attributes_"+idx+"_quantity\" class=\"numbers entries_quantity\">" +
-    "<input type=\"hidden\" name=\""+model+"[entries_attributes]["+idx+"][item_id]\" id=\""+model+"_entries_attributes_"+idx+"_item_id\">" +
-    "</td></tr>";
+    "<input type=\"hidden\" name=\""+model+"[entries_attributes]["+idx+"][item_id]\" id=\""+model+"_entries_attributes_"+idx+"_item_id\"></td>"; 
+  if(window.with_value == true) {
+    html += "<td class=\"actions td_30\"><input type=\"text\" size=\"30\" name=\""+model+"[entries_attributes]["+idx+"][value]\" id=\""+model+"_entries_attributes_"+idx+"_value\" class=\"numbers entries_value\"></td>"; 
+  }
+  html += "</tr>";
   return html;
 }

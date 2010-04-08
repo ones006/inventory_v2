@@ -25,13 +25,17 @@
       %strong Transaction Entries
     %table.report
       %tr
-        %th #
-        %th PLU
+        %th.td_5 #
+        %th.td_15 PLU
         %th Item
-        %th Quantity
+        %th.td_10 Quantity
+        %th.actions.td_25 Value
       - @item_in.entries.each_with_index do |entry, n|
         %tr
           %td.index= n+1
           %td= entry.plu.code
           %td= entry.plu.item.name_with_code
           %td.tdr= entry.quantity
+          %td.actions
+            = number_to_currency(entry.total_value, :unit => '', :delimiter => '.', :separator => ',')
+            = "(@ #{number_to_currency(entry.value, :unit => '', :delimiter => '.', :separator => ',')})"

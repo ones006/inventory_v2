@@ -29,6 +29,13 @@ class ItemInsController < ApplicationController
     @item_in = current_company.item_ins.find(params[:id])
   end
 
+  def destroy
+    @item_in = ItemIn.find(params[:id])
+    @item_in.destroy
+    flash[:notice] = "Transaction #{@item_in.number} successfuly destroyed"
+    redirect_to item_ins_path
+  end
+
   private
   def assign_tab
     @tab = 'transactions'

@@ -29,6 +29,13 @@ class ItemOutsController < ApplicationController
     @item_out = ItemOut.find(params[:id])
   end
 
+  def destroy
+    @item_out = ItemOut.find(params[:id])
+    @item_out.destroy
+    flash[:notice] = "Transaction #{@item_out.number} successfuly destroyed"
+    redirect_to item_outs_path
+  end
+
   private
   def assign_tab
     @tab = 'transactions'

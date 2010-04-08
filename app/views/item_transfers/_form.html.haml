@@ -1,6 +1,6 @@
 - cache do
 
-  - javascript 'item_transfer'
+  - javascript 'item_transfer', 'custom_checkbox'
   = javascript_tag "var plu = #{@plus.to_json(:only => [:id, :code], :methods => :item_name_with_code)};"
   = javascript_tag "var model = 'item_transfer';"
   
@@ -8,8 +8,10 @@
     = f.error_messages
     - f.inputs do
       = f.input :number, :input_html => { :class => :default }
-      = f.input :originator_warehouse
-      = f.input :destination_warehouse
+      = f.input :originator_warehouse, :include_blank => false
+      = f.input :destination_warehouse, :include_blank => false
+      = f.input :alter_stock, :input_html => { :class => 'firerift-style-checkbox' }
+      = f.input :remark, :input_html => { :rows => 3 }
 
       %li.string
         #items

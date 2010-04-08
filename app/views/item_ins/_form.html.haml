@@ -2,6 +2,7 @@
 
   = javascript_tag "var plu = #{@plus.to_json(:only => [:id, :code], :methods => :item_name_with_code)};"
   = javascript_tag "var model = 'item_in';"
+  = javascript_tag "var with_value = true;"
   - javascript 'item_transfer', 'custom_checkbox'
 
   - semantic_form_for @item_in do |f|
@@ -17,8 +18,9 @@
           %table#transaction_entries.list
             %tr
               %th.td_20 PLU Code
-              %th.td_70 Item
+              %th.td_40 Item
               %th.actions.td_10 Quantity
+              %th.actions.td_30 @ Value
             - unless @item_in.entries.blank?
               - f.semantic_fields_for :entries do |entry|
                 %tr
@@ -29,6 +31,7 @@
                   %td.actions.td_10
                     = entry.text_field :quantity, :size => 10, :class => 'numbers entries_quantity'
                     = entry.hidden_field :item_id
+                  %td.actions.td_30= entry.text_field :value, :size => 30, :class => 'numbers entries_value'
 
           %p
             %a{:href => '#', :id => 'add_entries'}

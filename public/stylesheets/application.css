@@ -304,7 +304,9 @@ input.numbers { text-align:right; }
 .td_10 { width:10%; }
 .td_15 { width:15%; }
 .td_20 { width:20%; }
-.td_30 { width:20%; }
+.td_25 { width:25%; }
+.td_30 { width:30%; }
+.td_35 { width:35%; }
 .td_40 { width:40%; }
 .td_50 { width:50%; }
 .td_70 { width:70%; }

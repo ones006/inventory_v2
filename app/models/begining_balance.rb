@@ -5,6 +5,7 @@ class BeginingBalance < Transaction
   accepts_nested_attributes_for :entries, :allow_destroy => true, :reject_if => proc { |a| a['quantity'].blank? }
   validates_presence_of :number
   attr_writer :category_name
+  before_save :assign_alter_stock
 
   def category_name
     @category_name || entries.first.try(:item).try(:category).try(:name)
@@ -18,4 +19,8 @@ class BeginingBalance < Transaction
     "#{prefix}.#{next_available}"
   end
 
+  private
+  def assign_alter_stock
+    self.alter_stock = true
+  end
 end

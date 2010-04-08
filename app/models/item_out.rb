@@ -5,7 +5,7 @@ class ItemOut < Transaction
   validates_presence_of :origin_id
   validates_uniqueness_of :number, :scope => :company_id
   attr_accessor :originator_warehouse
-  has_many :entries, :foreign_key => :transaction_id
+  has_many :entries, :foreign_key => :transaction_id, :dependent => :destroy
   accepts_nested_attributes_for :entries, :allow_destroy => true, :reject_if => proc { |a| a['quantity'].blank? }
   
   def self.suggested_number(company)
