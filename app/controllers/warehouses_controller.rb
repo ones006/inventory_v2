@@ -1,6 +1,7 @@
 class WarehousesController < ApplicationController
   before_filter :authenticate
   before_filter :set_tab
+
   def index
     @warehouses = current_company.warehouses
   end
@@ -61,6 +62,13 @@ class WarehousesController < ApplicationController
     @warehouse.destroy
     flash[:notice] = "Successfully destroyed warehouse."
     redirect_to warehouses_url
+  end
+
+  def plu_available
+    @warehouse = Warehouse.find(params[:id])
+    item_ids = @warehouse.managed_items.map(&:id)
+    @plus = current_company.plus.all(:conditions => { :item_id => item_ids }).to_json(:only => [:id, :code], :methods => :item_name_with_code)
+    render :json => { 'plus' => @plus }
   end
 
   private

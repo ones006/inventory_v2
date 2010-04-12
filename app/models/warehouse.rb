@@ -36,6 +36,10 @@ class Warehouse < ActiveRecord::Base
   end
 
   def managed_items_quantity
-    items = {}; managed_items.each { |item| items[item.id] = company.stock.item_on_hand_per_warehouse(self, item) }; items
+    items = {}; managed_items.each { |item| items[item.id] = item_quantity(item) }; items
+  end
+
+  def item_quantity(item)
+    company.stock.item_on_hand_per_warehouse(self, item)
   end
 end

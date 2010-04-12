@@ -15,7 +15,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :suppliers
 
-  map.resources :warehouses, :member => { :setdefault => :get, :setasdefault => :put } do |warehouse|
+  map.resources :warehouses, :member => { :plu_available => :get, :setdefault => :get, :setasdefault => :put } do |warehouse|
     warehouse.resources :locations
   end
 

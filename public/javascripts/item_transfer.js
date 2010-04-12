@@ -1,31 +1,22 @@
 $(function() {
   set_autocomplete();
+  $('.plu_source').change(function() {
+    $.getJSON('/warehouses/' + $(this).val() + '/plu_available',
+      function(json) {
+        window.plu = eval('('+json.plus+')');
+        set_autocomplete();
+      });
+  });
 });
 
-function set_autocomplete() {
-  $('.plu_code').autocomplete(plu, {
-    formatItem: function(row, i) { return row.plu.code; },
-    mustMatch: true }
-  )
-  .result(function(event, data) {
-    var input = $(this);
-    if(data) {
-      input.next('input[type=hidden]').val(data.plu.id);
-      input.parent().next().html(data.plu.item_name_with_code);
-      input.parent().next().next().children()[0].focus();
-    }
-    else input.next('input[type=hidden]').val('');
-  });
-}
-
-$('#add_entries').live('click', function() {
+$('#add_entries').live('click', function(e) {
   var entries_count = $('#transaction_entries tr').length - 1; // 1 is the table header, we're only intersted in rows with input fields in it
   $('#transaction_entries').append(entry_row(entries_count));
   return false;
 });
 
 $('input.entries_quantity, input.entries_value').live('keypress', function(e) {
-  if(e.keyCode == 13) {
+  if(e.keyCode == 13 && $(this).val() != '') {
     $('#add_entries').click();
     $('#transaction_entries tbody tr:last td:first').children()[0].focus();
     set_autocomplete();
@@ -46,4 +37,22 @@ function entry_row(count) {
   }
   html += "</tr>";
   return html;
+}
+
+function set_autocomplete() {
+  $('.plu_code').autocomplete(plu, {
+    formatItem: function(row, i) { return row.plu.code; },
+    autoFill: true,
+    mustMatch: true }
+  )
+  .result(function(event, data) {
+    var input = $(this);
+    if(data) {
+      input.next('input[type=hidden]').val(data.plu.id);
+      input.parent().next().html(data.plu.item_name_with_code);
+      input.parent().next().next().children()[0].focus();
+      event.stopImmediatePropagation();
+    }
+    // else input.next('input[type=hidden]').val('');
+  });
 }

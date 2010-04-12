@@ -18,10 +18,16 @@ class ItemTransfersController < ApplicationController
   
   def create
     @item_transfer = current_company.item_transfers.new(params[:item_transfer])
+    @item_transfer.entries.each do |entry| 
+      entry.warehouse_id = @item_transfer.origin_id
+      entry.validating_quantity = true
+    end
     if @item_transfer.save
       flash[:notice] = "Successfully created item transfer."
       redirect_to @item_transfer
     else
+      existing_plu = @item_transfer.entries.collect { |ent| ent.plu_id }
+      @item_transfer.entries.build if @item_transfer.entries.length < 1
       @plus = current_company.plus.all(:include => :item)
       render :action => 'new'
     end
