@@ -16,6 +16,10 @@ class ItemOutsController < ApplicationController
   
   def create
     @item_out = current_company.item_outs.new(params[:item_out])
+    @item_out.entries.each do |entry| 
+      entry.warehouse_id = @item_out.origin_id
+      entry.validating_quantity = true
+    end
     if @item_out.save
       flash[:notice] = "Successfully created item out."
       redirect_to @item_out
