@@ -1,0 +1,42 @@
+var t_types = new Array();
+<%- @transaction_types.each do |tt| -%>
+  <%= "t_types[#{tt.id}] = '#{tt.to_json(:methods => :next_available_number)}';" %>
+<%- end -%>
+
+$('#general_transaction_transaction_type_id').change(function() {
+  alter_form(this.value);
+});
+
+function alter_form(index) {
+  if(index != '') {
+    obj = eval('(' + t_types[index] + ')');
+    $('#general_transaction_number_input').show();
+    $('#general_transaction_number_input input').val(obj.transaction_type.next_available_number).focus();
+    $('#general_transaction_remark_input').show();
+    $('#items').show();
+    $('fieldset.buttons').show();
+    if(obj.transaction_type.direction === 0) {
+      $('#general_transaction_originator_warehouse_input').hide();
+      $('#general_transaction_destination_warehouse_input').show();
+    }
+    if(obj.transaction_type.direction === 1) {
+      $('#general_transaction_originator_warehouse_input').show();
+      $('#general_transaction_destination_warehouse_input').hide();
+    }
+    if(obj.transaction_type.direction === 2) {
+      $('#general_transaction_originator_warehouse_input').show();
+      $('#general_transaction_destination_warehouse_input').show();
+    }
+  } else {
+    $('#general_transaction_number_input').hide();
+    $('#general_transaction_originator_warehouse_input').hide();
+    $('#general_transaction_destination_warehouse_input').hide();
+    $('#general_transaction_remark_input').hide();
+    $('#items').hide();
+    $('fieldset.buttons').hide();
+  }
+}
+
+$(function() {
+  alter_form($('#general_transaction_transaction_type_id').val());
+});

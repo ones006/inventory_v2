@@ -57,5 +57,6 @@ class ItemTransfersController < ApplicationController
   private
   def assign_tab
     @tab = 'transactions'
+    @current = 'tr'
   end
 end

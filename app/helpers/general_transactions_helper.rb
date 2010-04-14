@@ -1,0 +1,2 @@
+module GeneralTransactionsHelper
+end

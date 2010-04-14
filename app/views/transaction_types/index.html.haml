@@ -13,12 +13,14 @@
   %table.list
     %tr
       %th Code
+      %th Name
       %th Description
       %th.actions Actions
     - for transaction_type in @transaction_types
       %tr
         %td= transaction_type.code
-        %td= link_to transaction_type.description, transaction_type
+        %td= link_to transaction_type.name, transaction_type
+        %td= transaction_type.description
         %td.actions
           = link_to image_tag('icons/silk/application_form_edit.png'), edit_transaction_type_path(transaction_type), :title => "edit #{transaction_type.code}"
           = link_to image_tag('icons/silk/delete.png'), transaction_type, :confirm => 'Are you sure?', :method => :delete, :title => "delete #{transaction_type.code}"

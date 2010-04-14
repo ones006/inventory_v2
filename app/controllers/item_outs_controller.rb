@@ -43,5 +43,6 @@ class ItemOutsController < ApplicationController
   private
   def assign_tab
     @tab = 'transactions'
+    @current = 'io'
   end
 end

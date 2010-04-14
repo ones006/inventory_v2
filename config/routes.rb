@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+
+  map.resources :general_transactions
+
   map.resources :item_outs
 
   map.resources :item_ins
@@ -38,7 +41,5 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :companies
   map.resources :users
-
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  map.connect ':controller/:action.:format'
 end

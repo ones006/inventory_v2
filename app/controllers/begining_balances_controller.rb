@@ -45,5 +45,6 @@ class BeginingBalancesController < ApplicationController
   private
   def assign_tab
     @tab = 'transactions'
+    @current = 'bb'
   end
 end

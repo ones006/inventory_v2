@@ -39,5 +39,6 @@ class ItemInsController < ApplicationController
   private
   def assign_tab
     @tab = 'transactions'
+    @current = 'in'
   end
 end

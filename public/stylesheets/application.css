@@ -101,10 +101,11 @@ p { margin-bottom:20px; }
 #sidebar {
   float:left;
   margin:0 20px 20px 0;
-  width:180px;
+  width:240px;
   -moz-border-radius:8px;
   -webkit-border-radius:8px;
 }
+#sidemenu li { position:relative; }
 #sidemenu li span {
   color:rgb(111, 111, 111);
   display:block;
@@ -122,21 +123,49 @@ p { margin-bottom:20px; }
   font-size:1.06em;
   font-weight:bold;
   margin:0 0 2px;
-  padding:6px;
+  padding:6px 6px 7px;
   text-decoration:none;
   text-shadow:0 1px 1px rgba(255,255,255,.9);
 }
+#sidemenu li a.current {
+  background:rgb(35,95,38); /*url(/images/gradient.png) repeat-x scroll 0 -120px;*/
+  color:#fff;
+  margin-right:-20px;
+  text-shadow:0 -1px rgba(0,0,0,1);
+}
+#sidemenu li a.current + div, #sidemenu li a:hover + div {
+  border-width:13px 0 13px 7px;
+  border-style:solid;
+  position:absolute;
+  top:0;
+  right:-27px;
+  height:0;
+  width:0;
+}
+#sidemenu li a.current + div, #sidemenu li a.current:hover + div {
+  border-color:transparent transparent transparent #235f26;
+}
+#sidemenu li a:hover + div {
+  border-color:transparent transparent transparent #9bfb9d;
+}
 #sidemenu li a:hover {
-  background:rgba(0, 239, 0, .25);
+  background:#9bfb9d;
   color:rgb(0, 0, 0);
+  margin-right:-20px;
+}
+#sidemenu li a.current:hover {
+  background:rgb(35,95,38); /*url(/images/gradient.png) repeat-x scroll 0 -120px;*/
+  color:#fff;
 }
 #sidemenu ul {
   display:none;
   padding:0 0 0 20px;
 }
 #main {
+  background:rgb(255,255,255);
   background:rgba(255,255,255,.8);
-  margin-left:200px;
+  margin-left:260px;
+  min-height:360px;
   padding:20px;
   -moz-box-shadow:2px 2px 6px rgba(0, 0, 0, .4);
   -webkit-box-shadow:2px 2px 6px rgba(0, 0, 0, .4);
@@ -159,7 +188,7 @@ p { margin-bottom:20px; }
   color:#8C8C8C;
   font-size:0.9em;
   line-height:2em;
-  margin:20px 0 0 200px;
+  margin:20px 0 0 260px;
 }
 #footer p { margin-bottom:0; }
 #footer.wide {
@@ -372,3 +401,25 @@ input.numbers { text-align:right; }
   overflow:hidden;
 }
 td img { vertical-align:middle; }
+#hint {
+  background:rgb(254, 255, 175);
+  margin-bottom:20px;
+  -moz-box-shadow:2px 2px 6px rgba(0,0,0,.4);
+  -webkit-box-shadow:2px 2px 6px rgba(0,0,0,.4);
+}
+#hint h2 {
+  font-size:1.3em;
+  font-weight:bold;
+  margin:0;
+  padding:10px;
+}
+#hint p {
+  line-height:1.25em;
+  margin:0;
+  padding:0 10px 10px;
+}
+.hints {
+  background:#feffaf;
+  margin:10px 10px 10px 0 !important;
+  padding:10px !important;
+}

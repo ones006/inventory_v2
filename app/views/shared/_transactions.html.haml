@@ -1,6 +1,21 @@
+- current = { 'gt' => nil, 'bb' => nil, 'tt' => nil, 'tr' => nil, 'in' => nil, 'io' => nil }
+- current[@current] = 'current'
 %ul#sidemenu
-  %li= link_to "Begining Balances", begining_balances_path
-  %li= link_to "Transaction Types", transaction_types_path
-  %li= link_to "Item Transfer", item_transfers_path
-  %li= link_to "Item In", item_ins_path
-  %li= link_to "Item Out", item_outs_path
+  %li
+    = link_to "General Transaction", general_transactions_path, :class => current['gt']
+    %div
+  %li
+    = link_to "Begining Balances", begining_balances_path, :class => current['bb']
+    %div
+  %li
+    = link_to "Transaction Types", transaction_types_path, :class => current['tt']
+    %div
+  %li
+    = link_to "Item Transfer", item_transfers_path, :class => current['tr']
+    %div
+  %li
+    = link_to "Item In", item_ins_path, :class => current['in']
+    %div
+  %li
+    = link_to "Item Out", item_outs_path, :class => current['io']
+    %div

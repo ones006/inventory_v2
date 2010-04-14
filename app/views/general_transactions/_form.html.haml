@@ -1,0 +1,42 @@
+- cache do
+  = javascript_tag "var plu = #{@plus.to_json(:only => [:id, :code], :methods => :item_name_with_code)};"
+  = javascript_tag "var model = 'general_transaction';"
+  = javascript_tag "var with_value = true;"
+  - javascript 'item_transfer'
+  - javascript 'general_transaction'
+  #dialog_form  
+    - semantic_form_for @general_transaction do |f|
+      = f.error_messages
+      - f.inputs do
+        = f.input :transaction_type
+        = f.input :number, :input_html => { :class => :default }
+        = f.input :originator_warehouse, :include_blank => false, :input_html => { :class => 'plu_source' }
+        = f.input :destination_warehouse, :include_blank => false
+        = f.input :remark, :input_html => { :rows => 3 }
+
+        %li.string
+          #items
+            %table#transaction_entries.list
+              %tr
+                %th.td_20 PLU Code
+                %th.td_40 Item
+                %th.actions.td_10 Quantity
+                %th.actions.td_30 @ Value
+              - unless @general_transaction.entries.blank?
+                - f.semantic_fields_for :entries do |entry|
+                  %tr
+                    %td.td_20
+                      = entry.text_field :plu_code, :class => 'plu_code'
+                      = entry.hidden_field :plu_id
+                    %td= entry.object.plu.try(:item).try(:name_with_code)
+                    %td.actions.td_10
+                      = entry.text_field :quantity, :size => 10, :class => 'numbers entries_quantity'
+                      = entry.hidden_field :item_id
+                    %td.actions.td_30= entry.text_field :value, :size => 30, :class => 'numbers entries_value'
+
+            %p
+              %a{:href => '#', :id => 'add_entries'}
+                = "#{image_tag('icons/silk/add.png')} add transaction entries"
+
+      %fieldset.buttons
+        %button{ :type => :submit }= "#{image_tag('icons/silk/disk.png')} Save Transaction"

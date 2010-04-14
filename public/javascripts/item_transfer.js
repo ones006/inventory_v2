@@ -16,7 +16,7 @@ $('#add_entries').live('click', function(e) {
 });
 
 $('input.entries_quantity, input.entries_value').live('keypress', function(e) {
-  if(e.keyCode == 13 && $(this).val() != '') {
+  if(e.keyCode == 13 && this.value != '') {
     $('#add_entries').click();
     $('#transaction_entries tbody tr:last td:first').children()[0].focus();
     set_autocomplete();

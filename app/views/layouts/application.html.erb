@@ -43,8 +43,9 @@
       </div>
       <div id="content">
         <div id="sidebar">
+          <%= render "shared/hint" unless @hint.blank? %>
           <%= yield :main_act %>
-          <%= yield :sidemenu %>
+          <%= render "shared/#{@tab}" %>
         </div>
         <div id="main">
           <div id="breadcrumb">

@@ -33,4 +33,5 @@ module LayoutHelper
       render "shared/#{section}"
     end
   end
+
 end

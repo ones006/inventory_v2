@@ -1,0 +1,9 @@
+- cache do
+  - title "New General Transaction"
+
+  - content_for :breadcrumb do
+    = breadcrumb [ link_to('Transactions', transactions_path), |
+      link_to('General transactions', general_transactions_path), |
+      'Create new transaction' ] |
+
+  = render :partial => 'form'
