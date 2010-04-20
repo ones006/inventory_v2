@@ -1,0 +1,14 @@
+- cache do
+  #dialog_form
+    - unless request.format == 'js'
+      %h3 Items Lookup
+    %p Enter <strong>item name</strong> or <strong>item code</strong> or <strong>plu code</strong> to search items
+    - form_tag lookup_items_path(:format => :js), :method => :get, :class => 'formtastic', :id => 'search' do
+      %p
+        %label{ :for => 'keyword' } Search
+        %input{ :type => :text, :name => 'keyword', :id => 'keyword', :value => @keyword, :class => 'default' }
+        %button{ :type => :submit } Go
+    %br
+
+    #searchresult
+      = render :partial => 'searchresult'

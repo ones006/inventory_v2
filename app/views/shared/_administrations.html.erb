@@ -1,7 +1,9 @@
+<% current = { 'cat' => nil, 'it' => nil, 'wrh' => nil, 'sup' => nil, 'plu' => nil } %>
+<% current[@current] = 'current' %>
 <ul id="sidemenu">
-  <li><%= link_to "Categories", categories_path %></li>
-  <li><%= link_to "Items", items_path %></li>
-  <li><%= link_to "Warehouses", warehouses_path %></li>
-  <li><%= link_to "Suppliers", suppliers_path %></li>
-  <li><%= link_to "PLU", plus_path %></li>
+  <li><%= link_to "Categories", categories_path, :class => current['cat'] %><div></div></li>
+  <li><%= link_to "Items", items_path, :class => current['it'] %><div></div></li>
+  <li><%= link_to "Warehouses", warehouses_path, :class => current['wrh'] %><div></div></li>
+  <li><%= link_to "Suppliers", suppliers_path, :class => current['sup'] %><div></div></li>
+  <li><%= link_to "PLU", plus_path, :class => current['plu'] %><div></div></li>
 </ul>

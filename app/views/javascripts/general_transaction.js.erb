@@ -1,6 +1,6 @@
 var t_types = new Array();
 <%- @transaction_types.each do |tt| -%>
-  <%= "t_types[#{tt.id}] = '#{tt.to_json(:methods => :next_available_number)}';" %>
+  <%= "t_types[#{tt.id}] = '#{tt.to_json(:methods => [:next_available_number, :entries_value, :should_validating_quantity])}';" %>
 <%- end -%>
 
 $('#general_transaction_transaction_type_id').change(function() {

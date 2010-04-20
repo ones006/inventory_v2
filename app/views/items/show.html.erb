@@ -15,20 +15,20 @@
     <%= sidemenu %>
 
     <p>
-      <strong>Category:</strong>
-      <%= @item.category_tree %>
+      <span class="light">Category:</span>
+      <strong><%= @item.category_tree %></strong>
     </p>
     <p>
-      <strong>Code:</strong>
-      <%=h @item.code %>
+      <span class="light">Code:</span>
+      <strong><%= @item.code %></strong>
     </p>
     <p>
-      <strong>Name:</strong>
-      <%=h @item.name %>
+      <span class="light">Name:</span>
+      <strong><%= @item.name %></strong>
     </p>
     <p>
-      <strong>Description:</strong>
-      <%=h @item.description %>
+      <span class="light">Description:</span>
+      <strong><%= @item.description %></strong>
     </p>
     <div>
       <strong>Units:</strong>
@@ -39,6 +39,15 @@
           <% end -%>
         </ol>
       <% end -%>
+    </div>
+
+    <div>
+      <strong>Stock</strong>
+      <p>
+        Overall : <%= @item.stock %>
+      </p>
+      <p>
+        Per Plu : 
     </div>
   </div>
 <% end -%>

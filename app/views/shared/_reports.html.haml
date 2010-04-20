@@ -1,0 +1,6 @@
+- current = { 'oh' => nil }
+- current[@current] = 'current'
+%ul#sidemenu
+  %li
+    = link_to "On Hands", reports_on_hands_path, :class => current['oh']
+    %div

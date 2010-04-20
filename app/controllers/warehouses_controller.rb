@@ -74,6 +74,7 @@ class WarehousesController < ApplicationController
   private
   def set_tab
     @tab = "administrations"
+    @current = 'wrh'
   end
 
   def xhr_success_response

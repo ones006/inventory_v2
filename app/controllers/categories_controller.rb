@@ -81,6 +81,7 @@ class CategoriesController < ApplicationController
   private
   def set_tab
     @tab = 'administrations'
+    @current = 'cat'
   end
 
   def categories_list

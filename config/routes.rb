@@ -22,7 +22,9 @@ ActionController::Routing::Routes.draw do |map|
     warehouse.resources :locations
   end
 
-
+  map.namespace(:reports) do |report|
+    report.resources :on_hands
+  end
   map.signin "signin", :controller => :user_sessions, :action => :new
   map.signout "signout", :controller => :user_sessions, :action => :destroy
 
@@ -35,7 +37,7 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => :pages
 
   map.resources :user_sessions
-  map.resources :items
+  map.resources :items, :collection => { :lookup => :get }
   map.resources :categories, :member => {:items_for_begining_balance => :get} do |category|
     category.resources :items
   end

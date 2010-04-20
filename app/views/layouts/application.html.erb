@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
+  <head profile="http://www.w3.org/2005/10/profile">
     <title><%= h(yield(:title) || "Untitled") %></title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/red_heart.ico" />
     <%= stylesheet_link_tag 'reset',
       'application',
       'formtastic',
@@ -37,13 +38,13 @@
         <ul id="tabs">
           <li><%= link_to "Dashboard", dashboard_path, :class => tab['dashboard'] %><div></div></li>
           <li><%= link_to "Transactions", transactions_path, :class => tab['transactions'] %><div></div></li>
-          <li><%= link_to "Reports", reports_path, :class => tab['report'] %><div></div></li>
+          <li><%= link_to "Reports", reports_path, :class => tab['reports'] %><div></div></li>
           <li><%= link_to "Administrations", administrations_path, :class => tab['administrations'] %><div></div></li>
         </ul>
       </div>
       <div id="content">
         <div id="sidebar">
-          <%= render "shared/hint" unless @hint.blank? %>
+          <%= yield :hint %>
           <%= yield :main_act %>
           <%= render "shared/#{@tab}" %>
         </div>

@@ -50,6 +50,7 @@ class SuppliersController < ApplicationController
   private
   def set_tab
     @tab = "administrations"
+    @current = 'sup'
   end
 
   def xhr_success_response

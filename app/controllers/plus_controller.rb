@@ -48,6 +48,7 @@ class PlusController < ApplicationController
   private
   def assign_tab
     @tab = 'administrations'
+    @current = 'plu'
   end
 
   def prepare_autocomplete

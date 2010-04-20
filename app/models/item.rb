@@ -3,6 +3,7 @@ class Item < ActiveRecord::Base
   belongs_to :company
   belongs_to :category
   has_many :units
+  has_many :plus
   validates_presence_of :code, :message => "code can't be blank"
   validates_presence_of :name, :message => "name can't be blank"
   validates_presence_of :category_code, :message => "category can't be blank"
@@ -26,16 +27,10 @@ class Item < ActiveRecord::Base
   end
 
   def stock
-    entries = []
-    company.begining_balances.each do |bb|
-      entries << bb.entries.reject { |entry| entry.item_id != id }
-    end
-    entries.flatten.collect { |entry| entry.quantity }.sum
+    company.stock.item_on_hand(self)
   end
 
   def quantity_in_warehouse(warehouse)
     company.stock.item_on_hand_per_warehouse(warehouse, self)
-    #transactions = Transaction.all(:conditions => {:destination_id => warehouse.id}).map(&:id)
-    #Entry.calculate(:sum, :quantity, :conditions => {:transaction_id => transactions, :item_id => id})
   end
 end

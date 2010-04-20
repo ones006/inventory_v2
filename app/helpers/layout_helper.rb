@@ -34,4 +34,9 @@ module LayoutHelper
     end
   end
 
+  def hint(block)
+    content_for :hint do
+      render "shared/hint", :hint => block
+    end
+  end
 end

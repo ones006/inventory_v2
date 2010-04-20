@@ -75,9 +75,25 @@ class ItemsController < ApplicationController
     redirect_to items_url
   end
 
+  def lookup
+    @keyword = params[:keyword]
+    @items = @keyword.nil? ? {} : current_company.items.name_or_code_or_plus_code_like(@keyword).all(:group => 'items.id')
+    respond_to do |format|
+      format.html
+      format.js do
+        if @keyword
+          render :partial => 'searchresult', :layout => false
+        else
+          render :layout => false
+        end
+      end
+    end
+  end
+
   private
   def set_tab
     @tab = 'administrations'
+    @current = 'it'
   end
 
   def categories_list

@@ -80,4 +80,9 @@ class Stock
     total_item_in_per_warehouse(warehouse, item, options) - total_item_out_per_warehouse(warehouse, item, options)
   end
 
+  def by_plu(plu)
+    plu_id = plu.is_a?(Plu) ? plu.id : plu
+    company.plus.find(plu_id).total_item
+  end
+
 end

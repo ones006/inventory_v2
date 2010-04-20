@@ -22,4 +22,12 @@ class TransactionType < ActiveRecord::Base
     "#{prefix}.#{next_available}"
   end
 
+  def entries_value
+    direction == 0 || direction == 2
+  end
+
+  def should_validating_quantity?
+    direction == 1 || direction == 2
+  end
+
 end

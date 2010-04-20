@@ -1,0 +1,17 @@
+- cache do
+  - title "On Hands Report"
+  - content_for :breadcrumb do
+    = breadcrumb [ link_to('Reports', reports_path), |
+      "On Hands Report" ] |
+
+  #items
+    %table.list
+      %tr
+        %th Code
+        %th Name
+        %th On Hand
+      - for item in @items
+        %tr
+          %td= link_to item.code, item
+          %td= item.name
+          %td= item.stock

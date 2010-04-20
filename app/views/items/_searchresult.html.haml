@@ -1,0 +1,13 @@
+%table.searchresults
+  %tr
+    %th Item
+    %th Plu
+    %th Xtra
+  - for item in @items
+    %tr
+      %td= "#{item.name} (#{item.code})"
+      %td
+        - unless item.plus.blank?
+          %ul
+            - for plu in item.plus
+              %li= link_to plu.code, '#', :class => 'plu_code_handle', :title => plu.code

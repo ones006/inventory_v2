@@ -23,4 +23,8 @@ class Plu < ActiveRecord::Base
   def item_name_with_code
     item.name_with_code
   end
+
+  def total_item
+    
+  end
 end

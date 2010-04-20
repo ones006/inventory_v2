@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
+  <head profile="http://www.w3.org/2005/10/profile">
     <title><%= h(yield(:title) || "Inventory System") %></title>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/red_heart.ico" />
     <%= stylesheet_link_tag 'reset', 'login', :cache => 'login' %>
     <%= stylesheet_link_tag 'formtastic','formtastic_changes', :cache => 'formtastic' %>
     <%= yield(:stylesheets) %>

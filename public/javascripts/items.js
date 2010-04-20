@@ -50,7 +50,7 @@ $("#item_form").live("submit", function() {
   .replaceWith("<p><img src='/images/ui-anim.basic.16x16.gif' alt=''/> <span>Saving... please wait</span></p>");
 });
 
-$(".item_detail").live('click', function() {
+$("a.item_detail").live('click', function() {
   Boxy.load(this.href, {
     modal: true,
     title: this.innerHTML,
@@ -59,9 +59,10 @@ $(".item_detail").live('click', function() {
   return false;
 });
 
-$('#items tr').live('click', function() {
+/*
+$('td > a.item_detail').live('click', function() {
   $.ajax({
-    url: $(this).find('td a.item_detail').attr('href'),
+    url: this.href,
     success: function(respond, status) {
       $('#item_detail').html(respond);
     },
@@ -69,7 +70,6 @@ $('#items tr').live('click', function() {
   });
   return false;
 });
-/*
 $(".new_item, .edit_item").live('click', function() {
   Boxy.load(this.href, {
     modal: true,
