@@ -252,7 +252,6 @@ table.report tr:nth-child(2n+1) {
 table.list tr:hover td, table.list tr.odd:hover td, table.list tr.even:hover td {
   background:rgba(95,191,99,.4);
 }
-table.list tr td:nth-child(2n+1) { background:rgba(71,143,74,.2); }
 table.list tr td.lvl_1 { padding-left:20px; } 
 table.list tr td.lvl_2 { padding-left:40px; } 
 table.list tr td.lvl_3 { padding-left:60px; } 
@@ -424,12 +423,10 @@ td img { vertical-align:middle; }
   padding:10px !important;
 }
 input.plu_code {
-  padding:2px 17px 2px 2px !important;
-  width:82% !important;
+  width:80% !important;
 }
 .plu_input {
-  margin:1px 0 0 -18px;
-  position:absolute;
+  float:right;
 }
 .searchresults {
   width:100%;

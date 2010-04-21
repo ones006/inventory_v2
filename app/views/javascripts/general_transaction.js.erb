@@ -10,8 +10,11 @@ $('#general_transaction_transaction_type_id').change(function() {
 function alter_form(index) {
   if(index != '') {
     obj = eval('(' + t_types[index] + ')');
+    $('body').data('next_number', obj.transaction_type.next_available_number);
     $('#general_transaction_number_input').show();
-    $('#general_transaction_number_input input').val(obj.transaction_type.next_available_number).focus();
+    if($('#general_transaction_number_input input').val() == '') {
+      $('#general_transaction_number_input input').val(obj.transaction_type.next_available_number).focus();
+    }
     $('#general_transaction_remark_input').show();
     $('#items').show();
     $('fieldset.buttons').show();

@@ -1,9 +1,13 @@
 $(function() {
   $('input.default').focus();
+  $('.number_suggestion').click(function() {
+    $(this).parents('li').children('input[type=text]').val(this.rel);
+    return false;
+  });
 });
 
 $('.plu_input').live('click', function() {
-  var input_id = $(this).prev('input[type=text]').attr("id");
+  var input_id = $(this).prevAll('input[type=text]').attr("id");
   $('body').data('input_id', '#' + input_id);
   Boxy.load(this.href, {
     modal: true,
@@ -41,10 +45,6 @@ $('#sidemenu li a.revealer').click(function() {
   return false;
 });
 
-function send_title_as_value(obj, target_id) {
-}
-
-
 function boxy_ajaxify(formwrapper) {
   var form = formwrapper;
   var button = form.find("button[type=submit]");
@@ -81,9 +81,9 @@ function entry_row(count) {
   var idx = count;
   var html = "<tr><td class=\"td_20\">" +
     "<input type=\"text\" name=\""+model+"[entries_attributes]["+idx+"][plu_code]\" id=\""+model+"_entries_attributes_"+idx+"_plu_code\" class=\"plu_code ac_input\" autocomplete=\"off\">" +
-    "<a class=\"plu_input\" href=\"/items/lookup.js\"><img src=\"/images/icons/silk/magnifier.png\" alt=\"Magnifier\"></a>" +
     "<input type=\"hidden\" name=\""+model+"[entries_attributes]["+idx+"][plu_id]\" id=\""+model+"_entries_attributes_"+idx+"_plu_id\" value=\"\">" +
-    "</td> <td class=\"td_50\"></td> <td class=\"actions td_10\">" +
+    "<a class=\"plu_input\" href=\"/items/lookup.js\"><img src=\"/images/icons/silk/magnifier.png\" alt=\"Magnifier\"></a></td> " +
+    "<td class=\"td_50\"></td> <td class=\"actions td_10\">" +
     "<input type=\"text\" size=\"10\" name=\""+model+"[entries_attributes]["+idx+"][quantity]\" id=\""+model+"_entries_attributes_"+idx+"_quantity\" class=\"numbers entries_quantity\">" +
     "<input type=\"hidden\" name=\""+model+"[entries_attributes]["+idx+"][item_id]\" id=\""+model+"_entries_attributes_"+idx+"_item_id\"></td>"; 
   if(window.with_value == true) {
@@ -101,6 +101,7 @@ function set_autocomplete() {
   )
   .result(function(event, data) {
     var input = $(this);
+    console.log(data);
     if(data) {
       input.next('input[type=hidden]').val(data.plu.id);
       input.parent().next().html(data.plu.item_name_with_code);

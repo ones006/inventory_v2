@@ -1,6 +1,12 @@
 *.swp
+*.swn
+*.swo
 */*.swp
+*/*.swn
+*/*.swo
 */**/*.swp
+*/**/*.swn
+*/**/*.swo
 log/*.log
 tmp/*
 tmp/**/*

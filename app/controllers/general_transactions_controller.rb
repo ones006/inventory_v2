@@ -24,6 +24,8 @@ class GeneralTransactionsController < ApplicationController
       redirect_to @general_transaction
     else
       @hint = 'new_general_transaction'.to_sym
+      @plus = current_company.plus.all(:include => :item)
+      @number_suggestion = @general_transaction.transaction_type.next_available_number
       render :action => 'new'
     end
   end
