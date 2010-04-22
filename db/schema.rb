@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100414084539) do
+ActiveRecord::Schema.define(:version => 20100422031932) do
 
   create_table "categories", :force => true do |t|
     t.integer  "company_id"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20100414084539) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
+    t.string   "count_method", :default => "avg"
   end
 
   create_table "locations", :force => true do |t|

@@ -9,6 +9,7 @@
     <% f.inputs do %>
       <%= f.input :category_code, :input_html => { :class => 'default' } %>
       <%= f.input :category_id, :as => :hidden %>
+      <%= f.input :count_method, :as => :select, :collection => [['Average', 'avg'],['FIFO','fifo'],['LIFO','lifo']], :include_blank => false %>
       <%= f.input :code %>
       <%= f.input :name %>
       <%= f.input :description, :input_html => { :rows => 3 } %>
