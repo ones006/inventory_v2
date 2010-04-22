@@ -4,7 +4,7 @@ var supplier_name = $('input#plu_supplier_name');
 var supplier_id = $('input#plu_supplier_id');
 
 $(function() {
-  item_name.select();
+  //item_name.select();
   set_autocomplete();
 });
 

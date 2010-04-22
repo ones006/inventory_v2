@@ -12,18 +12,23 @@
   %table.list
     %tr
       %th.td_15 Number
-      %th.td_20 Destination Warehouse
+      %th.td_20 Destination
       %th Remark
       %th.td_15 Alter Stock
       %th.actions.td_5 Actions
-    - for item_in in @item_ins
+    - if @item_ins.blank?
       %tr
-        %td= link_to item_in.number, item_in
-        %td= item_in.destination_warehouse.name
-        %td= item_in.remark
-        %td.tdc
-          - if item_in.alter_stock?
-            = image_tag 'icons/silk/tick.png'
-          - else
-            = image_tag 'icons/silk/cross.png'
-        %td.actions= link_to "#{image_tag('icons/silk/delete.png')}", item_in, :method => :delete, :confirm => "Are you sure?", :title => "delete transaction #{item_in.number}"
+        %td{ :colspan => 5 }
+          %div.no_record No transaction recorded yet
+    - else
+      - for item_in in @item_ins
+        %tr
+          %td= link_to item_in.number, item_in
+          %td= item_in.destination_warehouse.name
+          %td= item_in.remark
+          %td.tdc
+            - if item_in.alter_stock?
+              = image_tag 'icons/silk/tick.png'
+            - else
+              = image_tag 'icons/silk/cross.png'
+          %td.actions= link_to "#{image_tag('icons/silk/delete.png')}", item_in, :method => :delete, :confirm => "Are you sure?", :title => "delete transaction #{item_in.number}"

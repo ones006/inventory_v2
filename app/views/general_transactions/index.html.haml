@@ -1,23 +1,27 @@
 - cache do
-  #dialog_form
-    - title "General Transactions"
+  - title "General Transactions"
 
-    - content_for :breadcrumb do
-      = breadcrumb [ link_to('Transactions', transactions_path), |
-        'General transactions' ] |
+  - content_for :breadcrumb do
+    = breadcrumb [ link_to('Transactions', transactions_path), |
+      'General transactions' ] |
 
-      = sidemenu @tab
+    = sidemenu @tab
 
-    - content_for :main_act do
-      = link_to "#{image_tag('icons/silk/add.png')} New Transaction", new_general_transaction_path, :class => 'main_link'
-      
+  - content_for :main_act do
+    = link_to "#{image_tag('icons/silk/add.png')} New Transaction", new_general_transaction_path, :class => 'main_link'
+    
 
-    %table.list
+  %table.list
+    %tr
+      %th Transaction Type
+      %th Number
+      %th Remark
+      %th.actions Actions
+    - if @general_transactions.blank?
       %tr
-        %th Transaction Type
-        %th Number
-        %th Remark
-        %th.actions Actions
+        %td{ :colspan => 4 }
+          %div.no_record No transaction recorded yet
+    - else
       - for general_transaction in @general_transactions
         %tr
           %td= general_transaction.transaction_type

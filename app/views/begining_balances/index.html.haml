@@ -14,9 +14,14 @@
       %th Created
       %th Last Update
       %th.actions Actions
-    - for begining_balance in @begining_balances
+    - if @begining_balances.blank?
       %tr
-        %td= link_to begining_balance.number, begining_balance
-        %td= begining_balance.created_at
-        %td= begining_balance.updated_at
-        %td.actions= link_to image_tag('icons/silk/application_form_edit.png'), edit_begining_balance_path(begining_balance)
+        %td{ :colspan => 4 }
+          %div.no_record No transaction recorded yet
+    - else
+      - for begining_balance in @begining_balances
+        %tr
+          %td= link_to begining_balance.number, begining_balance
+          %td= begining_balance.created_at
+          %td= begining_balance.updated_at
+          %td.actions= link_to image_tag('icons/silk/application_form_edit.png'), edit_begining_balance_path(begining_balance)

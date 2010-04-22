@@ -10,7 +10,8 @@ $('.plu_input').live('click', function() {
   var input_id = $(this).prevAll('input[type=text]').attr("id");
   $('body').data('input_id', '#' + input_id);
   Boxy.load(this.href, {
-    modal: true,
+    //modal: true,
+    draggable: true,
     unloadOnHide: true,
     title: "Item Lookup",
     closeText: "<img src='/images/icons/cross.png' alt='close'/>",

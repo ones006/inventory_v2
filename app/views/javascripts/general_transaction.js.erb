@@ -1,3 +1,4 @@
+var stale = true;
 var t_types = new Array();
 <%- @transaction_types.each do |tt| -%>
   <%= "t_types[#{tt.id}] = '#{tt.to_json(:methods => [:next_available_number, :entries_value, :should_validating_quantity])}';" %>
@@ -8,11 +9,12 @@ $('#general_transaction_transaction_type_id').change(function() {
 });
 
 function alter_form(index) {
+  stale = true;
   if(index != '') {
     obj = eval('(' + t_types[index] + ')');
     $('body').data('next_number', obj.transaction_type.next_available_number);
     $('#general_transaction_number_input').show();
-    if($('#general_transaction_number_input input').val() == '') {
+    if(stale || $('#general_transaction_number_input input').val() == '') {
       $('#general_transaction_number_input input').val(obj.transaction_type.next_available_number).focus();
     }
     $('#general_transaction_remark_input').show();

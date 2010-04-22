@@ -13,7 +13,7 @@ class Plu < ActiveRecord::Base
   attr_accessor :item_name, :supplier_name
 
   def item_name
-    @item_name || item.try(:name)
+    @item_name || item.try(:name_with_code)
   end
 
   def supplier_name
@@ -22,9 +22,5 @@ class Plu < ActiveRecord::Base
 
   def item_name_with_code
     item.name_with_code
-  end
-
-  def total_item
-    
   end
 end

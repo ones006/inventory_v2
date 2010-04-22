@@ -12,18 +12,23 @@
   %table.list
     %tr
       %th.td_15 Number
-      %th.td_20 Originator Warehouse
+      %th.td_20 Origin
       %th Remark
       %th.td_15 Alter Stock
       %th.actions.td_5 Actions
-    - for item_out in @item_outs
+    - if @item_outs.blank?
       %tr
-        %td= link_to item_out.number, item_out
-        %td= item_out.originator_warehouse.name
-        %td= truncate item_out.remark, :length => 50
-        %td.tdc
-          - if item_out.alter_stock?
-            = image_tag 'icons/silk/tick.png'
-          - else
-            = image_tag 'icons/silk/cross.png'
-        %td.actions= link_to "#{image_tag('icons/silk/delete.png')}", item_out, :method => :delete, :confirm => "Are you sure?", :title => "delete transaction #{item_out.number}"
+        %td{ :colspan => 5 }
+          %div.no_record No transaction recorded yet
+    - else
+      - for item_out in @item_outs
+        %tr
+          %td= link_to item_out.number, item_out
+          %td= item_out.originator_warehouse.name
+          %td= truncate item_out.remark, :length => 50
+          %td.tdc
+            - if item_out.alter_stock?
+              = image_tag 'icons/silk/tick.png'
+            - else
+              = image_tag 'icons/silk/cross.png'
+          %td.actions= link_to "#{image_tag('icons/silk/delete.png')}", item_out, :method => :delete, :confirm => "Are you sure?", :title => "delete transaction #{item_out.number}"

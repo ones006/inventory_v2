@@ -428,9 +428,8 @@ input.plu_code {
 .plu_input {
   float:right;
 }
-.searchresults {
-  width:100%;
-}
+#searchresult { height:400px; overflow:auto !important; }
+.searchresults { width:100%; }
 .searchresults th, .searchresults td { padding:5px; }
 .searchresults tr th {
   background:#77EF7C;
@@ -451,3 +450,8 @@ input.plu_code {
   padding:5px;
 }
 .searchresults td ul li a:focus { background:#FFAD0F; }
+div.no_record {
+  font:1.6em bold;
+  padding:10px;
+  text-align:center;
+}
