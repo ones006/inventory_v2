@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  reference_transaction_id: 1
+  consumer_transaction_id: 1
+  available_stock: 1
+  quantity_consumed: 1
+
+two:
+  reference_transaction_id: 1
+  consumer_transaction_id: 1
+  available_stock: 1
+  quantity_consumed: 1

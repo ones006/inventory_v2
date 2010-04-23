@@ -14,10 +14,6 @@ class GeneralTransaction < Transaction
 
   accepts_nested_attributes_for :entries, :allow_destroy => true, :reject_if => proc { |a| a['quantity'].blank? }
 
-  def number_suggestion
-    "#{transaction_type.next_available_number} is available"
-  end
-
   def should_validate_origin?
     @validating_origin
   end

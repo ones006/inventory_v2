@@ -37,9 +37,11 @@
         %th PLU
         %th Item
         %th Quantity
+        %th Value
       - @general_transaction.entries.each_with_index do |entry, n|
         %tr
           %td.index= n+1
           %td= entry.plu.code
           %td= entry.plu.item.name_with_code
           %td.tdr= entry.quantity
+          %td.tdr= entry.calculated_value

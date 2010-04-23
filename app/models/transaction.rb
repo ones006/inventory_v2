@@ -1,7 +1,16 @@
 class Transaction < ActiveRecord::Base
-  named_scope :inward, :conditions => [ "origin_id IS NULL AND destination_id > ?", 0 ]
-  named_scope :outward, :conditions => [ "origin_id > ? AND destination_id IS NULL", 0 ]
-  named_scope :transfer, :conditions => [ "origin_id > ? AND destination_id > ?", 0, 0 ]
+  belongs_to :company
+  has_many :entries
+  has_many :fifo_trackers, :foreign_key => :consumer_transaction_id, :dependent => :destroy
+
+  default_scope :order => "created_at"
+  named_scope :inward, :conditions => [ "origin_id IS NULL AND destination_id > ?", 0 ], :order => :created_at
+  named_scope :outward, :conditions => [ "origin_id > ? AND destination_id IS NULL", 0 ], :order => :created_at
+  named_scope :transfer, :conditions => [ "origin_id > ? AND destination_id > ?", 0, 0 ], :order => :created_at
+
+  named_scope :contain, lambda { |itemid|
+    { :joins => :entries, :conditions => [ 'entries.item_id = ?', itemid ] }
+  }
 
   named_scope :destined_to, lambda { |destination|
     return {} if destination.blank?
@@ -30,9 +39,52 @@ class Transaction < ActiveRecord::Base
     { :conditions => { :created_at => (start.beginning_of_day..finish.end_of_day) } }
   }
 
+  named_scope :not_in, lambda { |ids|
+    return {} if ids.blank?
+    { :conditions => [ "transactions.id NOT IN (?)", ids ] }
+  }
+
+  after_save :run_trackers
 
   def self.suggested_number(company, type)
     first(:conditions => { :company_id => company.id, :type => type },
          :order => 'created_at DESC').try(:number)
   end
+
+  def self.stock_transaction_for(item)
+    containing_transactions = inward.contain(item).map(&:id)
+    incomplete_in_fifo_tracker = FifoTracker.incomplete_within(containing_transactions)
+  end
+
+  def item_quantity_for(item_id)
+    entries.first(:select => :quantity, :conditions => { :item_id => item_id }).quantity
+  end
+
+  def available_quantity_for(item)
+    initial_quantity = item_quantity_for(item)
+    used_quantity = fifo_trackers.sum(:quantity_consumed)
+    initial_quantity - used_quantity
+  end
+
+  def outward?
+    !origin_id.nil? && destination_id.nil?
+  end
+
+  def run_trackers
+    entries.each do |entry|
+      entry.track
+    end
+  end
+
+  def tracker(item)
+    if contain?(item)
+      return @tracker if @tracker && @tracker.item == item
+      @tracker = Tracker.new(self, Item.find(item))
+    end
+  end
+
+  def contain?(item)
+    !entries.all(:conditions => [ 'entries.item_id = ?', item ]).blank?
+  end
+
 end

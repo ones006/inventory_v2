@@ -14,6 +14,15 @@ class Company < ActiveRecord::Base
   has_many :item_outs
   has_many :transaction_types
   has_many :general_transactions
+  has_many :fifo_trackers
+  has_many :transactions
+
+  default_scope :order => :created_at
+
+  def next_stock
+    available = fifo_trackers.available_transaction
+    available.blank? ? transactions.inward.first : available
+  end
 
   def default_warehouse
     warehouses.first(:conditions => { :default => true })
