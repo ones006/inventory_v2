@@ -7,6 +7,7 @@ class Entry < ActiveRecord::Base
   attr_writer :plu_code, :validating_quantity, :warehouse_id
   before_save :assign_item_id
   before_save :assign_company_id
+  has_many :fifo_trackers, :foreign_key => :consumer_entry_id, :dependent => :destroy
 
   named_scope :for_transactions, lambda { |ids|
     { :conditions => { :transaction_id => ids } }
@@ -50,8 +51,9 @@ class Entry < ActiveRecord::Base
       while true
         tracker = item.tracker
         if tracker.nil?
-          closed_trans = item.closed_trackers.map(&:reference_transaction_id)
-          ref = company.transactions.inward.altering_stock.contain(item).not_in(closed_trans).first
+          closed_trackers = item.closed_trackers.map(&:stock_entry_id)
+          closed_transactions = closed_trackers.blank? ? [] : Transaction.entries_id_in(closed_trackers).uniq
+          ref = company.transactions.inward.altering_stock.contain(item).not_in(closed_transactions).first
           ref_entry = ref.entries.first(:conditions => { :item_id => item })
           initial_qty = company.fifo_trackers.new.log(self, initial_qty,  ref_entry)
         else
@@ -68,9 +70,9 @@ class Entry < ActiveRecord::Base
     if transaction.outward?
       tmp_value = 0
       if item.fifo?
-        trackers = FifoTracker.all(:conditions => { :consumer_transaction_id => transaction.id })
+        trackers = FifoTracker.all(:conditions => { :consumer_entry_id => id })
         trackers.each do |tracker|
-          tmp_value = tmp_value + (tracker.value * tracker.quantity_consumed)
+          tmp_value = tmp_value + (tracker.value * tracker.consumed_stock)
         end
         tmp_value
       end

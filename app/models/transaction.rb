@@ -1,7 +1,6 @@
 class Transaction < ActiveRecord::Base
   belongs_to :company
   has_many :entries
-  has_many :fifo_trackers, :foreign_key => :consumer_transaction_id, :dependent => :destroy
 
   default_scope :order => "created_at"
   named_scope :inward, :conditions => [ "origin_id IS NULL AND destination_id > ?", 0 ], :order => :created_at
@@ -51,18 +50,13 @@ class Transaction < ActiveRecord::Base
          :order => 'created_at DESC').try(:number)
   end
 
-  def self.stock_transaction_for(item)
-    containing_transactions = inward.contain(item).map(&:id)
-    incomplete_in_fifo_tracker = FifoTracker.incomplete_within(containing_transactions)
-  end
-
   def item_quantity_for(item_id)
     entries.first(:select => :quantity, :conditions => { :item_id => item_id }).quantity
   end
 
   def available_quantity_for(item)
     initial_quantity = item_quantity_for(item)
-    used_quantity = fifo_trackers.sum(:quantity_consumed)
+    used_quantity = fifo_trackers.sum(:consumed_stock)
     initial_quantity - used_quantity
   end
 
@@ -73,13 +67,6 @@ class Transaction < ActiveRecord::Base
   def run_trackers
     entries.each do |entry|
       entry.track
-    end
-  end
-
-  def tracker(item)
-    if contain?(item)
-      return @tracker if @tracker && @tracker.item == item
-      @tracker = Tracker.new(self, Item.find(item))
     end
   end
 

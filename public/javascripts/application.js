@@ -102,7 +102,6 @@ function set_autocomplete() {
   )
   .result(function(event, data) {
     var input = $(this);
-    console.log(data);
     if(data) {
       input.next('input[type=hidden]').val(data.plu.id);
       input.parent().next().html(data.plu.item_name_with_code);

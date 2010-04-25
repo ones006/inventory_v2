@@ -12,11 +12,11 @@ class Item < ActiveRecord::Base
   accepts_nested_attributes_for :units, :allow_destroy => true, :reject_if => lambda {|a| a['name'].blank? }
 
   def tracker
-    company.fifo_trackers.first(:conditions => { :item_id => id, :closed => false })
+    company.fifo_trackers.first(:conditions => { :item_id => id, :closed => false }, :order => "available_stock ASC")
   end
 
   def closed_trackers
-    company.fifo_trackers.all(:conditions => { :item_id => id, :closed => true }, :group => :reference_transaction_id)
+    company.fifo_trackers.all(:conditions => { :item_id => id, :closed => true }, :group => :stock_entry_id)
   end
 
   def category_code

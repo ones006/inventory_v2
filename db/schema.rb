@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100423101606) do
+ActiveRecord::Schema.define(:version => 20100424042254) do
 
   create_table "categories", :force => true do |t|
     t.integer  "company_id"
@@ -44,15 +44,15 @@ ActiveRecord::Schema.define(:version => 20100423101606) do
   end
 
   create_table "fifo_trackers", :force => true do |t|
-    t.integer  "reference_transaction_id"
-    t.integer  "consumer_transaction_id"
+    t.integer  "stock_entry_id"
+    t.integer  "consumer_entry_id"
     t.integer  "available_stock"
-    t.integer  "quantity_consumed"
+    t.integer  "consumed_stock"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
     t.integer  "item_id"
-    t.boolean  "closed",                   :default => false
+    t.boolean  "closed",            :default => false
     t.integer  "value"
   end
 
