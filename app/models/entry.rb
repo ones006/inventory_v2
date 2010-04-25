@@ -7,6 +7,7 @@ class Entry < ActiveRecord::Base
   attr_writer :plu_code, :validating_quantity, :warehouse_id
   before_save :assign_item_id
   before_save :assign_company_id
+  before_save :assign_value
   has_many :fifo_trackers, :foreign_key => :consumer_entry_id, :dependent => :destroy
 
   named_scope :for_transactions, lambda { |ids|
@@ -43,6 +44,15 @@ class Entry < ActiveRecord::Base
 
   def assign_company_id
     self.company_id = transaction.company_id
+  end
+
+  def assign_value
+    if transaction.inward? && value.blank?
+      last_entry = Entry.first(:joins => :transaction,
+                               :conditions => ["entries.item_id = ? AND transactions.origin_id IS NULL AND transactions.destination_id > 0 AND alter_stock = 1", item_id],
+                               :order => "created_at DESC")
+      self.value = last_entry.blank? ? 0 : last_entry.value
+    end
   end
 
   def track

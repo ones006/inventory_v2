@@ -64,6 +64,10 @@ class Transaction < ActiveRecord::Base
     !origin_id.nil? && destination_id.nil?
   end
 
+  def inward?
+    origin_id.nil? && !destination_id.nil?
+  end
+
   def run_trackers
     entries.each do |entry|
       entry.track
