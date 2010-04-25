@@ -56,7 +56,7 @@ class Transaction < ActiveRecord::Base
 
   def available_quantity_for(item)
     initial_quantity = item_quantity_for(item)
-    used_quantity = fifo_trackers.sum(:consumed_stock)
+    used_quantity = trackers.sum(:consumed_stock)
     initial_quantity - used_quantity
   end
 

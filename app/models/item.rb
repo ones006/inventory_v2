@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :code, :name, :description, :category_code, :category_id, :units_attributes
+  attr_accessible :code, :name, :description, :category_code, :category_id, :units_attributes, :count_method
   belongs_to :company
   belongs_to :category
   has_many :units
@@ -11,12 +11,12 @@ class Item < ActiveRecord::Base
   validates_uniqueness_of :code, :scope => :company_id, :message => "code has already been taken"
   accepts_nested_attributes_for :units, :allow_destroy => true, :reject_if => lambda {|a| a['name'].blank? }
 
-  def tracker
-    company.fifo_trackers.first(:conditions => { :item_id => id, :closed => false }, :order => "available_stock ASC")
+  def available_tracker
+    company.trackers.first(:conditions => { :item_id => id, :closed => false }, :order => "available_stock ASC")
   end
 
   def closed_trackers
-    company.fifo_trackers.all(:conditions => { :item_id => id, :closed => true }, :group => :stock_entry_id)
+    company.trackers.all(:conditions => { :item_id => id, :closed => true }, :group => :stock_entry_id)
   end
 
   def category_code

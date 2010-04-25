@@ -8,7 +8,7 @@ class Entry < ActiveRecord::Base
   before_save :assign_item_id
   before_save :assign_company_id
   before_save :assign_value
-  has_many :fifo_trackers, :foreign_key => :consumer_entry_id, :dependent => :destroy
+  has_many :trackers, :foreign_key => :consumer_entry_id, :dependent => :destroy
 
   named_scope :for_transactions, lambda { |ids|
     { :conditions => { :transaction_id => ids } }
@@ -59,13 +59,30 @@ class Entry < ActiveRecord::Base
     if item.fifo? && transaction.outward?
       initial_qty = quantity
       while true
-        tracker = item.tracker
+        tracker = item.available_tracker
         if tracker.nil?
           closed_trackers = item.closed_trackers.map(&:stock_entry_id)
           closed_transactions = closed_trackers.blank? ? [] : Transaction.entries_id_in(closed_trackers).uniq
           ref = company.transactions.inward.altering_stock.contain(item).not_in(closed_transactions).first
           ref_entry = ref.entries.first(:conditions => { :item_id => item })
-          initial_qty = company.fifo_trackers.new.log(self, initial_qty,  ref_entry)
+          initial_qty = company.trackers.new.log(self, initial_qty,  ref_entry)
+        else
+          initial_qty = tracker.log(self, initial_qty)
+        end
+        if initial_qty <= 0
+          break
+        end
+      end
+    elsif item.lifo? && transaction.outward?
+      initial_qty = quantity
+      while true
+        tracker = item.available_tracker
+        if tracker.nil?
+          closed_trackers = item.closed_trackers.map(&:stock_entry_id)
+          closed_transactions = closed_trackers.blank? ? [] : Transaction.entries_id_in(closed_trackers).uniq
+          ref = company.transactions.inward.altering_stock.contain(item).not_in(closed_transactions).last
+          ref_entry = ref.entries.first(:conditions => { :item_id => item })
+          initial_qty = company.trackers.new.log(self, initial_qty,  ref_entry)
         else
           initial_qty = tracker.log(self, initial_qty)
         end
@@ -79,8 +96,8 @@ class Entry < ActiveRecord::Base
   def calculated_value
     if transaction.outward?
       tmp_value = 0
-      if item.fifo?
-        trackers = FifoTracker.all(:conditions => { :consumer_entry_id => id })
+      if item.fifo? || item.lifo?
+        trackers = Tracker.all(:conditions => { :consumer_entry_id => id })
         trackers.each do |tracker|
           tmp_value = tmp_value + (tracker.value * tracker.consumed_stock)
         end
