@@ -1,22 +1,10 @@
-class FifoTracker < ActiveRecord::Base
+class FifoTracker < Tracker
   belongs_to :company
   belongs_to :item
   belongs_to :stock_entry, :class_name => 'Entry'
   belongs_to :consumer_entry, :class_name => 'Entry'
 
-  # named_scope :all_transactions, :group => :reference_transaction_id
   named_scope :completed, :conditions => "available_stock = consumed_stock"
-  # named_scope :within, lambda { |transaction_ids|
-  #   { :conditions => { :reference_transaction_id => transaction_ids } }
-  # }
-
-  # def self.available_transaction
-  #   all_transactions - completed_transactions
-  # end
-
-  # def self.incomplete_within(transaction_ids)
-  #   within(transaction_ids) - within(transaction_ids).completed
-  # end
 
   def log_with_self(entry, quantity)
     new_available_quantity = available_stock - consumed_stock

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100424042254) do
+ActiveRecord::Schema.define(:version => 20100425072451) do
 
   create_table "categories", :force => true do |t|
     t.integer  "company_id"
@@ -40,19 +40,6 @@ ActiveRecord::Schema.define(:version => 20100424042254) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "item_id"
-    t.integer  "value"
-  end
-
-  create_table "fifo_trackers", :force => true do |t|
-    t.integer  "stock_entry_id"
-    t.integer  "consumer_entry_id"
-    t.integer  "available_stock"
-    t.integer  "consumed_stock"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "company_id"
-    t.integer  "item_id"
-    t.boolean  "closed",            :default => false
     t.integer  "value"
   end
 
@@ -107,6 +94,20 @@ ActiveRecord::Schema.define(:version => 20100424042254) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "trackers", :force => true do |t|
+    t.integer  "stock_entry_id"
+    t.integer  "consumer_entry_id"
+    t.integer  "available_stock"
+    t.integer  "consumed_stock"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
+    t.integer  "item_id"
+    t.boolean  "closed",            :default => false
+    t.integer  "value"
+    t.string   "type"
   end
 
   create_table "transaction_types", :force => true do |t|
