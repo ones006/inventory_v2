@@ -33,7 +33,7 @@ class Transaction < ActiveRecord::Base
     { :conditions => [ 'created_at <= ?', time ] }
   }
 
-  named_scope :between,lambda { |start, finish|
+  named_scope :between, lambda { |start, finish|
     return {} if start.blank? || finish.blank?
     { :conditions => { :created_at => (start.beginning_of_day..finish.end_of_day) } }
   }

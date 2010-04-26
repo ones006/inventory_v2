@@ -1,0 +1,45 @@
+- cache do
+  - title "Transaction #{@general_transactions.number}"
+  - content_for :breadcrumb do
+    = breadcrumb [ link_to('Transactions', transactions_path), |
+      link_to('General Transactions', general_transactions_path), |
+      link_to("#{@general_transactions.number}", @general_transactions) ] |
+
+  = hint "This is the detail calculation method result for each item in this transaction"
+
+  %h4 Transaction item's value calculation
+
+  - for entry in @general_transactions.entries
+    .entry_method
+      %h5
+        %span{ :class => entry.item.count_method }= "#{entry.item.count_method.upcase}"
+        %strong= "#{entry.item.name}"
+      - if entry.item.fifo? || entry.item.lifo?
+        %table.report
+          %tr
+            %th Transaction
+            %th Item Qty
+            %th Item Value
+            %th Used Qty
+            %th Calculated Value
+          - for tracker in entry.trackers
+            %tr
+              %td= link_to tracker.stock_entry.transaction.number, tracker.stock_entry.transaction, :title => "Transaction date #{tracker.stock_entry.transaction.created_at.to_s(:long)}"
+              %td.tdr= tracker.stock_entry.quantity
+              %td.tdr= number_to_currency(tracker.value, :unit => '', :delimiter => '.', :precision => 0)
+              %td.tdr= tracker.consumed_stock
+              %td.tdr= number_to_currency(tracker.value * tracker.consumed_stock, :unit => '', :delimiter => '.', :precision => 0)
+          %tr.total
+            %td{ :colspan => 3, :class => 'tdr' } <strong>TOTAL</strong>
+            %td.tdr= entry.quantity
+            %td.tdr= number_to_currency(entry.calculated_value, :unit => '', :delimiter => '.', :precision => 0)
+      - else
+        %table.report
+          %tr
+            %th= "Average value until #{entry.transaction.created_at.to_s(:long)}"
+            %th Quantity
+            %th Total
+          %tr
+            %td.tdr= number_to_currency(entry.average_value, :unit => '', :delimiter => '.', :precision => 0)
+            %td.tdr= entry.quantity
+            %td.tdr= number_to_currency(entry.calculated_value, :unit => '', :delimiter => '.', :precision => 0)

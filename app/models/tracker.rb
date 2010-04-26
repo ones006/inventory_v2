@@ -5,6 +5,7 @@ class Tracker < ActiveRecord::Base
   belongs_to :consumer_entry, :class_name => 'Entry'
 
   named_scope :completed, :conditions => "available_stock = consumed_stock"
+  default_scope :joins => :stock_entry, :order => "entries.created_at ASC"
 
   def log_with_self(entry, quantity)
     new_available_quantity = available_stock - consumed_stock

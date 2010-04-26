@@ -51,6 +51,10 @@ class GeneralTransactionsController < ApplicationController
     redirect_to general_transactions_url
   end
 
+  def detail
+    @general_transactions = GeneralTransaction.find(params[:id])
+  end
+
   private
   def assign_tab
     @tab = 'transactions'

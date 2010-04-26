@@ -44,4 +44,4 @@
           %td= entry.plu.code
           %td= entry.plu.item.name_with_code
           %td.tdr= entry.quantity
-          %td.tdr= entry.calculated_value
+          %td.tdr= link_to number_to_currency(entry.calculated_value, :unit => '', :delimiter => '.', :precision => 0), detail_general_transaction_path(@general_transaction)

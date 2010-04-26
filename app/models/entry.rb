@@ -14,6 +14,18 @@ class Entry < ActiveRecord::Base
     { :conditions => { :transaction_id => ids } }
   }
 
+  named_scope :from_inward_transactions,
+              :joins => :transaction,
+              :conditions => "transactions.origin_id IS NULL AND transactions.destination_id > 0"
+
+  named_scope :with_item, lambda { |item|
+    { :conditions => { :item_id => item } }
+  }
+
+  named_scope :until, lambda { |time|
+    { :conditions => [ "created_at < ?", time ] }
+  }
+
   def validate
     if @validating_quantity  && !quantity.blank?
       stock = Entry.quantity_in_warehouse(@warehouse_id, plu_id)
@@ -57,6 +69,7 @@ class Entry < ActiveRecord::Base
 
   def track
     if item.fifo? && transaction.outward?
+      # FIFO method
       initial_qty = quantity
       while true
         tracker = item.available_tracker
@@ -74,6 +87,7 @@ class Entry < ActiveRecord::Base
         end
       end
     elsif item.lifo? && transaction.outward?
+      # LIFO method
       initial_qty = quantity
       while true
         tracker = item.available_tracker
@@ -90,6 +104,8 @@ class Entry < ActiveRecord::Base
           break
         end
       end
+    else
+      # average method
     end
   end
 
@@ -102,9 +118,16 @@ class Entry < ActiveRecord::Base
           tmp_value = tmp_value + (tracker.value * tracker.consumed_stock)
         end
         tmp_value
+      elsif item.average?
+        (average_value * quantity)
       end
     else
       value * quantity
     end
+  end
+
+  def average_value
+      in_entries = company.entries.from_inward_transactions.with_item(item).transaction_created_at_before(transaction.created_at)
+      in_entries.sum("entries.value * entries.quantity") / in_entries.sum(:quantity)
   end
 end

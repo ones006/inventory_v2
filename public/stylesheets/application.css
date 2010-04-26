@@ -18,7 +18,7 @@ h1 { font-size:2em; }
 h2 { font-size:1.8em; }
 h3 { font-size:1.5em; }
 h4 { font-size:1.3em; }
-h5 { font-size:1.2em; }
+h5 { font-size:1.15em; }
 h6 { font-size:1.1em; }
 p { margin-bottom:20px; }
 #flash_notice, #flash_error, #flash_success {
@@ -455,3 +455,25 @@ div.no_record {
   padding:10px;
   text-align:center;
 }
+.fifo {
+  background:#C9FF8F;
+  border-right:solid 1px #5BAF00;
+  border-bottom:solid 1px #5BAF00;
+  font-weight:normal;
+  padding:2px 5px;
+}
+.lifo {
+  background:#9FDDFF;
+  border-right:solid 1px #00669F;
+  border-bottom:solid 1px #00669F;
+  font-weight:normal;
+  padding:2px 5px;
+}
+.avg {
+  background:#EF95ED;
+  border-right:solid 1px #6F006D;
+  border-bottom:solid 1px #6F006D;
+  font-weight:normal;
+  padding:2px 5px;
+}
+tr.total td { border-top:solid 1px #666; }

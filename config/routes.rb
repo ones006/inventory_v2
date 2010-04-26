@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resources :general_transactions
+  map.resources :general_transactions, :member => { :detail => :get }
 
   map.resources :item_outs
 

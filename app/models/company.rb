@@ -16,6 +16,7 @@ class Company < ActiveRecord::Base
   has_many :general_transactions
   has_many :trackers
   has_many :transactions
+  has_many :entries
 
   default_scope :order => :created_at
 
