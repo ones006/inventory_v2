@@ -20,7 +20,7 @@ h3 { font-size:1.5em; }
 h4 { font-size:1.3em; }
 h5 { font-size:1.15em; }
 h6 { font-size:1.1em; }
-p { margin-bottom:20px; }
+p { margin-bottom:10px; }
 #flash_notice, #flash_error, #flash_success {
   padding: 5px 8px;
   margin: 10px 0;
@@ -306,7 +306,7 @@ table.report {
   width:100%;
 }
 table.report th, table.report td {
-  padding:4px;
+  padding:5px;
 }
 table.report tr th {
   background:#666;
@@ -476,4 +476,16 @@ div.no_record {
   font-weight:normal;
   padding:2px 5px;
 }
+.transaction_type_tag {
+  background:#FAFFCF;
+  border-right:solid 1px #ADBF0B;
+  border-bottom:solid 1px #ADBF0B;
+  font-weight:normal;
+  padding:2px 5px;
+}
 tr.total td { border-top:solid 1px #666; }
+.two_columns { margin-bottom:0 !important; }
+.two_columns p {
+  float:left;
+  width:50%;
+}

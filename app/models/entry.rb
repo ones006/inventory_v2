@@ -28,7 +28,8 @@ class Entry < ActiveRecord::Base
 
   def validate
     if @validating_quantity  && !quantity.blank?
-      stock = Entry.quantity_in_warehouse(@warehouse_id, plu_id)
+      stock = Warehouse.find(@warehouse_id).item_quantity(Plu.find(plu_id).item)
+      # stock = Entry.quantity_in_warehouse(@warehouse_id, plu_id)
       errors.add(:quantity, "of #{plu.item.name} exceeded actual stock (#{stock})") if (!quantity.blank? && quantity > stock)
     end
   end
@@ -122,7 +123,7 @@ class Entry < ActiveRecord::Base
         (average_value * quantity)
       end
     else
-      value * quantity
+      quantity * (value.blank? ? 0 : value)
     end
   end
 

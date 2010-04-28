@@ -50,6 +50,10 @@ class Transaction < ActiveRecord::Base
          :order => 'created_at DESC').try(:number)
   end
 
+  def total_value
+    total = 0; entries.each { |entry| total = total + entry.calculated_value }; total
+  end
+
   def item_quantity_for(item_id)
     entries.first(:select => :quantity, :conditions => { :item_id => item_id }).quantity
   end

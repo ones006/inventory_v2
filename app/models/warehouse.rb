@@ -30,16 +30,17 @@ class Warehouse < ActiveRecord::Base
   end
 
   def managed_items
-    ids = Transaction.destined_to(id).map(&:id)
-    entries = Entry.for_transactions(ids).all(:group => :item_id).map(&:item_id)
-    Item.all(:conditions => {:id => entries})
+    item_ids = Entry.transaction_destination_id_is(id).all(:group => :item_id).map(&:item_id)
+    Item.all(:conditions => {:id => item_ids})
+  end
+
+  def item_quantity(item)
+    ins = Entry.transaction_destination_id_is(self.id).transaction_alter_stock_is(true).item_id_is(item).sum(:quantity)
+    out = Entry.transaction_origin_id_is(self.id).transaction_alter_stock_is(true).item_id_is(item).sum(:quantity)
+    ins - out
   end
 
   def managed_items_quantity
     items = {}; managed_items.each { |item| items[item.id] = item_quantity(item) }; items
-  end
-
-  def item_quantity(item)
-    company.stock.item_on_hand_per_warehouse(self, item)
   end
 end

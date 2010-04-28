@@ -7,7 +7,7 @@
                      "Create new location under #{link_to @location.warehouse.name, warehouse_path(@location.warehouse)}" ] %>
   <% end -%>
 
-  <%= sidemenu %>
+  <%= sidemenu @tab %>
 
   <%= render :partial => "form" %>
 <% end -%>

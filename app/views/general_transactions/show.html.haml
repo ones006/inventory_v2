@@ -1,23 +1,25 @@
 - cache do
   #dialog_form
-    - title "#{@general_transaction.transaction_type.name} No. #{@general_transaction.number}"
+    - title "Transaction No. #{@general_transaction.number}"
 
     - content_for :breadcrumb do
       = breadcrumb [ link_to('Transaction', transactions_path), |
         link_to('General Transaction', general_transactions_path), |
-        "Transaction #{@general_transaction.number}" ] |
+        "#{@general_transaction.number} <span class='transaction_type_tag'>#{@general_transaction.transaction_type.name}</span>" ] |
 
-    %p
-      %span.light.transaction_label Transaction Type
-      %strong= @general_transaction.transaction_type.name
+    = hint "This page shows the detail of transaction number #{@general_transaction.number}"
 
-    %p
-      %span.light.transaction_label Transaction Number
-      %strong= @general_transaction.number
+    .two_columns
+      %p
+        %span.light.transaction_label Number
+        %strong= @general_transaction.number
+      %p
+        %span.light.transaction_label Date
+        %strong= @general_transaction.created_at.to_s(:long)
 
     - if @general_transaction.transaction_type.direction == 1 || @general_transaction.transaction_type.direction == 2
       %p
-        %span.light.transaction_label Originator
+        %span.light.transaction_label Origin
         %strong= link_to @general_transaction.originator_warehouse.name, @general_transaction.originator_warehouse
 
     - if @general_transaction.transaction_type.direction == 0 || @general_transaction.transaction_type.direction == 2
@@ -41,7 +43,11 @@
       - @general_transaction.entries.each_with_index do |entry, n|
         %tr
           %td.index= n+1
-          %td= entry.plu.code
-          %td= entry.plu.item.name_with_code
+          %td= link_to entry.plu.code, entry.plu
+          %td= "<span class='#{entry.item.count_method}'>#{entry.item.count_method.upcase}</span> #{link_to entry.item.name_with_code, entry.item}"
           %td.tdr= entry.quantity
           %td.tdr= link_to number_to_currency(entry.calculated_value, :unit => '', :delimiter => '.', :precision => 0), detail_general_transaction_path(@general_transaction)
+      %tr.total
+        %td{ :colspan => 3, :class => 'tdr' } <strong>TOTAL</strong>
+        %td.tdr= @general_transaction.entries.sum(:quantity)
+        %td.tdr= number_to_currency(@general_transaction.total_value, :unit => '', :delimiter => '.', :precision => 0)

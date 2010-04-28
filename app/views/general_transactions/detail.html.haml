@@ -1,15 +1,15 @@
 - cache do
-  - title "Transaction #{@general_transactions.number}"
+  - title "Transaction #{@general_transaction.number}"
   - content_for :breadcrumb do
     = breadcrumb [ link_to('Transactions', transactions_path), |
       link_to('General Transactions', general_transactions_path), |
-      link_to("#{@general_transactions.number}", @general_transactions) ] |
+      "#{link_to(@general_transaction.number, @general_transaction)} <span class='transaction_type_tag'>#{@general_transaction.transaction_type.name}</span>" ] |
 
   = hint "This is the detail calculation method result for each item in this transaction"
 
   %h4 Transaction item's value calculation
 
-  - for entry in @general_transactions.entries
+  - for entry in @general_transaction.entries
     .entry_method
       %h5
         %span{ :class => entry.item.count_method }= "#{entry.item.count_method.upcase}"
@@ -41,5 +41,9 @@
             %th Total
           %tr
             %td.tdr= number_to_currency(entry.average_value, :unit => '', :delimiter => '.', :precision => 0)
+            %td.tdr= entry.quantity
+            %td.tdr= number_to_currency(entry.calculated_value, :unit => '', :delimiter => '.', :precision => 0)
+          %tr.total
+            %td.tdr <strong>TOTAL</strong>
             %td.tdr= entry.quantity
             %td.tdr= number_to_currency(entry.calculated_value, :unit => '', :delimiter => '.', :precision => 0)

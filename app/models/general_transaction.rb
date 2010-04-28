@@ -26,7 +26,7 @@ class GeneralTransaction < Transaction
     if transaction_type.should_validating_quantity?
       entries.each do |ent| 
         ent.validating_quantity = true
-        ent.warehouse_id = destination_id
+        ent.warehouse_id = origin_id
       end
     end
   end

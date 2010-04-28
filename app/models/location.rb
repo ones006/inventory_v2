@@ -14,8 +14,6 @@ class Location < ActiveRecord::Base
 
   private
   def assign_parent
-    unless @parent_code.blank? && parent.try(:code) == @parent_code
-      move_to_child_of company.locations.find_by_code(@parent_code)
-    end
+    move_to_child_of(company.locations.find_by_code(@parent_code)) unless @parent_code.blank?
   end
 end

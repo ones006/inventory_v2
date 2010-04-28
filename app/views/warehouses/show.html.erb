@@ -59,9 +59,9 @@
         </tr>
         <% @warehouse.managed_items.each do |item| %>
           <tr>
-            <td><%=h item.code %></td>
+            <td><%= link_to item.code, item %></td>
             <td><%=h item.name %></td>
-            <td><%=h item.quantity_in_warehouse(@warehouse) %></td>
+            <td><%=h @warehouse.item_quantity(item) %></td>
           </tr>
         <% end -%>
       </table>

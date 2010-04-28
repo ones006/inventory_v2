@@ -36,11 +36,16 @@ class Item < ActiveRecord::Base
   end
 
   def stock
-    company.stock.item_on_hand(self)
+    ins = company.entries.item_id_is(id).transaction_origin_id_is(nil).transaction_destination_id_gt(0).transaction_alter_stock_is(true).sum(:quantity)
+    out = company.entries.item_id_is(id).transaction_origin_id_gt(0).transaction_destination_id_is(nil).transaction_alter_stock_is(true).sum(:quantity)
+    ins - out
   end
 
   def quantity_in_warehouse(warehouse)
-    company.stock.item_on_hand_per_warehouse(warehouse, self)
+    ins = company.entries.item_id_is(id).transaction_destination_id_is(warehouse).transaction_alter_stock_is(true).sum(:quantity)
+    out = company.entries.item_id_is(id).transaction_origin_id_is(warehouse).transaction_alter_stock_is(true).sum(:quantity)
+    ins - out
+    # company.stock.item_on_hand_per_warehouse(warehouse, self)
   end
 
   def fifo?

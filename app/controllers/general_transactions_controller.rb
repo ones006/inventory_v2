@@ -52,7 +52,7 @@ class GeneralTransactionsController < ApplicationController
   end
 
   def detail
-    @general_transactions = GeneralTransaction.find(params[:id])
+    @general_transaction = GeneralTransaction.find(params[:id])
   end
 
   private
