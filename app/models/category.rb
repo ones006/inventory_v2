@@ -9,6 +9,10 @@ class Category < ActiveRecord::Base
   attr_writer :parent_code
   after_save :assign_parent
 
+  def self.sorted
+    roots.collect { |root| root.self_and_descendants }.flatten
+  end
+
   def fullcode
     root? ? code : "#{code} (#{parent.code})"
   end
@@ -22,7 +26,7 @@ class Category < ActiveRecord::Base
   end
 
   def code_for_item
-    "#{ancestors.map(&:code).join('.')}.#{code}"
+    root? ? code : "#{ancestors.map(&:code).join('.')}.#{code}"
   end
 
   private

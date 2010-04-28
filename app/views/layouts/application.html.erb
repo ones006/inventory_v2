@@ -10,6 +10,9 @@
       'formtastic_changes',
       'jquery.autocomplete',
       'jquery.boxy',
+      'jquery.ui.datepicker',
+      'jquery.ui.base',
+      'jquery.ui.theme',
       :cache => 'style'
     %>
     <%= yield(:head) %>
@@ -70,6 +73,8 @@
       </div>
     </div>
     <%= javascript_include_tag 'jquery',
+      'jquery.ui.core.min',
+      'jquery.ui.datepicker.min',
       'jquery.autocomplete.min',
       'jquery.boxy',
       'application',

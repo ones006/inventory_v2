@@ -27,6 +27,7 @@ Rails::Initializer.run do |config|
   config.gem 'slim_scrooge'
   config.gem 'cancan'
   config.gem 'formtastic'
+  config.gem 'chronic'
   #config.gem 'newrelic_rpm'
 
   # Only load the plugins named here, in the order given (default is alphabetical).

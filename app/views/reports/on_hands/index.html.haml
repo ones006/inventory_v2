@@ -4,14 +4,33 @@
     = breadcrumb [ link_to('Reports', reports_path), |
       "On Hands Report" ] |
 
+  %fieldset.plain
+    %legend Filter
+    - form_tag reports_on_hands_path, :method => :get do
+      %p
+        = label_tag 'from'
+        = text_field_tag 'from', @from, :class => 'datepicker'
+        = label_tag 'until'
+        = text_field_tag 'until', @until, :class => 'datepicker'
+        %button{ :type => :submit } Go
+
   #items
     %table.list
       %tr
         %th Code
         %th Name
         %th On Hand
-      - for item in @items
+      - for category in @categories
         %tr
-          %td= link_to item.code, item
-          %td= item.name
-          %td= item.stock
+          %td
+            = "#{'&nbsp;&nbsp;' * category.level}"
+            = link_to category.code_for_item, category
+          %td= category.name
+          %td &nbsp;
+        - for item in category.items
+          %tr.special
+            %td
+              = "#{'&nbsp;&nbsp;' * category.level}&nbsp;&nbsp;"
+              = link_to item.code, item
+            %td= item.name
+            %td= item.stock

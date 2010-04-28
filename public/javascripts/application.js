@@ -4,6 +4,11 @@ $(function() {
     $(this).parents('li').children('input[type=text]').val(this.rel);
     return false;
   });
+  $('input.datepicker').datepicker({
+    showOn:'button',
+    buttonImage: '/images/icons/silk/calendar_select_day.png',
+    buttonImageOnly: true
+  });
 });
 
 $('.plu_input').live('click', function() {

@@ -489,3 +489,18 @@ tr.total td { border-top:solid 1px #666; }
   float:left;
   width:50%;
 }
+tr.special td { background:#EFE259 !important; }
+fieldset.plain {
+  border:solid 1px #008F0D;
+  padding:10px;
+  margin-bottom:10px;
+}
+fieldset.plain legend {
+  padding:2px 5px;
+  font-weight:bold;
+}
+.ui-widget-header { font-size:1em; }
+.ui-widget-content {
+  -moz-box-shadow:0 0 7px rgba(0,0,0,.8);
+  -webkit-box-shadow:0 0 7px rgba(0,0,0,.8);
+}

@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   before_filter :categories_list, :except => [:show, :destroy]
 
   def index
-    @categories = current_company.sorted_categories
+    @categories = current_company.categories.sorted
     @category = Category.new
   end
   

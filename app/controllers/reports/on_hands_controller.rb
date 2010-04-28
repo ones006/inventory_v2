@@ -4,6 +4,7 @@ class Reports::OnHandsController < ApplicationController
 
   def index
     @items = current_company.items.all(:order => 'name')
+    @categories = current_company.categories.sorted
   end
 
   private
