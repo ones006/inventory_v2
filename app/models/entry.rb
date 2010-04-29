@@ -26,6 +26,14 @@ class Entry < ActiveRecord::Base
     { :conditions => [ "created_at < ?", time ] }
   }
 
+  def self.transaction_inward
+    transaction_origin_id_null.transaction_destination_id_not_null
+  end
+
+  def self.transaction_outward
+    transaction_origin_id_not_null.transaction_destination_id_null
+  end
+
   def validate
     if @validating_quantity  && !quantity.blank?
       stock = Warehouse.find(@warehouse_id).item_quantity(Plu.find(plu_id).item)

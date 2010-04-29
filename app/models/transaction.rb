@@ -45,6 +45,10 @@ class Transaction < ActiveRecord::Base
 
   after_save :run_trackers
 
+  def self.inward
+    transaction_origin_id_null.transaction_destination_id_not_null
+  end
+
   def self.suggested_number(company, type)
     first(:conditions => { :company_id => company.id, :type => type },
          :order => 'created_at DESC').try(:number)
