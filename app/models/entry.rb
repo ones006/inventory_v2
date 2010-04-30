@@ -136,7 +136,7 @@ class Entry < ActiveRecord::Base
   end
 
   def average_value
-      in_entries = company.entries.from_inward_transactions.with_item(item).transaction_created_at_before(transaction.created_at)
-      in_entries.sum("entries.value * entries.quantity") / in_entries.sum(:quantity)
+    in_entries = company.entries.from_inward_transactions.with_item(item).transaction_created_at_before(transaction.created_at)
+    in_entries.sum("entries.value * entries.quantity") / in_entries.sum(:quantity)
   end
 end

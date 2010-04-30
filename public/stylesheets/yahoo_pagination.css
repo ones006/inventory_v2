@@ -18,9 +18,9 @@ div.pagination a {
 	color: #0061de;
 }
 div.pagination a:hover, div.pagination a:active {
-	border: 1px solid #2b55af;
+	border: 1px solid #235f26;
 	background-image:none;
-	background-color:#3666d4;
+	background-color:#235f26;
 	color: #fff;
 }
 div.pagination span.current {

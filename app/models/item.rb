@@ -12,6 +12,8 @@ class Item < ActiveRecord::Base
   accepts_nested_attributes_for :units, :allow_destroy => true, :reject_if => lambda {|a| a['name'].blank? }
   attr_accessor :on_hand_stock
 
+  acts_as_reportable
+
   def available_tracker
     company.trackers.first(:conditions => { :item_id => id, :closed => false }, :order => "available_stock ASC")
   end

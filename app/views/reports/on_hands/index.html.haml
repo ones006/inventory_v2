@@ -13,6 +13,7 @@
         = label_tag 'until'
         = text_field_tag 'until', @until, :class => 'datepicker'
         %button{ :type => :submit } Go
+        = link_to 'download PDF', '#' #reports_on_hands_path(:format => :pdf)
 
   #items
     %table.list
@@ -25,3 +26,5 @@
           %td= link_to item.code, item
           %td= item.name
           %td= item.on_hand_stock
+
+    = will_paginate(@items)
