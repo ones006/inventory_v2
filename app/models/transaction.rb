@@ -78,7 +78,7 @@ class Transaction < ActiveRecord::Base
 
   def run_trackers
     entries.each do |entry|
-      entry.track
+      entry.track_details
     end
   end
 

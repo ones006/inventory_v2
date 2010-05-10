@@ -9,6 +9,7 @@ class Entry < ActiveRecord::Base
   before_save :assign_company_id
   before_save :assign_value
   has_many :trackers, :foreign_key => :consumer_entry_id, :dependent => :destroy
+  has_many :details, :class_name => 'EntryDetail', :dependent => :destroy
 
   named_scope :for_transactions, lambda { |ids|
     { :conditions => { :transaction_id => ids } }
@@ -69,52 +70,50 @@ class Entry < ActiveRecord::Base
 
   def assign_value
     if transaction.inward? && value.blank?
-      last_entry = Entry.first(:joins => :transaction,
-                               :conditions => ["entries.item_id = ? AND transactions.origin_id IS NULL AND transactions.destination_id > 0 AND alter_stock = 1", item_id],
-                               :order => "created_at DESC")
+      last_entry = Entry.item_id_is(item_id).transaction_origin_id_is_null.transaction_destination_id_not_null.transaction_alter_stock_is(true).last
       self.value = last_entry.blank? ? 0 : last_entry.value
     end
   end
 
-  def track
-    if item.fifo? && transaction.outward?
-      # FIFO method
-      initial_qty = quantity
-      while true
-        tracker = item.available_tracker
-        if tracker.nil?
-          closed_trackers = item.closed_trackers.map(&:stock_entry_id)
-          closed_transactions = closed_trackers.blank? ? [] : Transaction.entries_id_in(closed_trackers).uniq
-          ref = company.transactions.inward.altering_stock.contain(item).not_in(closed_transactions).first
-          ref_entry = ref.entries.first(:conditions => { :item_id => item })
-          initial_qty = company.trackers.new.log(self, initial_qty,  ref_entry)
-        else
-          initial_qty = tracker.log(self, initial_qty)
-        end
-        if initial_qty <= 0
-          break
-        end
-      end
-    elsif item.lifo? && transaction.outward?
-      # LIFO method
-      initial_qty = quantity
-      while true
-        tracker = item.available_tracker
-        if tracker.nil?
-          closed_trackers = item.closed_trackers.map(&:stock_entry_id)
-          closed_transactions = closed_trackers.blank? ? [] : Transaction.entries_id_in(closed_trackers).uniq
-          ref = company.transactions.inward.altering_stock.contain(item).not_in(closed_transactions).last
-          ref_entry = ref.entries.first(:conditions => { :item_id => item })
-          initial_qty = company.trackers.new.log(self, initial_qty,  ref_entry)
-        else
-          initial_qty = tracker.log(self, initial_qty)
-        end
-        if initial_qty <= 0
-          break
-        end
-      end
+  def track_details(ref_entry_detail = nil)
+    if transaction.inward?
+      EntryDetail.create(:entry_id => id,
+                         :ref_entry_detail_id => nil,
+                         :quantity => quantity,
+                         :used_up => false,
+                         :available_quantity => quantity,
+                         :value => value)
     else
-      # average method
+      while required_quantity > 0
+        create_entry_detail
+      end
+    end
+  end
+
+  def required_quantity
+    @required_quantity ||= quantity
+  end
+
+  def create_entry_detail
+    ref_entry_detail = first_ref_entry_detail
+    req_quantity = ref_entry_detail.available_quantity <= required_quantity ? ref_entry_detail.available_quantity : required_quantity
+    used_up = transaction.outward? ? true : false
+    EntryDetail.create(:entry_id => id,
+                       :ref_entry_detail_id => ref_entry_detail.id,
+                       :quantity => req_quantity,
+                       :available_quantity => req_quantity,
+                       :used_up => used_up,
+                       :value => ref_entry_detail.value)
+    @required_quantity = @required_quantity - req_quantity
+    ref_entry_detail.update_attributes(:available_quantity => (ref_entry_detail.available_quantity - req_quantity),
+                                       :used_up => (ref_entry_detail.available_quantity - req_quantity) == 0)
+  end
+
+  def first_ref_entry_detail
+    if item.fifo?
+      EntryDetail.used_up_is(false).entry_transaction_destination_id_is(transaction.origin_id).entry_item_id_is(item_id).first(:readonly => false)
+    else
+      EntryDetail.used_up_is(false).entry_transaction_destination_id_is(transaction.origin_id).entry_item_id_is(item_id).last(:readonly => false)
     end
   end
 
@@ -122,9 +121,8 @@ class Entry < ActiveRecord::Base
     if transaction.outward?
       tmp_value = 0
       if item.fifo? || item.lifo?
-        trackers = Tracker.all(:conditions => { :consumer_entry_id => id })
-        trackers.each do |tracker|
-          tmp_value = tmp_value + (tracker.value * tracker.consumed_stock)
+        details.each do |detail|
+          tmp_value = tmp_value + detail.total_value
         end
         tmp_value
       elsif item.average?

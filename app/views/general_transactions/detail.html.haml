@@ -22,13 +22,13 @@
             %th Item Value
             %th Used Qty
             %th Calculated Value
-          - for tracker in entry.trackers
+          - for detail in entry.details
             %tr
-              %td= link_to tracker.stock_entry.transaction.number, tracker.stock_entry.transaction, :title => "Transaction date #{tracker.stock_entry.transaction.created_at.to_s(:long)}"
-              %td.tdr= tracker.stock_entry.quantity
-              %td.tdr= number_to_currency(tracker.value, :unit => '', :delimiter => '.', :precision => 0)
-              %td.tdr= tracker.consumed_stock
-              %td.tdr= number_to_currency(tracker.value * tracker.consumed_stock, :unit => '', :delimiter => '.', :precision => 0)
+              %td= link_to detail.reference_entry.transaction.number, detail.reference_entry.transaction, :title => "Transaction date #{detail.reference_entry.transaction.created_at.to_s(:long)}"
+              %td.tdr= detail.reference_entry_detail.quantity
+              %td.tdr= number_to_currency(detail.reference_entry_detail.value, :unit => '', :delimiter => '.', :precision => 0)
+              %td.tdr= detail.quantity
+              %td.tdr= number_to_currency(detail.total_value, :unit => '', :delimiter => '.', :precision => 0)
           %tr.total
             %td{ :colspan => 3, :class => 'tdr' } <strong>TOTAL</strong>
             %td.tdr= entry.quantity
