@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
-  helper_method :current_user_session, :current_user, :current_company, :authenticate
+  helper_method :current_user_session, :current_user, :current_company, :authenticate, :random_css_color
   # rescue_from CanCan::AccessDenied do |exception|
   #   flash[:error] = "Maaf, anda tidak bisa mengakses halaman tersebut."
   #   redirect_to root_path
@@ -22,6 +22,11 @@ class ApplicationController < ActionController::Base
 
   def leaf_category_names
     leaf_category.collect { |cat| cat.formatted_code }
+  end
+
+  def random_css_color(with_pound = false)
+    color = ''; 3.times { color << sprintf("%02s", rand(255).to_s(16)) }
+    with_pound ? "##{color}" : color
   end
 
   private

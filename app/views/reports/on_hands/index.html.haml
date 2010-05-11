@@ -8,12 +8,10 @@
     %legend Filter
     - form_tag reports_on_hands_path, :method => :get do
       %p.date_range
-        = label_tag 'from'
-        = text_field_tag 'from', @from, :class => 'datepicker'
-        = label_tag 'until'
+        = label_tag 'until', 'Report per'
         = text_field_tag 'until', @until, :class => 'datepicker'
         %button{ :type => :submit } Go
-        = link_to 'download PDF', '#' #reports_on_hands_path(:format => :pdf)
+        = link_to "#{image_tag('icons/silk/page_white_acrobat.png')} download PDF", reports_on_hands_path(:format => :pdf)
 
   #items
     %table.list
@@ -28,3 +26,6 @@
           %td= item.on_hand_stock
 
     = will_paginate(@items)
+
+  #chart
+    = image_tag(@chart)

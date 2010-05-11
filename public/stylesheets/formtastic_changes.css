@@ -73,3 +73,8 @@ form.formtastic fieldset ol li.boolean label { width:25%; padding:7px 0 0; }
 form.formtastic fieldset ol li { padding:3px; }
 form.formtastic fieldset ol li:hover { background:#ffffef; }
 form.formtastic fieldset ol li { margin-bottom:.1em; }
+img.ui-datepicker-trigger {
+  margin-left:-18px;
+  margin-top:-2px;
+  vertical-align:middle;
+}
