@@ -29,3 +29,4 @@
           %td= general_transaction.remark
           %td.actions
             = link_to image_tag('icons/silk/delete.png'), general_transaction, :confirm => 'Are you sure?', :method => :delete
+  = will_paginate(@general_transactions)

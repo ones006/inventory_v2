@@ -9,12 +9,11 @@ class Reports::OnHandsController < ApplicationController
     @items.each { |item| item.sum_on_hand_between(@from, @until) }
     @chart = Gchart.bar(:data => @items.map(&:on_hand_stock),
                         :axis_with_labels => ['y','x'],
-                        :axis_labels => [@items.map(&:name).reverse, (0..5).collect {|x| x*10} ],
+                        :axis_labels => [@items.map(&:name).reverse, (0..10).collect {|x| x*10} ],
                         :orientation => 'horizontal',
                         :background => 'f5fff6',
                         :title => 'Stock On Hand',
-                        :size => '400x240',
-                        :max_value => 50)
+                        :size => '400x240')
 
     respond_to do |format|
       format.html

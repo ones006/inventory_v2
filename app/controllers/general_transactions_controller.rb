@@ -3,7 +3,7 @@ class GeneralTransactionsController < ApplicationController
   before_filter :assign_tab
 
   def index
-    @general_transactions = current_company.general_transactions.all
+    @general_transactions = current_company.general_transactions.all.paginate(:page => params[:page])
   end
   
   def show

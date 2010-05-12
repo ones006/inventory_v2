@@ -111,9 +111,11 @@ class Entry < ActiveRecord::Base
 
   def first_ref_entry_detail
     if item.fifo?
-      EntryDetail.used_up_is(false).entry_transaction_destination_id_is(transaction.origin_id).entry_item_id_is(item_id).first(:readonly => false)
+      beg = EntryDetail.used_up_is(false).entry_transaction_destination_id_is(transaction.origin_id).entry_plu_id_null.entry_item_id_is(item_id).first(:readonly => false)
+      beg.nil? ? EntryDetail.used_up_is(false).entry_transaction_destination_id_is(transaction.origin_id).entry_plu_id_is(plu_id).first(:readonly => false) : beg
     else
-      EntryDetail.used_up_is(false).entry_transaction_destination_id_is(transaction.origin_id).entry_item_id_is(item_id).last(:readonly => false)
+      beg = EntryDetail.used_up_is(false).entry_transaction_destination_id_is(transaction.origin_id).entry_plu_id_null.entry_item_id_is(item_id).last(:readonly => false)
+      beg.nil? ? EntryDetail.used_up_is(false).entry_transaction_destination_id_is(transaction.origin_id).entry_plu_id_is(plu_id).last(:readonly => false) : beg
     end
   end
 
