@@ -7,6 +7,10 @@ class CreateCompanies < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    default_company       = Company.new
+    default_company.name  = 'Monster Inc.'
+    default_company.save
   end
 
   def self.down
