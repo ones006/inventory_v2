@@ -3,17 +3,14 @@ class Reports::OnHandsController < ApplicationController
   before_filter :assign_tab
 
   def index
-    @from = params[:from]
-    @until = params[:until]
-    @items = current_company.items.all(:order => 'name').paginate(:page => params[:page])
-    @items.each { |item| item.sum_on_hand_between(@from, @until) }
-    @chart = Gchart.bar(:data => @items.map(&:on_hand_stock),
-                        :axis_with_labels => ['y','x'],
-                        :axis_labels => [@items.map(&:name).reverse, (0..10).collect {|x| x*10} ],
-                        :orientation => 'horizontal',
-                        :background => 'f5fff6',
-                        :title => 'Stock On Hand',
-                        :size => '400x240')
+    all_items = Item.search(:company_id => current_company)
+    @category = params[:category]
+    all_items = all_items.category_id_is(@category) unless @category.nil?
+    @until = params[:until] unless params[:until].blank?
+    @items = all_items.all(:order => 'name ASC').paginate(:page => params[:page])
+
+    @items.each { |item| item.sum_on_hand_between(nil, @until) }
+    @categories = current_company.categories.sorted
 
     respond_to do |format|
       format.html

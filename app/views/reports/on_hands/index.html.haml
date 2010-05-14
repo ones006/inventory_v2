@@ -10,6 +10,10 @@
       %p.date_range
         = label_tag 'until', 'Report per'
         = text_field_tag 'until', @until, :class => 'datepicker'
+        - option_tags = [['Select a category','']]
+        - option_tags << @categories.collect {|cat| ["#{cat.name} - #{cat.formatted_code}", cat.id] if cat.leaf? }.compact
+        = label_tag 'category', 'Category'
+        = select_tag 'category', options_for_select(option_tags, @category.to_i)
         %button{ :type => :submit } Go
         = link_to "#{image_tag('icons/silk/page_white_acrobat.png')} download PDF", reports_on_hands_path(:format => :pdf)
 
