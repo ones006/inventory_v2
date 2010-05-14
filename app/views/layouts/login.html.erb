@@ -14,7 +14,7 @@
     <div id="container">
       <div id="banner">
         <div id="user_logo">
-          <span><%=h current_company.name %> :: Inventory System</span>
+          <span><%=h "#{current_company.name} ::" unless current_company.nil? %> Inventory System</span>
         </div>
       </div>
       <div id="content">

@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
   private
   def current_company
     return @current_company if defined?(@current_company)
-    @current_company = Company.find_by_subdomain(current_subdomain)
+    @current_company = current_user.company
   end
 
   def authenticate

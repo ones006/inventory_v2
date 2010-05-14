@@ -7,12 +7,13 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      company = Company.find_by_subdomain(current_subdomain)
-      unless company.users.include? current_user
+      # company = Company.find_by_subdomain(current_subdomain)
+      company = current_user.company
+      if company.nil?
         @user_session.destroy
         redirect_to signin_path
       else
-        flash[:notice] = "Successfully created user session."
+        flash[:notice] = "Login success"
         redirect_to root_url
       end
     else
